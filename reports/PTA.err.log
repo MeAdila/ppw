@@ -30,8 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import re', 'titles = []', 'writers= []', 'abstracts = []', '']
+['import pandas as pd', 'import re', 'titles = []', 'writers= []', 'abstracts = []']
 ...
-['    titles.append(title.text.upper())', '', 'print(len(abstracts),len(titles),len(writers))', "data = {'Title':titles,'Penulis':writers, 'Abstract':abstracts}", 'data']
+['    titles.append(title.text.upper())', '', 'print(len(abstracts),len(titles),len(writers),len(PembimbingI),len(PembimbingII))', "data = {'Judul':titles,'Penulis':writers, 'Dosen Pembimbing I' : PembimbingI, 'Dosen Pembimbing II' : PembimbingII, 'Abstrak':abstracts}", 'data']
 -------------------
 

@@ -388,11 +388,10 @@ document.write(`
 <h1>Crawling PTA<a class="headerlink" href="#crawling-pta" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span> <span class="k">as</span> <span class="n">bs</span>
 <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;https://pta.trunojoyo.ac.id/c_search/byprod/10/&quot;</span>
-  
+
 <span class="n">URL</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
     <span class="n">URL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
@@ -416,35 +415,42 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
 <span class="n">titles</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">writers</span><span class="o">=</span> <span class="p">[]</span>
 <span class="n">abstracts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">PembimbingI</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">PembimbingII</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">link_dokumen</span> <span class="ow">in</span> <span class="n">arr_link_dokumen</span><span class="p">:</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link_dokumen</span><span class="p">)</span>
     <span class="n">soup</span> <span class="o">=</span> <span class="n">bs</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
     <span class="n">writer</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Penulis&quot;</span><span class="p">))</span>
+    <span class="n">DPI</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Dosen Pembimbing I&quot;</span><span class="p">))</span>
+    <span class="n">DPII</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Dosen Pembimbing II&quot;</span><span class="p">))</span>
     <span class="n">abstract</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="s2">&quot;justify&quot;</span><span class="p">})</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">})</span>
     <span class="n">writers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Penulis :&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">PembimbingI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DPI</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Dosen Pembimbing I :&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">PembimbingII</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DPII</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Dosen Pembimbing II :&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
     <span class="n">abstracts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abstract</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">abstracts</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">writers</span><span class="p">))</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span><span class="n">titles</span><span class="p">,</span><span class="s1">&#39;Penulis&#39;</span><span class="p">:</span><span class="n">writers</span><span class="p">,</span> <span class="s1">&#39;Abstract&#39;</span><span class="p">:</span><span class="n">abstracts</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">abstracts</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">writers</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">PembimbingI</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">PembimbingII</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Judul&#39;</span><span class="p">:</span><span class="n">titles</span><span class="p">,</span><span class="s1">&#39;Penulis&#39;</span><span class="p">:</span><span class="n">writers</span><span class="p">,</span> <span class="s1">&#39;Dosen Pembimbing I&#39;</span> <span class="p">:</span> <span class="n">PembimbingI</span><span class="p">,</span> <span class="s1">&#39;Dosen Pembimbing II&#39;</span> <span class="p">:</span> <span class="n">PembimbingII</span><span class="p">,</span> <span class="s1">&#39;Abstrak&#39;</span><span class="p">:</span><span class="n">abstracts</span><span class="p">}</span>
 <span class="n">data</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyboardInterrupt</span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-cb60cd891313&gt;</span> in <span class="ni">&lt;cell line: 6&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">link_dokumen</span> <span class="ow">in</span> <span class="n">arr_link_dokumen</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link_dokumen</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">soup</span> <span class="o">=</span> <span class="n">bs</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">writer</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Penulis&quot;</span><span class="p">))</span>
+<span class="nn">&lt;ipython-input-2-e811b94678d3&gt;</span> in <span class="ni">&lt;cell line: 9&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">for</span> <span class="n">link_dokumen</span> <span class="ow">in</span> <span class="n">arr_link_dokumen</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link_dokumen</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">soup</span> <span class="o">=</span> <span class="n">bs</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">writer</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Penulis&quot;</span><span class="p">))</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="s2">&quot;&quot;&quot;</span>
@@ -489,65 +495,60 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">792</span><span class="s2">                 method,</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
-<span class="g g-Whitespace">    </span><span class="mi">465</span><span class="s2">             # Trigger any extra validation we need to do.</span>
-<span class="g g-Whitespace">    </span><span class="mi">466</span><span class="s2">             try:</span>
-<span class="ne">--&gt; </span><span class="mi">467</span><span class="s2">                 self._validate_conn(conn)</span>
-<span class="g g-Whitespace">    </span><span class="mi">468</span><span class="s2">             except (SocketTimeout, BaseSSLError) as e:</span>
-<span class="g g-Whitespace">    </span><span class="mi">469</span><span class="s2">                 self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">534</span><span class="s2">         # Receive the response from the server</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">536</span><span class="s2">             response = conn.getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span><span class="s2">         except (BaseSSLError, OSError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_validate_conn</span><span class="nt">(self, conn)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1090</span><span class="s2">         # Force connect early to allow us to validate the connection.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1091</span><span class="s2">         if conn.is_closed:</span>
-<span class="ne">-&gt; </span><span class="mi">1092</span><span class="s2">             conn.connect()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1093</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1094</span><span class="s2">         if not conn.is_verified:</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span><span class="s2">         # Get the response from http.client.HTTPConnection</span>
+<span class="ne">--&gt; </span><span class="mi">461</span><span class="s2">         httplib_response = super().getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span><span class="s2">         try:</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">640</span><span class="s2">             )</span>
-<span class="g g-Whitespace">    </span><span class="mi">641</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">642</span><span class="s2">         sock_and_verified = _ssl_wrap_socket_and_match_hostname(</span>
-<span class="g g-Whitespace">    </span><span class="mi">643</span><span class="s2">             sock=sock,</span>
-<span class="g g-Whitespace">    </span><span class="mi">644</span><span class="s2">             cert_reqs=self.cert_reqs,</span>
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">             try:</span>
+<span class="ne">-&gt; </span><span class="mi">1375</span><span class="s2">                 response.begin()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             except ConnectionError:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1377</span><span class="s2">                 self.close()</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">_ssl_wrap_socket_and_match_hostname</span><span class="nt">(sock, cert_reqs, ssl_version, ssl_minimum_version, ssl_maximum_version, cert_file, key_file, key_password, ca_certs, ca_cert_dir, ca_cert_data, assert_hostname, assert_fingerprint, server_hostname, ssl_context, tls_in_tls)</span>
-<span class="g g-Whitespace">    </span><span class="mi">781</span><span class="s2">             server_hostname = normalized</span>
-<span class="g g-Whitespace">    </span><span class="mi">782</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">783</span><span class="s2">     ssl_sock = ssl_wrap_socket(</span>
-<span class="g g-Whitespace">    </span><span class="mi">784</span><span class="s2">         sock=sock,</span>
-<span class="g g-Whitespace">    </span><span class="mi">785</span><span class="s2">         keyfile=key_file,</span>
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="s2">         # read until we get a non-100 response</span>
+<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="s2">         while True:</span>
+<span class="ne">--&gt; </span><span class="mi">318</span><span class="s2">             version, status, reason = self._read_status()</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">             if status != CONTINUE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span><span class="s2">                 break</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/util/ssl_.py</span> in <span class="ni">ssl_wrap_socket</span><span class="nt">(sock, keyfile, certfile, cert_reqs, ca_certs, server_hostname, ssl_version, ciphers, ssl_context, ca_cert_dir, key_password, ca_cert_data, tls_in_tls)</span>
-<span class="g g-Whitespace">    </span><span class="mi">467</span><span class="s2">         pass</span>
-<span class="g g-Whitespace">    </span><span class="mi">468</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">469</span><span class="s2">     ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)</span>
-<span class="g g-Whitespace">    </span><span class="mi">470</span><span class="s2">     return ssl_sock</span>
-<span class="g g-Whitespace">    </span><span class="mi">471</span><span class="s2"> </span>
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">     def _read_status(self):</span>
+<span class="ne">--&gt; </span><span class="mi">279</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/util/ssl_.py</span> in <span class="ni">_ssl_wrap_socket_impl</span><span class="nt">(sock, ssl_context, tls_in_tls, server_hostname)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span><span class="s2">         return SSLTransport(sock, ssl_context, server_hostname)</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">513</span><span class="s2">     return ssl_context.wrap_socket(sock, server_hostname=server_hostname)</span>
+<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">         while True:</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">705</span><span class="s2">                 return self._sock.recv_into(b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">             except timeout:</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span><span class="s2">                 self._timeout_occurred = True</span>
 
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span><span class="s2">         # SSLSocket class handles server_hostname encoding before it calls</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span><span class="s2">         # ctx._wrap_socket()</span>
-<span class="ne">--&gt; </span><span class="mi">513</span><span class="s2">         return self.sslsocket_class._create(</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span><span class="s2">             sock=sock,</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span><span class="s2">             server_side=server_side,</span>
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1272</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
+<span class="g g-Whitespace">   </span><span class="mi">1273</span><span class="s2">                   self.__class__)</span>
+<span class="ne">-&gt; </span><span class="mi">1274</span><span class="s2">             return self.read(nbytes, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1275</span><span class="s2">         else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1276</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
 
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">_create</span><span class="nt">(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1069</span><span class="s2">                         # non-blocking</span>
-<span class="g g-Whitespace">   </span><span class="mi">1070</span><span class="s2">                         raise ValueError(&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;)</span>
-<span class="ne">-&gt; </span><span class="mi">1071</span><span class="s2">                     self.do_handshake()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1072</span><span class="s2">             except (OSError, ValueError):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">                 self.close()</span>
-
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self, block)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1340</span><span class="s2">             if timeout == 0.0 and block:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1341</span><span class="s2">                 self.settimeout(None)</span>
-<span class="ne">-&gt; </span><span class="mi">1342</span><span class="s2">             self._sslobj.do_handshake()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1343</span><span class="s2">         finally:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1344</span><span class="s2">             self.settimeout(timeout)</span>
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1128</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1129</span><span class="s2">             if buffer is not None:</span>
+<span class="ne">-&gt; </span><span class="mi">1130</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1131</span><span class="s2">             else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1132</span><span class="s2">                 return self._sslobj.read(len)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -558,14 +559,15 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">df</span>
+<span class="c1"># df = pd.DataFrame.from_dict(data, orient=&#39;index&#39;)</span>
+<span class="c1"># df.transpose()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-f5d2a00b-7dc1-4f18-8270-d195f01b058a">
-    <div class="colab-df-container">
-      <div>
+  <div id="df-13988dee-9cc1-4f21-af65-4c3489c9696d" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -583,9 +585,11 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Title</th>
+      <th>Judul</th>
       <th>Penulis</th>
-      <th>Abstract</th>
+      <th>Dosen Pembimbing I</th>
+      <th>Dosen Pembimbing II</th>
+      <th>Abstrak</th>
     </tr>
   </thead>
   <tbody>
@@ -593,320 +597,420 @@ document.write(`
       <th>0</th>
       <td>PERANCANGAN DAN IMPLEMENTASI SISTEM DATABASE \...</td>
       <td>A.Ubaidillah S.Kom</td>
+      <td>Budi Setyono M.T</td>
+      <td>Hermawan S.T</td>
       <td>Sistem  informasi  akademik  (SIAKAD) merupaka...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>APLIKASI KONTROL DAN MONITORING JARINGAN KOMPU...</td>
       <td>M. Basith Ardianto,</td>
+      <td>Drs. Budi Soesilo, MT</td>
+      <td>Koko Joni, ST</td>
       <td>Berjalannya koneksi jaringan komputer dengan l...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>RANCANG BANGUN APLIKASI PROXY SERVER UNTUK\r\n...</td>
       <td>Akhmad Suyandi, S.Kom</td>
+      <td>Drs. Budi Soesilo, M.T</td>
+      <td>Hermawan, ST, MT</td>
       <td>Web server adalah sebuah perangkat lunak serve...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>SISTEM PENDUKUNG KEPUTUSAN OPTIMASI PENJADWALA...</td>
       <td>Heri Supriyanto</td>
+      <td>Mulaab, S.Si., M.Kom</td>
+      <td>Firli Irhamni, ST., M.Kom</td>
       <td>Penjadwalan  kuliah  di  Perguruan  Tinggi  me...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>SISTEM AUGMENTED REALITY ANIMASI BENDA BERGERA...</td>
       <td>Septian Rahman Hakim</td>
+      <td>Arik Kurniawati, S.Kom., M.T.</td>
+      <td>Haryanto, S.T., M.T.</td>
       <td>Seiring perkembangan teknologi yang ada diduni...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>GERAK PEKERJA PADA GAME REAL TIME STRATEGY MEN...</td>
       <td>Adi Chandra Laksono</td>
+      <td>Kurniawan Eka P, S.Kom., Msc</td>
+      <td>Arik Kurniawati, S.Kom., M.T.</td>
       <td>Gerak pekerja ada pada game yang memiliki genr...</td>
     </tr>
     <tr>
       <th>6</th>
       <td>RANCANG BANGUN GAME PERAWATAN SAPI KARAPAN MEN...</td>
       <td>NURRACHMAT</td>
+      <td>Arik Kurniawati, S.Kom., M.T.</td>
+      <td>Kurniawan Eka Permana, S.Kom., MSc.</td>
       <td>Perkembangan game yang semakin pesat, memberik...</td>
     </tr>
     <tr>
       <th>7</th>
       <td>EKSTRAKSI FITUR BERBASIS TWO DIMENSIONAL LINEA...</td>
       <td>Muhammad Choirur Rozi</td>
+      <td>Dr. Arif Muntasa, S.Si.,M.T</td>
+      <td>Fitri Damayanti, S.Kom.,M.kom</td>
       <td>Sistem pengenalan wajah adalah suatu sistem un...</td>
     </tr>
     <tr>
       <th>8</th>
       <td>IMPLEMENTASI  ALGORITMA PRIM  DAN DEPTH FIRST ...</td>
       <td>M Khoiril Anwar</td>
+      <td>Cucun Very Angkoso, S.T., M.T.</td>
+      <td>Arik Kurniawati S. Kom., M.T.</td>
       <td>Teknologi mobile game beroperating system open...</td>
     </tr>
     <tr>
       <th>9</th>
       <td>PERANCANGAN SISTEM INFORMASI BADAN KEPEGAWAIAN...</td>
       <td>MALIKUL HAMZAH</td>
+      <td>Moch. Kautsar Sophan, S.Kom., M.MT.</td>
+      <td>Yeni Kustiyaningsih, S.Kom., M.Kom.</td>
       <td>Kantor Badan Kepegawaian kota Bangkalan adalah...</td>
     </tr>
     <tr>
       <th>10</th>
       <td>PEMANFAATAN TOGAF ADM UNTUK PERANCANGAN SISTEM...</td>
       <td>Norman</td>
+      <td>M. Kautsar Sophan, S.Kom., M. MT.</td>
+      <td>Yeni Kustiyahningsih S.Kom., M.Kom.</td>
       <td>Penyusunan Sistem Informasi Dinas Perindustria...</td>
     </tr>
     <tr>
       <th>11</th>
       <td>APLIKASI METODE FUZZY ANALYTIC NETWORK PROCESS...</td>
       <td>Robiatul Adawiyah, S.Kom</td>
+      <td>Diana Rahmawati, S.T, M.T</td>
+      <td>Budi Dwi Satoto, S.T, M.Kom</td>
       <td>Perusahaan pemerintah maupun swasta mempunyai ...</td>
     </tr>
     <tr>
       <th>12</th>
       <td>SISTEM PENDUKUNG KEPUTUSAN REKOMENDASI MENU DI...</td>
       <td>Desy Mariana S. Kom</td>
+      <td>Haryanto ST, MT</td>
+      <td>Firli Irhamni ST, M. Kom</td>
       <td>Pelayanan makanan bagi pasien rawat inap di Ru...</td>
     </tr>
     <tr>
       <th>13</th>
       <td>RANCANG BANGUN APLIKASI PEMILIHAN TEKNIK REKAY...</td>
       <td>Lia Fransiska</td>
+      <td>Firli Irhamni S.T, M.Kom</td>
+      <td>Budi Dwi Satoto S.T, M.Kom</td>
       <td>Penyusunan Sistem Pendukung Keputusan pemiliha...</td>
     </tr>
     <tr>
       <th>14</th>
       <td>DETEKSI COREPOINT SIDIK JARI MENGGUNAKAN METOD...</td>
       <td>Erwina Safitri</td>
+      <td>Dr. Indah Agustien, S.Kom., M.Kom</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
       <td>Sidik jari adalah salah satu karakteristik fis...</td>
     </tr>
     <tr>
       <th>15</th>
       <td>SISTEM PENENTUAN STATUS GIZI PASIEN RAWAT INAP...</td>
       <td>Nur Anggraeni</td>
+      <td>Diana Rahmawati, ST.M.T</td>
+      <td>Firli Irhamni, ST.M.Kom</td>
       <td>Di Indonesia masalah perkembangan gizi adalah ...</td>
     </tr>
     <tr>
       <th>16</th>
       <td>PENGENALAN TULISAN TANGAN HURUF ALFABET\r\nDEN...</td>
       <td>Hilyati Safitri</td>
+      <td>Fitri Damayanti S.Kom., M.Kom</td>
+      <td>Kurniawan Eka Permana S.Kom., M.Sc.</td>
       <td>Pengenalan tulisan tangan merupakan topik pene...</td>
     </tr>
     <tr>
       <th>17</th>
       <td>PENGENALAN POLA SENYUMAN BERBASIS EKSTRAKSI FI...</td>
       <td>SITI KHOLILAH</td>
+      <td>RIMA TRI WAHYUNINGRUM, S.T., M.T</td>
+      <td>HARYANTO, S.T., M.T</td>
       <td>Citra senyum merupakan salah satu fitur biomet...</td>
     </tr>
     <tr>
       <th>18</th>
       <td>SISTEM PEROLEHAN CITRA BERBASIS ISI MENGGUNAKA...</td>
       <td>Nansy Lovitasari</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
+      <td>Rima Tri Wahyuningrum, S.T., M.T</td>
       <td>Batik adalah kerajinan yang memiliki nilai sen...</td>
     </tr>
     <tr>
       <th>19</th>
       <td>ONTOLOGY SEMANTIC WEB UNTUK PENCARIAN TUGAS AK...</td>
       <td>Daniyar Bagus Prasetya</td>
+      <td>Firdaus Solihin S.kom,.M.kom</td>
+      <td>Kurniawan Eka P. S.kom,.M.sc</td>
       <td>Kebutuhan pencarian data pada internet yang ce...</td>
     </tr>
     <tr>
       <th>20</th>
       <td>RANCANG BANGUN APLIKASI INTRUSION PREVENTION S...</td>
       <td>BAHRUL ULUM</td>
+      <td>Meidya Koeshardianto, S.Si., M.T</td>
+      <td>Eza Rahmanita, S.T., M.T</td>
       <td>Dalam setiap perusahaan tentunya memiliki data...</td>
     </tr>
     <tr>
       <th>21</th>
       <td>APLIKASI CITRA MOSAIK PANORAMIK MENGGUNAKAN ME...</td>
       <td>Sri Rahma Puspa Sari</td>
+      <td>Eza Rahmanita, S.T.,M.T.</td>
+      <td>Meidya Koeshardianto, S.Si.,M.T.</td>
       <td>Citra digital banyak dimanfaatkan dalam berbag...</td>
     </tr>
     <tr>
       <th>22</th>
       <td>ANALISA VALIDITAS PENERIMA BEASISWA MENGGUNAKA...</td>
       <td>Hilmi Fairuz Abadi</td>
+      <td>Bain Khusnul K., S.T., M.Kom.</td>
+      <td>Firli Irhamni, S.T., M.Kom.</td>
       <td>Beasiswa adalah pemberian berupa bantuan keuan...</td>
     </tr>
     <tr>
       <th>23</th>
       <td>SISTEM PERAMALAN PENJUALAN JANGKA PENDEK SPARE...</td>
       <td>Ana Qaimah L.M.D.R</td>
+      <td>Mulaâab, S.Si, M.Kom</td>
+      <td>Fika Hastarita R.,ST, M.Eng</td>
       <td>Spare part merupakan salah satu bagian penting...</td>
     </tr>
     <tr>
       <th>24</th>
       <td>PENGEMBANGAN MESIN PENCARIAN ANTIPLAGIASI PADA...</td>
       <td>ilham wibisono aziz</td>
+      <td>Hermawan S.T.,M.Kom</td>
+      <td>Andharini Dwi Cahyani S.Kom.,M.Kom</td>
       <td>ABSTRAK\r\nPenjiplakan merupakan masalah yang ...</td>
     </tr>
     <tr>
       <th>25</th>
       <td>SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN KARYAWAN ...</td>
       <td>Catur Ngesti Waluyo</td>
+      <td>Mula'ab,S.Si.,M.Kom</td>
+      <td>Riza Alfita, S.T., M.T</td>
       <td>Sumber daya manusia mutlak dibutuhkan untuk ke...</td>
     </tr>
     <tr>
       <th>26</th>
       <td>PENGELOMPOKAN KUALITAS KELAS PADA SISWA MENGGU...</td>
       <td>Hamiyah</td>
+      <td>Bain Khusnul K,ST.,M.Kom</td>
+      <td>Firli Irhamni, ST, M. Kom</td>
       <td>ABSTRAK\r\nData yang terdapat pada SMA Wachid ...</td>
     </tr>
     <tr>
       <th>27</th>
       <td>APLIKASI CITRA MOSAIC PANORAMIC MENGGUNAKAN ME...</td>
       <td>Gendra Budiarti</td>
+      <td>Eza Rahmanita, ST, MT</td>
+      <td>Meidya Koeshardianto, S.Si, MT</td>
       <td>Sebuah citra banyak diterapkan dalam berbagai ...</td>
     </tr>
     <tr>
       <th>28</th>
       <td>PENGENALAN TELAPAK TANGAN MENGGUNAKAN METODE N...</td>
       <td>Daril Ulumiyah</td>
+      <td>Mulaab, S.Si., M.Kom.</td>
+      <td>Rima Tri Wahyuningrum, ST.,MT.</td>
       <td>Teknologi biometrik saat ini mengalami perkemb...</td>
     </tr>
     <tr>
       <th>29</th>
       <td>IMPLEMENTASI SISTEM PAKAR PADA PENGAMBILAN KEP...</td>
       <td>Rizky Maulidya</td>
+      <td>Fika Hastarita Rachman S.T., M.Eng</td>
+      <td>Firli Irhamni S.T., M.Kom</td>
       <td>Diagnosa penyakit mata dengan sistem informasi...</td>
     </tr>
     <tr>
       <th>30</th>
       <td>RANCANG BANGUN MANAJEMEN PEMBELAJARAN DAN TES ...</td>
       <td>Susanto</td>
+      <td>Hermawan S.T.,M.Kom</td>
+      <td>Andharini Dwi Cahyani S.Kom.,M.Kom</td>
       <td>Penggunaan teknologi mobile saat ini sangat ma...</td>
     </tr>
     <tr>
       <th>31</th>
       <td>APLIKASI PENILAIAN KINERJA DENGAN METODOLOGI C...</td>
       <td>Luthfi Zahro</td>
+      <td>Moch. Kautsar Sophan, S.Kom., M.MT</td>
+      <td>Dr. Rachmad Hidayat, ST., MT</td>
       <td>Setiap perusahaan mengharapkan adanya hubungan...</td>
     </tr>
     <tr>
       <th>32</th>
       <td>KALIBRASI KAMERA DENGAN MENGGUNAKAN METODE TSAI</td>
       <td>Bima Iffan Hakim</td>
+      <td>Eza Rahmanita, ST., MT</td>
+      <td>Meidya Koeshardianto, S.Si., MT</td>
       <td>Teknik kalibrasi sangat berpengaruh terhadap p...</td>
     </tr>
     <tr>
       <th>33</th>
       <td>PENERAPAN METODE ANALYTICAL HIERARCHY PROCESS ...</td>
       <td>Helyatin</td>
+      <td>Bain Khusnul K, S.T.,M.Kom</td>
+      <td>Andharini Dwi C, S.Kom.,M.Kom</td>
       <td>Pemilihan  supplier merupakan salah satu isu p...</td>
     </tr>
     <tr>
       <th>34</th>
       <td>MODEL PENJUALAN PRODUK UNGGULAN BATIK KHAS PAM...</td>
       <td>Murni Rotifah</td>
+      <td>Moch. Kautsar Sophan, S.Kom, M.MT</td>
+      <td>Bain Khusnul Khotimah, S.T., M.Kom</td>
       <td>Kabupaten Pamekasan merupakan salah satu pusat...</td>
     </tr>
     <tr>
       <th>35</th>
       <td>APLIKASI DAN DESAIN MODEL DECISION AID PELANGG...</td>
       <td>Ardiyanto Setiawan</td>
+      <td>Moch. Kautsar Sophan, S.Kom., M.MT.</td>
+      <td>Yeni Kustiyah Ningsih, S.Kom., M.Kom.</td>
       <td>Toko Batik Tulis Madura merupakan salah satu t...</td>
     </tr>
     <tr>
       <th>36</th>
       <td>SEGMENTASI PARASIT MALARIA DALAM SEL DARAH MEN...</td>
       <td>Yenni Rahmawati</td>
+      <td>Rima Tri Wahyuningrum, S.T.,M.T.</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
       <td>Malaria disebabkan oleh intraseluler parasit b...</td>
     </tr>
     <tr>
       <th>37</th>
       <td>ANALISA DATA ANTARAN POS EXPRESS MENGGUNAKAN\r...</td>
       <td>siti murtasiyah warda</td>
+      <td>Bain Khusnul Khotimah.,S.T.,M.Kom</td>
+      <td>Firli Irhamni, S.T., M.Kom.</td>
       <td>PT. Pos Indonesia (Persero) merupakan salah sa...</td>
     </tr>
     <tr>
       <th>38</th>
       <td>DETEKSI MANUSIA MENGGUNAKAN HISTOGRAM OF ORIEN...</td>
       <td>R.A. Uluwiyah Nur Oktavianis</td>
+      <td>Dr. Indah Agustien, S.Kom., M.Kom</td>
+      <td>Ari Kusumaningsih, S.T, M.T</td>
       <td>Deteksi manusia merupakan  suatu aplikasi yang...</td>
     </tr>
     <tr>
       <th>39</th>
       <td>KLASIFIKASI STATUS GIZI BALITA MENGGUNAKAN KOH...</td>
       <td>Uhty Zunairoh</td>
+      <td>Bain Khusnul Khotimah, S.T., M.Kom.</td>
+      <td>Aeri Rachmad, S.T., M.T.</td>
       <td>Aplikasi klasifikasi status gizi balita ini di...</td>
     </tr>
     <tr>
       <th>40</th>
       <td>PERANCANGAN SISTEM INFORMASI PERENCANAAN PRODU...</td>
       <td>M. Arif Rahman</td>
+      <td>Yeni Kustiyahningsih, S.Kom., M.Kom.</td>
+      <td>Heri Awalul Ilhamsyah, ST., MT.</td>
       <td>Penelitian ini membahas tentang perancangan si...</td>
     </tr>
     <tr>
       <th>41</th>
       <td>ANALISIS PERAMALAN PENJUALAN PRODUK ASESORIS K...</td>
       <td>Moh. Hasbi Ash Shiddieqy</td>
+      <td>Mulaâab, S.Si., M.Kom.</td>
+      <td>Yeni Kustiyahningsih, S.Kom., M.Kom.</td>
       <td>Dengan prediksi yang baik, dapat dibuat rencan...</td>
     </tr>
     <tr>
       <th>42</th>
       <td>SISTEM INFORMASI GEOGRAFIS PEMETAAN WILAYAH BE...</td>
       <td>Hendriatno</td>
+      <td>Bain Khusnul Khotimah.,S.T.,M.Kom</td>
+      <td>Firli Irhamni, S.T., M.Kom.</td>
       <td>Menurut pemetaan yang dilakukan oleh Tim Nasio...</td>
     </tr>
     <tr>
       <th>43</th>
       <td>PENERAPAN METODE RADIAL BASIS FUNCTION NETWORK...</td>
       <td>Dwi Nuzulul Heriyanto</td>
+      <td>Fika Hastarita Rachman, S.T, M.Eng</td>
+      <td>Budi Dwi Satoto, ST, M.Kom</td>
       <td>Berawal dari permintaan akan Straw (sperma bek...</td>
     </tr>
     <tr>
       <th>44</th>
       <td>AUTO LEVELING BERBASIS FINITE STATE MACHINE (F...</td>
       <td>Syafrial Nur Maulana</td>
+      <td>Arik Kurniawati, S.Kom.,M.T.</td>
+      <td>Ari Kusumaningsih, S.T., M.T.</td>
       <td>Pengetahuan tentang bahasa Inggris pada jaman ...</td>
     </tr>
     <tr>
       <th>45</th>
       <td>RANCANG BANGUN SISTEM INFORMASI PEMETAAN TANAM...</td>
       <td>RIDHA MARISTA</td>
+      <td>HUSNI,S.Kom., M.T.</td>
+      <td>DIANA RAHMAWATI, S.T., M.T.</td>
       <td>Kabupaten Bangkalan memiliki lahan pertanian s...</td>
     </tr>
     <tr>
       <th>46</th>
       <td>PENGENALAN TULISAN TANGAN CARAKAN JAWA SECARA ...</td>
       <td>Nining Latifah</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
+      <td>Rima Tri Wahyuningrum, ST, MT</td>
       <td>Pengenalan tulisan tangan adalah salah satu ca...</td>
     </tr>
     <tr>
       <th>47</th>
       <td>SISTEM PEROLEHAN CITRA BERBASIS ISI MENGGUNAKA...</td>
       <td>VEMBRI PRATAMA PRISTYONO</td>
+      <td>BAIN KHUSNUL KHOTIMAH, S.T., M.Kom.</td>
+      <td>ABDULLAH BASUKI RAHMAT, S.Si., M.T.</td>
       <td>Batik merupakan seni yang paling penting dalam...</td>
     </tr>
     <tr>
       <th>48</th>
       <td>SISTEM PERAMALAN KEBUTUHAN OBAT MENGGUNAKAN ME...</td>
       <td>Rahmatina Hidayati</td>
+      <td>Bain Khusnul Khotimah, S.T.,M.Kom.</td>
+      <td>Haryanto, S.T.,M.T.</td>
       <td>Obat merupakan salah satu kebutuhan penting da...</td>
     </tr>
     <tr>
       <th>49</th>
       <td>VISUALISASI PROSES TERJADINYA HUJAN BERBASIS S...</td>
       <td>Anggit Pratama</td>
+      <td>Arik Kurniawati,S.Kom, M.Kom.</td>
+      <td>Dr.Indah Agustien Siradjuddin, S.Kom, M.Kom.  ...</td>
       <td>ABSTRAK\r\nPerkembangan teknologi masa kini te...</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-f5d2a00b-7dc1-4f18-8270-d195f01b058a')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
-        
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-13988dee-9cc1-4f21-af65-4c3489c9696d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
-      
+    </button>
+
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -928,6 +1032,10 @@ document.write(`
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -941,33 +1049,727 @@ document.write(`
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-f5d2a00b-7dc1-4f18-8270-d195f01b058a button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-13988dee-9cc1-4f21-af65-4c3489c9696d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-f5d2a00b-7dc1-4f18-8270-d195f01b058a');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-13988dee-9cc1-4f21-af65-4c3489c9696d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-dce2fae8-5d79-486f-979c-373700a5428f">
+  <button class="colab-df-quickchart" onclick="quickchart('df-dce2fae8-5d79-486f-979c-373700a5428f')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const charts = await google.colab.kernel.invokeFunction(
+          'suggestCharts', [key], {});
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-dce2fae8-5d79-486f-979c-373700a5428f button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
     </div>
   </div>
-  </div></div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;PTA.csv&quot;</span><span class="p">)</span>
+<span class="n">show_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;PTA.csv&quot;</span><span class="p">)</span>
+<span class="n">show_csv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-9b9d9333-0350-4c59-9af9-2d133f5e7fcb" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Judul</th>
+      <th>Penulis</th>
+      <th>Dosen Pembimbing I</th>
+      <th>Dosen Pembimbing II</th>
+      <th>Abstrak</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>PERANCANGAN DAN IMPLEMENTASI SISTEM DATABASE \...</td>
+      <td>A.Ubaidillah S.Kom</td>
+      <td>Budi Setyono M.T</td>
+      <td>Hermawan S.T</td>
+      <td>Sistem  informasi  akademik  (SIAKAD) merupaka...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>APLIKASI KONTROL DAN MONITORING JARINGAN KOMPU...</td>
+      <td>M. Basith Ardianto,</td>
+      <td>Drs. Budi Soesilo, MT</td>
+      <td>Koko Joni, ST</td>
+      <td>Berjalannya koneksi jaringan komputer dengan l...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>RANCANG BANGUN APLIKASI PROXY SERVER UNTUK\r\n...</td>
+      <td>Akhmad Suyandi, S.Kom</td>
+      <td>Drs. Budi Soesilo, M.T</td>
+      <td>Hermawan, ST, MT</td>
+      <td>Web server adalah sebuah perangkat lunak serve...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>SISTEM PENDUKUNG KEPUTUSAN OPTIMASI PENJADWALA...</td>
+      <td>Heri Supriyanto</td>
+      <td>Mulaab, S.Si., M.Kom</td>
+      <td>Firli Irhamni, ST., M.Kom</td>
+      <td>Penjadwalan  kuliah  di  Perguruan  Tinggi  me...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>SISTEM AUGMENTED REALITY ANIMASI BENDA BERGERA...</td>
+      <td>Septian Rahman Hakim</td>
+      <td>Arik Kurniawati, S.Kom., M.T.</td>
+      <td>Haryanto, S.T., M.T.</td>
+      <td>Seiring perkembangan teknologi yang ada diduni...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>GERAK PEKERJA PADA GAME REAL TIME STRATEGY MEN...</td>
+      <td>Adi Chandra Laksono</td>
+      <td>Kurniawan Eka P, S.Kom., Msc</td>
+      <td>Arik Kurniawati, S.Kom., M.T.</td>
+      <td>Gerak pekerja ada pada game yang memiliki genr...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>RANCANG BANGUN GAME PERAWATAN SAPI KARAPAN MEN...</td>
+      <td>NURRACHMAT</td>
+      <td>Arik Kurniawati, S.Kom., M.T.</td>
+      <td>Kurniawan Eka Permana, S.Kom., MSc.</td>
+      <td>Perkembangan game yang semakin pesat, memberik...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>EKSTRAKSI FITUR BERBASIS TWO DIMENSIONAL LINEA...</td>
+      <td>Muhammad Choirur Rozi</td>
+      <td>Dr. Arif Muntasa, S.Si.,M.T</td>
+      <td>Fitri Damayanti, S.Kom.,M.kom</td>
+      <td>Sistem pengenalan wajah adalah suatu sistem un...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>IMPLEMENTASI  ALGORITMA PRIM  DAN DEPTH FIRST ...</td>
+      <td>M Khoiril Anwar</td>
+      <td>Cucun Very Angkoso, S.T., M.T.</td>
+      <td>Arik Kurniawati S. Kom., M.T.</td>
+      <td>Teknologi mobile game beroperating system open...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>PERANCANGAN SISTEM INFORMASI BADAN KEPEGAWAIAN...</td>
+      <td>MALIKUL HAMZAH</td>
+      <td>Moch. Kautsar Sophan, S.Kom., M.MT.</td>
+      <td>Yeni Kustiyaningsih, S.Kom., M.Kom.</td>
+      <td>Kantor Badan Kepegawaian kota Bangkalan adalah...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>PEMANFAATAN TOGAF ADM UNTUK PERANCANGAN SISTEM...</td>
+      <td>Norman</td>
+      <td>M. Kautsar Sophan, S.Kom., M. MT.</td>
+      <td>Yeni Kustiyahningsih S.Kom., M.Kom.</td>
+      <td>Penyusunan Sistem Informasi Dinas Perindustria...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>APLIKASI METODE FUZZY ANALYTIC NETWORK PROCESS...</td>
+      <td>Robiatul Adawiyah, S.Kom</td>
+      <td>Diana Rahmawati, S.T, M.T</td>
+      <td>Budi Dwi Satoto, S.T, M.Kom</td>
+      <td>Perusahaan pemerintah maupun swasta mempunyai ...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>SISTEM PENDUKUNG KEPUTUSAN REKOMENDASI MENU DI...</td>
+      <td>Desy Mariana S. Kom</td>
+      <td>Haryanto ST, MT</td>
+      <td>Firli Irhamni ST, M. Kom</td>
+      <td>Pelayanan makanan bagi pasien rawat inap di Ru...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>RANCANG BANGUN APLIKASI PEMILIHAN TEKNIK REKAY...</td>
+      <td>Lia Fransiska</td>
+      <td>Firli Irhamni S.T, M.Kom</td>
+      <td>Budi Dwi Satoto S.T, M.Kom</td>
+      <td>Penyusunan Sistem Pendukung Keputusan pemiliha...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>DETEKSI COREPOINT SIDIK JARI MENGGUNAKAN METOD...</td>
+      <td>Erwina Safitri</td>
+      <td>Dr. Indah Agustien, S.Kom., M.Kom</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
+      <td>Sidik jari adalah salah satu karakteristik fis...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>SISTEM PENENTUAN STATUS GIZI PASIEN RAWAT INAP...</td>
+      <td>Nur Anggraeni</td>
+      <td>Diana Rahmawati, ST.M.T</td>
+      <td>Firli Irhamni, ST.M.Kom</td>
+      <td>Di Indonesia masalah perkembangan gizi adalah ...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>16</td>
+      <td>PENGENALAN TULISAN TANGAN HURUF ALFABET\r\nDEN...</td>
+      <td>Hilyati Safitri</td>
+      <td>Fitri Damayanti S.Kom., M.Kom</td>
+      <td>Kurniawan Eka Permana S.Kom., M.Sc.</td>
+      <td>Pengenalan tulisan tangan merupakan topik pene...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>PENGENALAN POLA SENYUMAN BERBASIS EKSTRAKSI FI...</td>
+      <td>SITI KHOLILAH</td>
+      <td>RIMA TRI WAHYUNINGRUM, S.T., M.T</td>
+      <td>HARYANTO, S.T., M.T</td>
+      <td>Citra senyum merupakan salah satu fitur biomet...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>SISTEM PEROLEHAN CITRA BERBASIS ISI MENGGUNAKA...</td>
+      <td>Nansy Lovitasari</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
+      <td>Rima Tri Wahyuningrum, S.T., M.T</td>
+      <td>Batik adalah kerajinan yang memiliki nilai sen...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>19</td>
+      <td>ONTOLOGY SEMANTIC WEB UNTUK PENCARIAN TUGAS AK...</td>
+      <td>Daniyar Bagus Prasetya</td>
+      <td>Firdaus Solihin S.kom,.M.kom</td>
+      <td>Kurniawan Eka P. S.kom,.M.sc</td>
+      <td>Kebutuhan pencarian data pada internet yang ce...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20</td>
+      <td>RANCANG BANGUN APLIKASI INTRUSION PREVENTION S...</td>
+      <td>BAHRUL ULUM</td>
+      <td>Meidya Koeshardianto, S.Si., M.T</td>
+      <td>Eza Rahmanita, S.T., M.T</td>
+      <td>Dalam setiap perusahaan tentunya memiliki data...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21</td>
+      <td>APLIKASI CITRA MOSAIK PANORAMIK MENGGUNAKAN ME...</td>
+      <td>Sri Rahma Puspa Sari</td>
+      <td>Eza Rahmanita, S.T.,M.T.</td>
+      <td>Meidya Koeshardianto, S.Si.,M.T.</td>
+      <td>Citra digital banyak dimanfaatkan dalam berbag...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>22</td>
+      <td>ANALISA VALIDITAS PENERIMA BEASISWA MENGGUNAKA...</td>
+      <td>Hilmi Fairuz Abadi</td>
+      <td>Bain Khusnul K., S.T., M.Kom.</td>
+      <td>Firli Irhamni, S.T., M.Kom.</td>
+      <td>Beasiswa adalah pemberian berupa bantuan keuan...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>23</td>
+      <td>SISTEM PERAMALAN PENJUALAN JANGKA PENDEK SPARE...</td>
+      <td>Ana Qaimah L.M.D.R</td>
+      <td>Mulaâab, S.Si, M.Kom</td>
+      <td>Fika Hastarita R.,ST, M.Eng</td>
+      <td>Spare part merupakan salah satu bagian penting...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24</td>
+      <td>PENGEMBANGAN MESIN PENCARIAN ANTIPLAGIASI PADA...</td>
+      <td>ilham wibisono aziz</td>
+      <td>Hermawan S.T.,M.Kom</td>
+      <td>Andharini Dwi Cahyani S.Kom.,M.Kom</td>
+      <td>ABSTRAK\r\nPenjiplakan merupakan masalah yang ...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN KARYAWAN ...</td>
+      <td>Catur Ngesti Waluyo</td>
+      <td>Mula'ab,S.Si.,M.Kom</td>
+      <td>Riza Alfita, S.T., M.T</td>
+      <td>Sumber daya manusia mutlak dibutuhkan untuk ke...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>PENGELOMPOKAN KUALITAS KELAS PADA SISWA MENGGU...</td>
+      <td>Hamiyah</td>
+      <td>Bain Khusnul K,ST.,M.Kom</td>
+      <td>Firli Irhamni, ST, M. Kom</td>
+      <td>ABSTRAK\r\nData yang terdapat pada SMA Wachid ...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>27</td>
+      <td>APLIKASI CITRA MOSAIC PANORAMIC MENGGUNAKAN ME...</td>
+      <td>Gendra Budiarti</td>
+      <td>Eza Rahmanita, ST, MT</td>
+      <td>Meidya Koeshardianto, S.Si, MT</td>
+      <td>Sebuah citra banyak diterapkan dalam berbagai ...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>28</td>
+      <td>PENGENALAN TELAPAK TANGAN MENGGUNAKAN METODE N...</td>
+      <td>Daril Ulumiyah</td>
+      <td>Mulaab, S.Si., M.Kom.</td>
+      <td>Rima Tri Wahyuningrum, ST.,MT.</td>
+      <td>Teknologi biometrik saat ini mengalami perkemb...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>29</td>
+      <td>IMPLEMENTASI SISTEM PAKAR PADA PENGAMBILAN KEP...</td>
+      <td>Rizky Maulidya</td>
+      <td>Fika Hastarita Rachman S.T., M.Eng</td>
+      <td>Firli Irhamni S.T., M.Kom</td>
+      <td>Diagnosa penyakit mata dengan sistem informasi...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30</td>
+      <td>RANCANG BANGUN MANAJEMEN PEMBELAJARAN DAN TES ...</td>
+      <td>Susanto</td>
+      <td>Hermawan S.T.,M.Kom</td>
+      <td>Andharini Dwi Cahyani S.Kom.,M.Kom</td>
+      <td>Penggunaan teknologi mobile saat ini sangat ma...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>31</td>
+      <td>APLIKASI PENILAIAN KINERJA DENGAN METODOLOGI C...</td>
+      <td>Luthfi Zahro</td>
+      <td>Moch. Kautsar Sophan, S.Kom., M.MT</td>
+      <td>Dr. Rachmad Hidayat, ST., MT</td>
+      <td>Setiap perusahaan mengharapkan adanya hubungan...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>32</td>
+      <td>KALIBRASI KAMERA DENGAN MENGGUNAKAN METODE TSAI</td>
+      <td>Bima Iffan Hakim</td>
+      <td>Eza Rahmanita, ST., MT</td>
+      <td>Meidya Koeshardianto, S.Si., MT</td>
+      <td>Teknik kalibrasi sangat berpengaruh terhadap p...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33</td>
+      <td>PENERAPAN METODE ANALYTICAL HIERARCHY PROCESS ...</td>
+      <td>Helyatin</td>
+      <td>Bain Khusnul K, S.T.,M.Kom</td>
+      <td>Andharini Dwi C, S.Kom.,M.Kom</td>
+      <td>Pemilihan  supplier merupakan salah satu isu p...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>34</td>
+      <td>MODEL PENJUALAN PRODUK UNGGULAN BATIK KHAS PAM...</td>
+      <td>Murni Rotifah</td>
+      <td>Moch. Kautsar Sophan, S.Kom, M.MT</td>
+      <td>Bain Khusnul Khotimah, S.T., M.Kom</td>
+      <td>Kabupaten Pamekasan merupakan salah satu pusat...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>35</td>
+      <td>APLIKASI DAN DESAIN MODEL DECISION AID PELANGG...</td>
+      <td>Ardiyanto Setiawan</td>
+      <td>Moch. Kautsar Sophan, S.Kom., M.MT.</td>
+      <td>Yeni Kustiyah Ningsih, S.Kom., M.Kom.</td>
+      <td>Toko Batik Tulis Madura merupakan salah satu t...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>36</td>
+      <td>SEGMENTASI PARASIT MALARIA DALAM SEL DARAH MEN...</td>
+      <td>Yenni Rahmawati</td>
+      <td>Rima Tri Wahyuningrum, S.T.,M.T.</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
+      <td>Malaria disebabkan oleh intraseluler parasit b...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>37</td>
+      <td>ANALISA DATA ANTARAN POS EXPRESS MENGGUNAKAN\r...</td>
+      <td>siti murtasiyah warda</td>
+      <td>Bain Khusnul Khotimah.,S.T.,M.Kom</td>
+      <td>Firli Irhamni, S.T., M.Kom.</td>
+      <td>PT. Pos Indonesia (Persero) merupakan salah sa...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>38</td>
+      <td>DETEKSI MANUSIA MENGGUNAKAN HISTOGRAM OF ORIEN...</td>
+      <td>R.A. Uluwiyah Nur Oktavianis</td>
+      <td>Dr. Indah Agustien, S.Kom., M.Kom</td>
+      <td>Ari Kusumaningsih, S.T, M.T</td>
+      <td>Deteksi manusia merupakan  suatu aplikasi yang...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>39</td>
+      <td>KLASIFIKASI STATUS GIZI BALITA MENGGUNAKAN KOH...</td>
+      <td>Uhty Zunairoh</td>
+      <td>Bain Khusnul Khotimah, S.T., M.Kom.</td>
+      <td>Aeri Rachmad, S.T., M.T.</td>
+      <td>Aplikasi klasifikasi status gizi balita ini di...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>40</td>
+      <td>PERANCANGAN SISTEM INFORMASI PERENCANAAN PRODU...</td>
+      <td>M. Arif Rahman</td>
+      <td>Yeni Kustiyahningsih, S.Kom., M.Kom.</td>
+      <td>Heri Awalul Ilhamsyah, ST., MT.</td>
+      <td>Penelitian ini membahas tentang perancangan si...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>41</td>
+      <td>ANALISIS PERAMALAN PENJUALAN PRODUK ASESORIS K...</td>
+      <td>Moh. Hasbi Ash Shiddieqy</td>
+      <td>Mulaâab, S.Si., M.Kom.</td>
+      <td>Yeni Kustiyahningsih, S.Kom., M.Kom.</td>
+      <td>Dengan prediksi yang baik, dapat dibuat rencan...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>42</td>
+      <td>SISTEM INFORMASI GEOGRAFIS PEMETAAN WILAYAH BE...</td>
+      <td>Hendriatno</td>
+      <td>Bain Khusnul Khotimah.,S.T.,M.Kom</td>
+      <td>Firli Irhamni, S.T., M.Kom.</td>
+      <td>Menurut pemetaan yang dilakukan oleh Tim Nasio...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>43</td>
+      <td>PENERAPAN METODE RADIAL BASIS FUNCTION NETWORK...</td>
+      <td>Dwi Nuzulul Heriyanto</td>
+      <td>Fika Hastarita Rachman, S.T, M.Eng</td>
+      <td>Budi Dwi Satoto, ST, M.Kom</td>
+      <td>Berawal dari permintaan akan Straw (sperma bek...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>44</td>
+      <td>AUTO LEVELING BERBASIS FINITE STATE MACHINE (F...</td>
+      <td>Syafrial Nur Maulana</td>
+      <td>Arik Kurniawati, S.Kom.,M.T.</td>
+      <td>Ari Kusumaningsih, S.T., M.T.</td>
+      <td>Pengetahuan tentang bahasa Inggris pada jaman ...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>45</td>
+      <td>RANCANG BANGUN SISTEM INFORMASI PEMETAAN TANAM...</td>
+      <td>RIDHA MARISTA</td>
+      <td>HUSNI,S.Kom., M.T.</td>
+      <td>DIANA RAHMAWATI, S.T., M.T.</td>
+      <td>Kabupaten Bangkalan memiliki lahan pertanian s...</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>46</td>
+      <td>PENGENALAN TULISAN TANGAN CARAKAN JAWA SECARA ...</td>
+      <td>Nining Latifah</td>
+      <td>Fitri Damayanti, S.Kom., M.Kom</td>
+      <td>Rima Tri Wahyuningrum, ST, MT</td>
+      <td>Pengenalan tulisan tangan adalah salah satu ca...</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>47</td>
+      <td>SISTEM PEROLEHAN CITRA BERBASIS ISI MENGGUNAKA...</td>
+      <td>VEMBRI PRATAMA PRISTYONO</td>
+      <td>BAIN KHUSNUL KHOTIMAH, S.T., M.Kom.</td>
+      <td>ABDULLAH BASUKI RAHMAT, S.Si., M.T.</td>
+      <td>Batik merupakan seni yang paling penting dalam...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>48</td>
+      <td>SISTEM PERAMALAN KEBUTUHAN OBAT MENGGUNAKAN ME...</td>
+      <td>Rahmatina Hidayati</td>
+      <td>Bain Khusnul Khotimah, S.T.,M.Kom.</td>
+      <td>Haryanto, S.T.,M.T.</td>
+      <td>Obat merupakan salah satu kebutuhan penting da...</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>49</td>
+      <td>VISUALISASI PROSES TERJADINYA HUJAN BERBASIS S...</td>
+      <td>Anggit Pratama</td>
+      <td>Arik Kurniawati,S.Kom, M.Kom.</td>
+      <td>Dr.Indah Agustien Siradjuddin, S.Kom, M.Kom.  ...</td>
+      <td>ABSTRAK\r\nPerkembangan teknologi masa kini te...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9b9d9333-0350-4c59-9af9-2d133f5e7fcb')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-9b9d9333-0350-4c59-9af9-2d133f5e7fcb button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9b9d9333-0350-4c59-9af9-2d133f5e7fcb');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-29520807-efea-4085-8957-31f45481e68c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-29520807-efea-4085-8957-31f45481e68c')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const charts = await google.colab.kernel.invokeFunction(
+          'suggestCharts', [key], {});
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-29520807-efea-4085-8957-31f45481e68c button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
 </div>
 </section>
 
