@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Implementasi LDA &#8212; Pencarian &amp; Penambangan Web</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'LDA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Crawling PTA" href="PTA.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/poto.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/poto.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    WELCOME
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">TASK</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PTA.html">Crawling PTA</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Implementasi LDA</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/MeAdila/ppw/blob/gh-pages/_sources/LDA.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/MeAdila/ppw" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/MeAdila/ppw/issues/new?title=Issue%20on%20page%20%2FLDA.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/LDA.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Implementasi LDA</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="implementasi-lda">
+<h1>Implementasi LDA<a class="headerlink" href="#implementasi-lda" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">LatentDirichletAllocation</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/drive/MyDrive/ppw/PTA.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-51b7e8c9-9304-455b-943c-bbf28c57ea39" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Abstrak</th>
+      <th>Abstrak_Tokens</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>sistem informasi akademik siakad merupakan sis...</td>
+      <td>['sistem', 'informasi', 'akademik', 'siakad', ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>berjalannya koneksi jaringan komputer dengan l...</td>
+      <td>['jalan', 'koneksi', 'jaring', 'komputer', 'la...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>web server adalah sebuah perangkat lunak serve...</td>
+      <td>['web', 'server', 'perangkat', 'lunak', 'serve...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>penjadwalan kuliah di perguruan tinggi merupak...</td>
+      <td>['jadwal', 'kuliah', 'guru', 'kompleks', 'masa...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>seiring perkembangan teknologi yang ada diduni...</td>
+      <td>['iring', 'kembang', 'teknologi', 'dunia', 'mu...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>gerak pekerja ada pada game yang memiliki genr...</td>
+      <td>['gerak', 'kerja', 'game', 'milik', 'genre', '...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>perkembangan game yang semakin pesat memberika...</td>
+      <td>['kembang', 'game', 'pesat', 'alternative', 'm...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>sistem pengenalan wajah adalah suatu sistem un...</td>
+      <td>['sistem', 'kenal', 'wajah', 'sistem', 'nali',...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>teknologi mobile game beroperating system open...</td>
+      <td>['teknologi', 'mobile', 'game', 'beroperating'...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>kantor badan kepegawaian kota bangkalan adalah...</td>
+      <td>['kantor', 'badan', 'pegawai', 'kota', 'bangka...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>penyusu sistem informasi dinas perindustrian p...</td>
+      <td>['susu', 'sistem', 'informasi', 'dinas', 'indu...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>perusahaan pemerintah maupun swasta mempunyai ...</td>
+      <td>['usaha', 'perintah', 'swasta', 'tuju', 'capai...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>pelaya maka bagi pasien rawat inap di rumah sa...</td>
+      <td>['pelaya', 'pasien', 'rawat', 'inap', 'rumah',...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>penyusu sistem pendukung keputusan pemilihan t...</td>
+      <td>['susu', 'sistem', 'dukung', 'putus', 'pilih',...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>sidik jari adalah salah satu karakteristik fis...</td>
+      <td>['sidik', 'jari', 'salah', 'karakteristik', 'f...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>di indonesia masalah perkembangan gizi adalah ...</td>
+      <td>['indonesia', 'kembang', 'gizi', 'perhati', 's...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>16</td>
+      <td>pengenalan tulisan tangan merupakan topik pene...</td>
+      <td>['kenal', 'tulis', 'tangan', 'topik', 'teliti'...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>citra senyum merupakan salah satu fitur biomet...</td>
+      <td>['citra', 'senyum', 'salah', 'fitur', 'biometr...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>batik adalah keraji yang memiliki nilai seni t...</td>
+      <td>['batik', 'keraji', 'milik', 'nilai', 'seni', ...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>19</td>
+      <td>kebutuhan pencarian data pada internet yang ce...</td>
+      <td>['butuh', 'cari', 'data', 'internet', 'cepat',...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20</td>
+      <td>dalam setiap perusahaan tentunya memiliki data...</td>
+      <td>['usaha', 'milik', 'data', 'kait', 'giat', 'bi...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21</td>
+      <td>citra digital banyak dimanfaatkan dalam berbag...</td>
+      <td>['citra', 'digital', 'manfaat', 'aspek', 'hidu...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>22</td>
+      <td>beasiswa adalah pemberian berupa bantuan keuan...</td>
+      <td>['beasiswa', 'beri', 'bantu', 'uang', 'orang',...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>23</td>
+      <td>spare part merupakan salah satu bagian penting...</td>
+      <td>['spare', 'part', 'salah', 'operasi', 'mesin',...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24</td>
+      <td>abstrak penjiplakan merupakan masalah yang ser...</td>
+      <td>['abstrak', 'jiplak', 'muncul', 'kembang', 'bi...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>sumber daya manusia mutlak dibutuhkan untuk ke...</td>
+      <td>['sumber', 'daya', 'manusia', 'mutlak', 'butuh...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>abstrak data yang terdapat pada sma wachid has...</td>
+      <td>['abstrak', 'data', 'sma', 'wachid', 'hasyim',...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>27</td>
+      <td>sebuah citra banyak diterapkan dalam berbagai ...</td>
+      <td>['citra', 'terap', 'aspek', 'hidup', 'bidang',...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>28</td>
+      <td>teknologi biometrik saat ini mengalami perkemb...</td>
+      <td>['teknologi', 'biometrik', 'alami', 'kembang',...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>29</td>
+      <td>diagnosa penyakit mata dengan sistem informasi...</td>
+      <td>['diagnosa', 'sakit', 'mata', 'sistem', 'infor...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30</td>
+      <td>penggunaan teknologi mobile saat ini sangat ma...</td>
+      <td>['guna', 'teknologi', 'mobile', 'marak', 'samp...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>31</td>
+      <td>setiap perusahaan mengharapkan adanya hubungan...</td>
+      <td>['usaha', 'harap', 'hubung', 'langgan', 'pt', ...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>32</td>
+      <td>teknik kalibrasi sangat berpengaruh terhadap p...</td>
+      <td>['teknik', 'kalibrasi', 'pengaruh', 'kembang',...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33</td>
+      <td>pemilihan supplier merupakan salah satu isu pe...</td>
+      <td>['pilih', 'supplier', 'salah', 'isu', 'pilih',...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>34</td>
+      <td>kabupaten pamekasan merupakan salah satu pusat...</td>
+      <td>['kabupaten', 'pamekasan', 'salah', 'pusat', '...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>35</td>
+      <td>toko batik tulis madura merupakan salah satu t...</td>
+      <td>['toko', 'batik', 'tulis', 'madura', 'salah', ...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>36</td>
+      <td>malaria disebabkan oleh intraseluler parasit b...</td>
+      <td>['malaria', 'sebab', 'intraseluler', 'parasit'...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>37</td>
+      <td>pt pos indonesia persero merupakan salah satu ...</td>
+      <td>['pt', 'pos', 'indonesia', 'persero', 'salah',...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>38</td>
+      <td>deteksi manusia merupakan suatu aplikasi yang ...</td>
+      <td>['deteksi', 'manusia', 'aplikasi', 'fungsi', '...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>39</td>
+      <td>aplikasi klasifikasi status gizi balita ini di...</td>
+      <td>['aplikasi', 'klasifikasi', 'status', 'gizi', ...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>40</td>
+      <td>penelitian ini membahas tentang perancangan si...</td>
+      <td>['teliti', 'bahas', 'ancang', 'sistem', 'infor...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>41</td>
+      <td>dengan prediksi yang baik dapat dibuat rencana...</td>
+      <td>['prediksi', 'rencana', 'kerja', 'usaha', 'efe...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>42</td>
+      <td>menurut pemetaan yang dilakukan oleh tim nasio...</td>
+      <td>['meta', 'tim', 'nasional', 'cepat', 'peggulan...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>43</td>
+      <td>berawal dari permintaan akan straw sperma beku...</td>
+      <td>['minta', 'straw', 'sperma', 'beku', 'sapi', '...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>44</td>
+      <td>pengetahuan tentang bahasa inggris pada jaman ...</td>
+      <td>['tahu', 'bahasa', 'inggris', 'jaman', 'global...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>45</td>
+      <td>kabupaten bangkalan memiliki lahan pertanian s...</td>
+      <td>['kabupaten', 'bangkal', 'milik', 'lahan', 'ta...</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>46</td>
+      <td>pengenalan tulisan tangan adalah salah satu ca...</td>
+      <td>['kenal', 'tulis', 'tangan', 'salah', 'cabang'...</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>47</td>
+      <td>batik merupakan seni yang paling penting dalam...</td>
+      <td>['batik', 'seni', 'hidup', 'masyarakat', 'indo...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>48</td>
+      <td>obat merupakan salah satu kebutuhan penting da...</td>
+      <td>['obat', 'salah', 'butuh', 'rumah', 'sakit', '...</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>49</td>
+      <td>abstrak perkembangan teknologi masa kini telah...</td>
+      <td>['abstrak', 'kembang', 'teknologi', 'manusia',...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+      
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-51b7e8c9-9304-455b-943c-bbf28c57ea39')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+      
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+    
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-51b7e8c9-9304-455b-943c-bbf28c57ea39 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-51b7e8c9-9304-455b-943c-bbf28c57ea39');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+  
+    </div>
+  </div>
+  </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyError</span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-3-aac2375e3e8d&gt;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">X</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">331</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">332</span> 
+<span class="g g-Whitespace">    </span><span class="mi">333</span>         <span class="c1"># error: &quot;Callable[[VarArg(Any), KwArg(Any)], Any]&quot; has no</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/core/frame.py</span> in <span class="ni">drop</span><span class="nt">(self, labels, axis, index, columns, level, inplace, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5397</span>                 <span class="n">weight</span>  <span class="mf">1.0</span>     <span class="mf">0.8</span>
+<span class="g g-Whitespace">   </span><span class="mi">5398</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">5399</span><span class="s2">         return super().drop(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5400</span><span class="s2">             labels=labels,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5401</span><span class="s2">             axis=axis,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span><span class="s2">                     stacklevel=find_stack_level(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span><span class="s2">                 )</span>
+<span class="ne">--&gt; </span><span class="mi">331</span><span class="s2">             return func(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">332</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">333</span><span class="s2">         # error: &quot;Callable[[VarArg(Any), KwArg(Any)], Any]&quot; has no</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/core/generic.py</span> in <span class="ni">drop</span><span class="nt">(self, labels, axis, index, columns, level, inplace, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4503</span><span class="s2">         for axis, labels in axes.items():</span>
+<span class="g g-Whitespace">   </span><span class="mi">4504</span><span class="s2">             if labels is not None:</span>
+<span class="ne">-&gt; </span><span class="mi">4505</span><span class="s2">                 obj = obj._drop_axis(labels, axis, level=level, errors=errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4506</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">4507</span><span class="s2">         if inplace:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/core/generic.py</span> in <span class="ni">_drop_axis</span><span class="nt">(self, labels, axis, level, errors, only_slice)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4544</span><span class="s2">                 new_axis = axis.drop(labels, level=level, errors=errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4545</span><span class="s2">             else:</span>
+<span class="ne">-&gt; </span><span class="mi">4546</span><span class="s2">                 new_axis = axis.drop(labels, errors=errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4547</span><span class="s2">             indexer = axis.get_indexer(new_axis)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4548</span><span class="s2"> </span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/core/indexes/base.py</span> in <span class="ni">drop</span><span class="nt">(self, labels, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6932</span><span class="s2">         if mask.any():</span>
+<span class="g g-Whitespace">   </span><span class="mi">6933</span><span class="s2">             if errors != &quot;ignore&quot;:</span>
+<span class="ne">-&gt; </span><span class="mi">6934</span><span class="s2">                 raise KeyError(f&quot;{list(labels[mask])} not found in axis&quot;)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6935</span><span class="s2">             indexer = indexer[~mask]</span>
+<span class="g g-Whitespace">   </span><span class="mi">6936</span><span class="s2">         return self.delete(indexer)</span>
+
+<span class="ne">KeyError</span>: &quot;[&#39;Dokumen&#39;] not found in axis&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">lda</span> <span class="o">=</span> <span class="n">LatentDirichletAllocation</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">doc_topic_prior</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">topic_word_prior</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+<span class="n">proporsi_topik_dokumen</span> <span class="o">=</span> <span class="n">lda</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dokumen</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">]</span>
+<span class="n">output_proporsi_TD</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">proporsi_topik_dokumen</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Topik 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 3&#39;</span><span class="p">])</span>
+<span class="n">output_proporsi_TD</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">,</span> <span class="n">dokumen</span><span class="p">)</span>
+<span class="n">output_proporsi_TD</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output distribusi kata pada topik</span>
+<span class="n">distribusi_kata_topik</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lda</span><span class="o">.</span><span class="n">components_</span><span class="p">)</span>
+<span class="n">distribusi_kata_topik</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="PTA.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Crawling PTA</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 20_148 Fadilatul Jannah
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
