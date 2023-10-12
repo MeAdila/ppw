@@ -27,7 +27,7 @@ st.write("**Nama  : Fadilatul Jannah**")
 st.write("**NIM   : 200411100148**")
 st.write("**Kelas : PPW A**")
 st.write("-------------------------------------------------------------------------------------------------------------------------")
-upload_data, preporcessing, modeling = st.tabs(["Upload Data", "Preprocessing", "Modeling"])
+upload_data, modeling = st.tabs(["Upload Data", "Modeling"])
 
 
 with upload_data:
@@ -37,81 +37,6 @@ with upload_data:
         df = pd.read_csv(uploaded_file)
         st.write("Nama File Anda = ", uploaded_file.name)
         st.dataframe(df)
-
-with preporcessing :
-    st.write("""# Preprocessing""")
-    st.subheader("""Normalisasi Data""")
-    st.write("""Rumus Normalisasi Data :""")
-    st.markdown("""
-    Dimana :
-    - X = data yang akan dinormalisasi atau data asli
-    - min = nilai minimum semua data asli
-    - max = nilai maksimum semua data asli
-    """)
-    df = df.drop(columns=["Dokumen"])
-    #Mendefinisikan Varible X dan Y
-    X = df.drop(columns=['Label'])
-    y = df['Cluster'].values
-    df
-    X
-    df_min = X.min()
-    df_max = X.max()
-    
-    #NORMALISASI NILAI X
-    scaler = MinMaxScaler()
-    #scaler.fit(features)
-    #scaler.transform(features)
-    scaled = scaler.fit_transform(X)
-    #features_names.remove('label')
-    
-    features_names = X.columns.copy()
-    scaled_features = pd.DataFrame(scaled, columns=features_names)
-
-    st.subheader('Hasil Normalisasi Data')
-    st.write(scaled_features)
-
-    st.subheader('Target Label')
-    dumies = pd.get_dummies(df.Cluster).columns.values.tolist()
-    dumies = np.array(dumies)
-
-    labels = pd.get_dummies(df.Cluster).columns.values.tolist()
-
-    st.write(labels)
-
-    # st.subheader("""Normalisasi Data""")
-    # st.write("""Rumus Normalisasi Data :""")
-    # st.image('https://i.stack.imgur.com/EuitP.png', use_column_width=False, width=250)
-    # st.markdown("""
-    # Dimana :
-    # - X = data yang akan dinormalisasi atau data asli
-    # - min = nilai minimum semua data asli
-    # - max = nilai maksimum semua data asli
-    # """)
-    # df.weather.value_counts()
-    # df = df.drop(columns=["date"])
-    # #Mendefinisikan Varible X dan Y
-    # X = df.drop(columns=['weather'])
-    # y = df['weather'].values
-    # df_min = X.min()
-    # df_max = X.max()
-
-    # #NORMALISASI NILAI X
-    # scaler = MinMaxScaler()
-    # #scaler.fit(features)
-    # #scaler.transform(features)
-    # scaled = scaler.fit_transform(X)
-    # features_names = X.columns.copy()
-    # #features_names.remove('label')
-    # scaled_features = pd.DataFrame(scaled, columns=features_names)
-
-    # #Save model normalisasi
-    # from sklearn.utils.validation import joblib
-    # norm = "normalisasi.save"
-    # joblib.dump(scaled_features, norm) 
-
-
-    # st.subheader('Hasil Normalisasi Data')
-    # st.write(scaled_features)
 
 with modeling:
     st.write("""# Modeling""")
