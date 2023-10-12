@@ -38,85 +38,9 @@ with upload_data:
         st.write("Nama File Anda = ", uploaded_file.name)
         st.dataframe(df)
 
-with preporcessing :
-    st.write("""# Preprocessing""")
-    st.subheader("""Normalisasi Data""")
-    st.write("""Rumus Normalisasi Data :""")
-    st.markdown("""
-    Dimana :
-    - X = data yang akan dinormalisasi atau data asli
-    - min = nilai minimum semua data asli
-    - max = nilai maksimum semua data asli
-    """)
-    df = df.drop(columns=["Dokumen"])
-    #Mendefinisikan Varible X dan Y
-    X = df.drop(columns=['Label'])
-    y = df['Cluster'].values
-    df
-    X
-    df_min = X.min()
-    df_max = X.max()
-    
-    #NORMALISASI NILAI X
-    scaler = MinMaxScaler()
-    #scaler.fit(features)
-    #scaler.transform(features)
-    scaled = scaler.fit_transform(X)
-    #features_names.remove('label')
-    
-    features_names = X.columns.copy()
-    scaled_features = pd.DataFrame(scaled, columns=features_names)
-
-    st.subheader('Hasil Normalisasi Data')
-    st.write(scaled_features)
-
-    st.subheader('Target Label')
-    dumies = pd.get_dummies(df.Cluster).columns.values.tolist()
-    dumies = np.array(dumies)
-
-    labels = pd.get_dummies(df.Cluster).columns.values.tolist()
-
-    st.write(labels)
-
-    # st.subheader("""Normalisasi Data""")
-    # st.write("""Rumus Normalisasi Data :""")
-    # st.image('https://i.stack.imgur.com/EuitP.png', use_column_width=False, width=250)
-    # st.markdown("""
-    # Dimana :
-    # - X = data yang akan dinormalisasi atau data asli
-    # - min = nilai minimum semua data asli
-    # - max = nilai maksimum semua data asli
-    # """)
-    # df.weather.value_counts()
-    # df = df.drop(columns=["date"])
-    # #Mendefinisikan Varible X dan Y
-    # X = df.drop(columns=['weather'])
-    # y = df['weather'].values
-    # df_min = X.min()
-    # df_max = X.max()
-
-    # #NORMALISASI NILAI X
-    # scaler = MinMaxScaler()
-    # #scaler.fit(features)
-    # #scaler.transform(features)
-    # scaled = scaler.fit_transform(X)
-    # features_names = X.columns.copy()
-    # #features_names.remove('label')
-    # scaled_features = pd.DataFrame(scaled, columns=features_names)
-
-    # #Save model normalisasi
-    # from sklearn.utils.validation import joblib
-    # norm = "normalisasi.save"
-    # joblib.dump(scaled_features, norm) 
-
-
-    # st.subheader('Hasil Normalisasi Data')
-    # st.write(scaled_features)
-
 with modeling:
     st.write("""# Modeling""")
-    training, test = train_test_split(scaled_features,test_size=0.2, random_state=1)#Nilai X training dan Nilai X testing
-    training_label, test_label = train_test_split(y, test_size=0.2, random_state=1)#Nilai Y training dan Nilai Y testing
+    
     with st.form("modeling"):
         st.write("Pilihlah model yang akan dilakukan pengecekkan akurasi:")
         naive = st.checkbox('Gaussian Naive Bayes')
@@ -125,18 +49,27 @@ with modeling:
         submitted = st.form_submit_button("Submit")
 
         # NB
+        
+        # Memisahkan fitur dan label kelas target
+        X = df[['Topik 1', 'Topik 2', 'Topik 3']]
+        y = df['Cluster']  # Gantilah 'Kelas_Target' dengan nama kolom yang sesuai untuk label kelas target
+        
+        # Memisahkan data menjadi data latih dan data uji
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
         GaussianNB(priors=None)
-
-        # Fitting Naive Bayes Classification to the Training set with linear kernel
-        gaussian = GaussianNB()
-        gaussian = gaussian.fit(training, training_label)
-
-        # Predicting the Test set results
-        y_pred = gaussian.predict(test)
-    
-        y_compare = np.vstack((test_label,y_pred)).T
-        gaussian.predict_proba(test)
-        gaussian_akurasi = round(100 * accuracy_score(test_label, y_pred))
+        # Membuat model Naive Bayes
+        naive_bayes = GaussianNB()
+        
+        # Melatih model menggunakan data latih
+        naive_bayes.fit(X_train, y_train)
+        
+        # Membuat prediksi menggunakan data uji
+        predictions = naive_bayes.predict(X_test)
+        
+        # Mengukur akurasi model
+        gaussian_akurasi = accuracy_score(y_test, predictions)
+        print("Akurasi Naive Bayes:", gaussian_akurasi)
         # akurasi = 10
 
         #Gaussian Naive Bayes
@@ -150,20 +83,22 @@ with modeling:
         # gaussian_akurasi = round(100 * accuracy_score(test_label,probas))
 
         #KNN
-        K=3
-        knn=KNeighborsClassifier(n_neighbors=K)
-        knn.fit(training,training_label)
-        knn_predict=knn.predict(test)
+        neigh = KNeighborsClassifier(n_neighbors=3)
+        knn = neigh.fit(X_train, y_train)
+        y_pred_knn = knn.predict(X_test)
 
-        knn_akurasi = round(100 * accuracy_score(test_label,knn_predict))
+        knn_akurasi = accuracy_score(y_test, y_pred_knn)
+        print("Akurasi:", knn_akurasi)
 
         #Decission Tree
-        dt = DecisionTreeClassifier()
-        dt.fit(training, training_label)
-        # prediction
-        dt_pred = dt.predict(test)
-        #Accuracy
-        dt_akurasi = round(100 * accuracy_score(test_label,dt_pred))
+        
+        clf = tree.DecisionTreeClassifier()
+        decision_tree = clf.fit(X_train, y_train)
+
+        y_pred_clf = decision_tree.predict(X_test)
+
+        dt_akurasi = accuracy_score(y_test, y_pred_clf)
+        print("Akurasi:", dt_akurasi)
 
         if submitted :
             if naive :
