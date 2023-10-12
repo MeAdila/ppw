@@ -23,8 +23,8 @@ from sklearn.utils.validation import joblib
 
 st.title("UTS PENCARIAN DAN PENAMBANGAN WEB")
 st.write("-------------------------------------------------------------------------------------------------------------------------")
-st.write("**Nama  : Dhita Aprilia Dhamayanti**")
-st.write("**NIM   : 200411100102**")
+st.write("**Nama  : Fadilatul Jannah**")
+st.write("**NIM   : 200411100148**")
 st.write("**Kelas : PPW A**")
 st.write("-------------------------------------------------------------------------------------------------------------------------")
 upload_data, preporcessing, modeling = st.tabs(["Upload Data", "Preprocessing", "Modeling"])
