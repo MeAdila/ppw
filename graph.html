@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Pencarian &amp; Penambangan Web</title>
+    <title>Crawling Berita &#8212; Pencarian &amp; Penambangan Web</title>
   
   
   
@@ -167,11 +167,12 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">TASK</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="PTA.html">Crawling PTA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Data Text</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LDA.html">Implementasi LDA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="playstore.html">Crawling Playstore</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling Berita</a></li>
 </ul>
 
     </div>
@@ -373,9 +374,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -386,19 +385,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Crawling Berita</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -408,7 +399,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="crawling-berita">
+<h1>Crawling Berita<a class="headerlink" href="#crawling-berita" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#melakukan web scraping pada halaman berita yang berasal dari URL</span>
 <span class="kn">import</span> <span class="nn">requests</span>
@@ -1083,7 +1076,9 @@ skandal: 0.1040
 tabir: 0.1040
 tangan: 0.1040
 terdapat: 0.0838
-terkemuka: 0.1040
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>terkemuka: 0.1040
 termasuk: 0.1040
 turun: 0.1040
 untuk: 0.0472
@@ -1237,7 +1232,9 @@ gaza: 0.0968
 ini: 0.1205
 javascript: 0.2422
 kehidupan: 0.2147
-konflik: 0.1800
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>konflik: 0.1800
 lainplay: 0.2422
 memutar: 0.2422
 mengapa: 0.2147
@@ -1630,9 +1627,7 @@ membangun: 0.2327
 memberikan: 0.2327
 menerapkan: 0.2327
 pagar: 0.2327
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pembatasan: 0.2062
+pembatasan: 0.2062
 penyangga: 0.2327
 perlindungan: 0.2327
 sepanjang: 0.2062
@@ -2055,7 +2050,7 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-d66bb23d-66b8-48b1-a118-8e5aff6e5194" class="colab-df-container">
+  <div id="df-a9c8ed50-a16d-42d8-98cc-7a53ea87fb2b" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2705,7 +2700,7 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-d66bb23d-66b8-48b1-a118-8e5aff6e5194')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a9c8ed50-a16d-42d8-98cc-7a53ea87fb2b')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -2757,12 +2752,12 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 
     <script>
       const buttonEl =
-        document.querySelector('#df-d66bb23d-66b8-48b1-a118-8e5aff6e5194 button.colab-df-convert');
+        document.querySelector('#df-a9c8ed50-a16d-42d8-98cc-7a53ea87fb2b button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-d66bb23d-66b8-48b1-a118-8e5aff6e5194');
+        const element = document.querySelector('#df-a9c8ed50-a16d-42d8-98cc-7a53ea87fb2b');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2947,6 +2942,7 @@ Closeness Centrality of 0.2011
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2993,20 +2989,6 @@ Closeness Centrality of 0.2011
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
