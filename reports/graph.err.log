@@ -1,0 +1,74 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+#membuat grafik berarah (Directed Graph - DiGraph) yang merepresentasikan hubungan antara kalimat-kalimat dalam teks berdasarkan kemiripan (cosine similarity)
+import networkx as nx
+
+# Matriks TF-IDF telah dihitung sebelumnya (tfidf_matrix)
+# Hitung cosine similarity antara semua pasangan kalimat
+similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+# Buat grafik berarah (DiGraph) berdasarkan similarity_matrix
+G = nx.DiGraph()
+for i in range(len(similarity_matrix)):
+    G.add_node(i)  # Tambahkan node dengan indeks numerik
+
+for i in range(len(similarity_matrix)):
+    for j in range(len(similarity_matrix)):
+        similarity = similarity_matrix[i][j]
+        if similarity > 0 and i != j:  # Pastikan node tidak menghubungkan dirinya sendiri
+            G.add_edge(i, j)
+
+# Hitung closeness centrality
+closeness_centrality = nx.closeness_centrality(G)
+
+# Visualisasi closeness centrality
+pos = nx.spring_layout(G)  # Atur layout grafik
+!!node_size = [v * 1000 for v in closeness_centrality.values() if v > 0.2]  # Ubah ukuran node berdasarkan closeness centrality, dengan faktor pengurangan ukuran
+# pilih_node = [node for node, v in closeness_centrality.items() if v > 0.2]
+
+# subgraph = G.subgraph(pilih_node)
+
+nx.draw_networkx_nodes(G, pos, node_size=node_size, node_color='salmon')
+nx.draw_networkx_edges(G, pos, edge_color='gray', arrows=True)
+nx.draw_networkx_labels(G, pos)
+
+plt.show()
+
+# Cetak closeness centrality dari yang tertinggi hingga terendah
+print("Closeness Centrality (Dari Tertinggi ke Terendah):")
+!!sorted_closeness = sorted([(node, closeness) for node, closeness in closeness_centrality.items() if closeness > 0.2], key=lambda x: x[1], reverse=True)
+
+for node, closeness in sorted_closeness:
+    sentence = sentences[node]  # Akses kalimat yang sesuai dengan node
+    print(f"Node {node}: Closeness Centrality {closeness:.4f}")
+    print(f"Kalimat: {sentence}")
+    print()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-8-fd406c40529e>[0m in [0;36m<cell line: 29>[0;34m()[0m
+[1;32m     27[0m [0;31m# subgraph = G.subgraph(pilih_node)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     28[0m [0;34m[0m[0m
+[0;32m---> 29[0;31m [0mnx[0m[0;34m.[0m[0mdraw_networkx_nodes[0m[0;34m([0m[0mG[0m[0;34m,[0m [0mpos[0m[0;34m,[0m [0mnode_size[0m[0;34m=[0m[0mnode_size[0m[0;34m,[0m [0mnode_color[0m[0;34m=[0m[0;34m'salmon'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     30[0m [0mnx[0m[0;34m.[0m[0mdraw_networkx_edges[0m[0;34m([0m[0mG[0m[0;34m,[0m [0mpos[0m[0;34m,[0m [0medge_color[0m[0;34m=[0m[0;34m'gray'[0m[0;34m,[0m [0marrows[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     31[0m [0mnx[0m[0;34m.[0m[0mdraw_networkx_labels[0m[0;34m([0m[0mG[0m[0;34m,[0m [0mpos[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'node_size' is not defined
+
