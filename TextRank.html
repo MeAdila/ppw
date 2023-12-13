@@ -381,7 +381,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -397,6 +399,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">TextRank</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -408,6 +418,2077 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="textrank">
 <h1>TextRank<a class="headerlink" href="#textrank" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+[nltk_data] Downloading package punkt to /root/nltk_data...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]   Unzipping tokenizers/punkt.zip.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">stopwords</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">):</span>
+  <span class="c1"># Menggambar graf dengan canvas yang diperbesar</span>
+  <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Menentukan posisi simpul</span>
+  <span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+
+  <span class="c1"># Menentukan ukuran canvas</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+  <span class="c1"># Menggambar graf dengan ukuran canvas yang diperbesar</span>
+  <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_color</span><span class="p">)</span>
+  <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">graph_co_occurrence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+  <span class="n">tfidf_matrics</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">co_occurrence_matrix</span> <span class="o">=</span> <span class="n">tfidf_matrics</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tfidf_matrics</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+  <span class="n">df_co_occurence</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">co_occurrence_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+  <span class="n">df_co_occurence</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Word&#39;</span><span class="p">,</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+  <span class="k">if</span> <span class="n">show_matrics</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabel Co-occurence Matrics: &quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">df_co_occurence</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+  <span class="c1"># Membuat graf berbobot menggunakan NetworkX</span>
+  <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+  <span class="n">num_words</span> <span class="o">=</span> <span class="n">co_occurrence_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="c1"># Menambahkan edge ke graf berdasarkan matriks co-occurrence</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_words</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_words</span><span class="p">):</span>
+      <span class="n">weight</span> <span class="o">=</span> <span class="n">co_occurrence_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+      <span class="k">if</span> <span class="n">weight</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">j</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">text_rank</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">damping_factor</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
+  <span class="c1"># Inisialisasi nilai TextRank untuk setiap node</span>
+  <span class="n">initial_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+  <span class="n">ranks</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="n">initial_value</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inisialisasi Score Awal : </span><span class="si">{</span><span class="n">ranks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Edges : </span><span class="si">{</span><span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">()</span>
+
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+    <span class="n">new_ranks</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;========== Iterasi Ke - </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> ==========&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+      <span class="n">rank_sum</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">operasi</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+      <span class="c1"># Menampilkan informasi out_sum dan win untuk setiap node dan neighbor</span>
+      <span class="n">out_sums_info</span> <span class="o">=</span> <span class="p">{}</span>
+      <span class="n">win</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">)</span>
+
+      <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="n">node</span><span class="p">][</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span>
+        <span class="n">out_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="n">out_neighbor</span><span class="p">][</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">out_neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">neighbor</span><span class="p">))</span>
+        <span class="n">rank_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">edge_weight</span> <span class="o">/</span> <span class="n">out_sum</span><span class="p">)</span> <span class="o">*</span> <span class="n">ranks</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span>
+        <span class="n">operasi</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">edge_weight</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">out_sum</span><span class="si">}</span><span class="s2">) * </span><span class="si">{</span><span class="n">ranks</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span><span class="si">}</span><span class="s2"> + &quot;</span>
+
+        <span class="c1"># Menambah informasi out_sum untuk setiap neighbor</span>
+        <span class="n">out_sums_info</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">out_neighbor</span><span class="p">:</span> <span class="n">graph</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="n">out_neighbor</span><span class="p">][</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">out_neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)}</span>
+
+      <span class="c1"># Jika operasi kosong, atur nilai operasi menjadi 0</span>
+      <span class="n">operasi</span> <span class="o">=</span> <span class="n">operasi</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="k">if</span> <span class="n">operasi</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
+
+      <span class="n">new_rank</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">damping_factor</span><span class="p">)</span> <span class="o">+</span> <span class="n">damping_factor</span> <span class="o">*</span> <span class="n">rank_sum</span>
+      <span class="n">new_ranks</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_rank</span>
+
+      <span class="c1"># Menampilkan informasi out_sum dan win pada setiap iterasi</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Win(</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">win</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Out_sums_info(</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">out_sums_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W(</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">) = (1 - </span><span class="si">{</span><span class="n">damping_factor</span><span class="si">}</span><span class="s2">) + </span><span class="si">{</span><span class="n">damping_factor</span><span class="si">}</span><span class="s2"> * (</span><span class="si">{</span><span class="n">operasi</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">new_rank</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Periksa konvergensi</span>
+    <span class="n">convergence</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">new_ranks</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">-</span> <span class="n">ranks</span><span class="p">[</span><span class="n">node</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="n">new_ranks</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New Score : </span><span class="si">{</span><span class="n">new_ranks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">convergence</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Konvergensi tercapai pada iterasi ke-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">break</span>
+
+  <span class="k">return</span> <span class="n">ranks</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_top_words</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_scores</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">full_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Stopwords removal</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">stopwords</span><span class="p">(</span><span class="n">full_text</span><span class="p">)]</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">graph_co_occurrence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">show_matrics</span><span class="p">)</span>
+
+    <span class="c1"># Menghitung nilai dari PageRank (TextRank)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">text_rank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Dictionary untuk menyimpan skor tertinggi setiap kata</span>
+    <span class="n">ranked_words_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">current_score</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ranked_words_dict</span> <span class="ow">or</span> <span class="n">current_score</span> <span class="o">&gt;</span> <span class="n">ranked_words_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]:</span>
+            <span class="n">ranked_words_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_score</span>
+
+    <span class="c1"># Mengurutkan kata-kata berdasarkan skor tertinggi</span>
+    <span class="n">ranked_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(((</span><span class="n">score</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">ranked_words_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Memilih sejumlah w kata tertinggi</span>
+    <span class="n">selected_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">ranked_words</span><span class="p">[:</span><span class="n">w</span><span class="p">]]</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># Menggabungkan kata-kata menjadi satu string terpisah dengan koma</span>
+    <span class="n">keywords</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">selected_words</span><span class="p">)</span> <span class="k">if</span> <span class="n">selected_words</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">show_scores</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dokumen ke </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">full_text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s1"> Kata Kunci : </span><span class="si">{</span><span class="n">keywords</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TextRank Scores:&quot;</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">ranked_words</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skor: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">, Kata: </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">selected_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pemandangan gunung semeru indah&#39;</span><span class="p">]</span>
+<span class="n">G1</span><span class="p">,</span> <span class="n">keywords1</span> <span class="o">=</span> <span class="n">extract_top_words</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabel Co-occurence Matrics: 
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-5379c7d8-d5b1-43a6-a47e-78bf63d7a07f" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Word</th>
+      <th>gunung</th>
+      <th>indah</th>
+      <th>pemandangan</th>
+      <th>semeru</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>gunung</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>indah</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pemandangan</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>semeru</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+      
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-5379c7d8-d5b1-43a6-a47e-78bf63d7a07f')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+      
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+    
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-5379c7d8-d5b1-43a6-a47e-78bf63d7a07f button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-5379c7d8-d5b1-43a6-a47e-78bf63d7a07f');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+  
+    </div>
+  </div>
+  </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inisialisasi Score Awal : {&#39;gunung&#39;: 0.25, &#39;indah&#39;: 0.25, &#39;pemandangan&#39;: 0.25, &#39;semeru&#39;: 0.25}
+Edges : [(&#39;gunung&#39;, &#39;indah&#39;), (&#39;gunung&#39;, &#39;pemandangan&#39;), (&#39;gunung&#39;, &#39;semeru&#39;), (&#39;indah&#39;, &#39;pemandangan&#39;), (&#39;indah&#39;, &#39;semeru&#39;), (&#39;pemandangan&#39;, &#39;semeru&#39;)]
+
+========== Iterasi Ke - 0 ==========
+Win(gunung): 0
+Out_sums_info(gunung): {}
+W(gunung) = (1 - 0.85) + 0.85 * (0) = 0.15000000000000002
+
+Win(indah): 1
+Out_sums_info(indah): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(indah) = (1 - 0.85) + 0.85 * ((1/3) * 0.25) = 0.22083333333333335
+
+Win(pemandangan): 2
+Out_sums_info(pemandangan): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(pemandangan) = (1 - 0.85) + 0.85 * ((1/3) * 0.25 + (1/2) * 0.25) = 0.32708333333333334
+
+Win(semeru): 3
+Out_sums_info(semeru): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;pemandangan&#39;: {&#39;semeru&#39;: 1}}
+W(semeru) = (1 - 0.85) + 0.85 * ((1/3) * 0.25 + (1/2) * 0.25 + (1/1) * 0.25) = 0.5395833333333333
+
+New Score : {&#39;gunung&#39;: 0.15000000000000002, &#39;indah&#39;: 0.22083333333333335, &#39;pemandangan&#39;: 0.32708333333333334, &#39;semeru&#39;: 0.5395833333333333}
+
+========== Iterasi Ke - 1 ==========
+Win(gunung): 0
+Out_sums_info(gunung): {}
+W(gunung) = (1 - 0.85) + 0.85 * (0) = 0.15000000000000002
+
+Win(indah): 1
+Out_sums_info(indah): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(indah) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002) = 0.19250000000000003
+
+Win(pemandangan): 2
+Out_sums_info(pemandangan): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(pemandangan) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.22083333333333335) = 0.2863541666666667
+
+Win(semeru): 3
+Out_sums_info(semeru): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;pemandangan&#39;: {&#39;semeru&#39;: 1}}
+W(semeru) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.22083333333333335 + (1/1) * 0.32708333333333334) = 0.5643750000000001
+
+New Score : {&#39;gunung&#39;: 0.15000000000000002, &#39;indah&#39;: 0.19250000000000003, &#39;pemandangan&#39;: 0.2863541666666667, &#39;semeru&#39;: 0.5643750000000001}
+
+========== Iterasi Ke - 2 ==========
+Win(gunung): 0
+Out_sums_info(gunung): {}
+W(gunung) = (1 - 0.85) + 0.85 * (0) = 0.15000000000000002
+
+Win(indah): 1
+Out_sums_info(indah): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(indah) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002) = 0.19250000000000003
+
+Win(pemandangan): 2
+Out_sums_info(pemandangan): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(pemandangan) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.19250000000000003) = 0.2743125
+
+Win(semeru): 3
+Out_sums_info(semeru): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;pemandangan&#39;: {&#39;semeru&#39;: 1}}
+W(semeru) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.19250000000000003 + (1/1) * 0.2863541666666667) = 0.5177135416666667
+
+New Score : {&#39;gunung&#39;: 0.15000000000000002, &#39;indah&#39;: 0.19250000000000003, &#39;pemandangan&#39;: 0.2743125, &#39;semeru&#39;: 0.5177135416666667}
+
+========== Iterasi Ke - 3 ==========
+Win(gunung): 0
+Out_sums_info(gunung): {}
+W(gunung) = (1 - 0.85) + 0.85 * (0) = 0.15000000000000002
+
+Win(indah): 1
+Out_sums_info(indah): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(indah) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002) = 0.19250000000000003
+
+Win(pemandangan): 2
+Out_sums_info(pemandangan): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(pemandangan) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.19250000000000003) = 0.2743125
+
+Win(semeru): 3
+Out_sums_info(semeru): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;pemandangan&#39;: {&#39;semeru&#39;: 1}}
+W(semeru) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.19250000000000003 + (1/1) * 0.2743125) = 0.507478125
+
+New Score : {&#39;gunung&#39;: 0.15000000000000002, &#39;indah&#39;: 0.19250000000000003, &#39;pemandangan&#39;: 0.2743125, &#39;semeru&#39;: 0.507478125}
+
+========== Iterasi Ke - 4 ==========
+Win(gunung): 0
+Out_sums_info(gunung): {}
+W(gunung) = (1 - 0.85) + 0.85 * (0) = 0.15000000000000002
+
+Win(indah): 1
+Out_sums_info(indah): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(indah) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002) = 0.19250000000000003
+
+Win(pemandangan): 2
+Out_sums_info(pemandangan): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}}
+W(pemandangan) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.19250000000000003) = 0.2743125
+
+Win(semeru): 3
+Out_sums_info(semeru): {&#39;gunung&#39;: {&#39;indah&#39;: 1, &#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;indah&#39;: {&#39;pemandangan&#39;: 1, &#39;semeru&#39;: 1}, &#39;pemandangan&#39;: {&#39;semeru&#39;: 1}}
+W(semeru) = (1 - 0.85) + 0.85 * ((1/3) * 0.15000000000000002 + (1/2) * 0.19250000000000003 + (1/1) * 0.2743125) = 0.507478125
+
+New Score : {&#39;gunung&#39;: 0.15000000000000002, &#39;indah&#39;: 0.19250000000000003, &#39;pemandangan&#39;: 0.2743125, &#39;semeru&#39;: 0.507478125}
+
+Konvergensi tercapai pada iterasi ke-4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_graph</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0ee42f90971f06bd821f521c40f43b50569b16c125201656525a9cb23fda1964.png" src="_images/0ee42f90971f06bd821f521c40f43b50569b16c125201656525a9cb23fda1964.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keywords1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;semeru&#39;, &#39;pemandangan&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h2>TextRank<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/MeAdila/ppw/gh-pages/berita-BBC.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-e558ca93-d7bd-4d37-9510-b19b58eca3d8" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Judul Berita</th>
+      <th>Isi Berita</th>
+      <th>Kategori Berita</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Viral penemuan lima mayat di Kampus Unpri Meda...</td>
+      <td>Viral penemuan lima mayat di Kampus Unpri Meda...</td>
+      <td>Indonesia</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Debat capres berpengaruh terhadap pemilih meng...</td>
+      <td>Debat capres berpengaruh terhadap pemilih meng...</td>
+      <td>Indonesia</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Pilpres 2024: Apa janji capres soal hukum, HAM...</td>
+      <td>Pilpres 2024: Apa janji capres soal hukum, HAM...</td>
+      <td>Indonesia</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>TikTok Shop buka lagi setelah akuisisi Tokoped...</td>
+      <td>TikTok Shop buka lagi setelah akuisisi Tokoped...</td>
+      <td>Indonesia</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Siapa yang menyebarkan narasi kebencian dan ho...</td>
+      <td>Siapa yang menyebarkan narasi kebencian dan ho...</td>
+      <td>Indonesia</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>715</th>
+      <td>Demonstrasi anti-LGBT warnai konser Coldplay d...</td>
+      <td>Demonstrasi anti-LGBT warnai konser Coldplay d...</td>
+      <td>Viral</td>
+    </tr>
+    <tr>
+      <th>716</th>
+      <td>SEA Games 2023 'dihujani kritik', apa yang seb...</td>
+      <td>SEA Games 2023 'dihujani kritik', apa yang seb...</td>
+      <td>Viral</td>
+    </tr>
+    <tr>
+      <th>717</th>
+      <td>Fenomena ‘garasi’ di jalan umum, mengapa selal...</td>
+      <td>SEA Games 2023 'dihujani kritik', apa yang seb...</td>
+      <td>Viral</td>
+    </tr>
+    <tr>
+      <th>718</th>
+      <td>Presiden Jokowi ambil alih perbaikan jalan di ...</td>
+      <td>SEA Games 2023 'dihujani kritik', apa yang seb...</td>
+      <td>Viral</td>
+    </tr>
+    <tr>
+      <th>719</th>
+      <td>Polda Lampung hentikan kasus TikToker Bima, pa...</td>
+      <td>Polda Lampung hentikan kasus TikToker Bima, pa...</td>
+      <td>Viral</td>
+    </tr>
+  </tbody>
+</table>
+<p>720 rows × 3 columns</p>
+</div>
+    <div class="colab-df-buttons">
+      
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e558ca93-d7bd-4d37-9510-b19b58eca3d8')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+      
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+    
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e558ca93-d7bd-4d37-9510-b19b58eca3d8 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e558ca93-d7bd-4d37-9510-b19b58eca3d8');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+  
+    </div>
+  </div>
+  </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Judul Berita       0
+Isi Berita         0
+Kategori Berita    0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cleaning</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s.?!,]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cleaning&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Isi Berita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cleaning</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cleaning&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      viral penemuan lima mayat di kampus unpri meda...
+1      debat capres berpengaruh terhadap pemilih meng...
+2      pilpres 2024 apa janji capres soal hukum, ham,...
+3      tiktok shop buka lagi setelah akuisisi tokoped...
+4      siapa yang menyebarkan narasi kebencian dan ho...
+                             ...                        
+715    demonstrasi antilgbt warnai konser coldplay di...
+716    sea games 2023 dihujani kritik, apa yang seben...
+717    sea games 2023 dihujani kritik, apa yang seben...
+718    sea games 2023 dihujani kritik, apa yang seben...
+719    polda lampung hentikan kasus tiktoker bima, pa...
+Name: Cleaning, Length: 720, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">stopwordText</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Stopword Removal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cleaning&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">stopwordText</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tokenizing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Stopword Removal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tokenizing&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      [viral penemuan mayat kampus unpri medan korba...
+1      [debat capres berpengaruh pemilih mengambang?s...
+2      [pilpres 2024 janji capres hukum, ham, korupsi...
+3      [tiktok shop buka akuisisi tokopedia, pedagang...
+4      [menyebarkan narasi kebencian hoaks rohingya m...
+                             ...                        
+715    [demonstrasi antilgbt warnai konser coldplay j...
+716    [sea games 2023 dihujani kritik, kamboja?sumbe...
+717    [sea games 2023 dihujani kritik, kamboja?sumbe...
+718    [sea games 2023 dihujani kritik, kamboja?sumbe...
+719    [polda lampung hentikan tiktoker bima, pakar u...
+Name: Tokenizing, Length: 720, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">):</span>
+  <span class="c1"># Menggambar graf dengan canvas yang diperbesar</span>
+  <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Menentukan posisi simpul</span>
+  <span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+
+  <span class="c1"># Menentukan ukuran canvas</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+
+  <span class="c1"># Menggambar graf dengan ukuran canvas yang diperbesar</span>
+  <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+  <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">graph_co_occurrence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_matrics</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+    <span class="n">tfidf_matrics</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">co_occurrence_matrix</span> <span class="o">=</span> <span class="n">tfidf_matrics</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tfidf_matrics</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+    <span class="n">df_co_occurence</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">co_occurrence_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">show_matrics</span><span class="p">:</span>
+      <span class="n">display</span><span class="p">(</span><span class="n">df_co_occurence</span><span class="p">)</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+    <span class="c1"># Menambahkan edge ke graf berdasarkan matriks co-occurrence</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">co_occurrence_matrix</span><span class="p">)):</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">co_occurrence_matrix</span><span class="p">)):</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">co_occurrence_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">weight</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+          <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">j</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_top_words</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_scores</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">full_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">graph_co_occurrence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">show_matrics</span><span class="p">)</span>
+
+    <span class="c1"># Menghitung nilai dari PageRank (TextRank)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Dictionary untuk menyimpan skor tertinggi setiap kata</span>
+    <span class="n">ranked_words_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">current_score</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ranked_words_dict</span> <span class="ow">or</span> <span class="n">current_score</span> <span class="o">&gt;</span> <span class="n">ranked_words_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]:</span>
+            <span class="n">ranked_words_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_score</span>
+
+    <span class="c1"># Mengurutkan kata-kata berdasarkan skor tertinggi</span>
+    <span class="n">ranked_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(((</span><span class="n">score</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">ranked_words_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Memilih sejumlah w kata tertinggi</span>
+    <span class="n">selected_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ranked_words</span><span class="p">[:</span><span class="n">w</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># Menggabungkan kata-kata menjadi satu string terpisah dengan koma</span>
+    <span class="n">keywords</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">selected_words</span><span class="p">)</span> <span class="k">if</span> <span class="n">selected_words</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">show_scores</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dokumen ke </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">full_text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s1"> Kata Kunci : </span><span class="si">{</span><span class="n">keywords</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TextRank Scores:&quot;</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">ranked_words</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skor: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">, Kata: </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">selected_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_all</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_scores</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+  <span class="c1"># G = graph_co_occurrence(x, show_matrics)</span>
+
+  <span class="n">G</span><span class="p">,</span> <span class="n">top_words</span> <span class="o">=</span> <span class="n">extract_top_words</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">show_matrics</span><span class="p">,</span> <span class="n">show_scores</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plot Graph :&quot;</span><span class="p">)</span>
+    <span class="n">plot_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+  <span class="c1"># Menggabungkan kata-kata menjadi satu string terpisah dengan koma</span>
+  <span class="n">keywords</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top_words</span><span class="p">)</span> <span class="k">if</span> <span class="n">top_words</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+
+  <span class="k">return</span> <span class="n">keywords</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Tokenizing&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">example</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;debat capres berpengaruh pemilih mengambang?sumber gambar, fotoketerangan gambar, capres nomor urut anies baswedan kanan, capres nomor urut prabowo subianto tengah, capres nomor urut ganjar pranowo kiri beradu gagasan debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 12122023. debat perdana mengangkat topik pemerintahan, hukum ham, pemberantasan korupsi, penguatan demokrasi, peninngkatan layanan publik kerukunan warga.13 desember 2023, 0713 wibdebat caprescawapres dinilai berpengaruh elektabilitas pasangan calon, pengamat.&#39;,
+ &#39;tetapi, tim sukses caprescawapres debat elektabilitas calon.pendiri saiful mujani research and consulting smrc, saiful mujani, menyimpulkan berdasarkan kajian elektabilitas lakukan debat caprescawapres berpengaruh signifikan suara pemilih.kalau mengukur elektabilitas hasil survei debat hasil survei debat, rangkaian pilpres 2004 2019 kemarin, pengaruh debat sebenarnya, jelasnya.sebab, orangorang menonton debat cenderung pengikut setia alias partisan.&#39;,
+ &#39;sementara, pemilih mengambang undecided voters kebanyakan berminat terjangkau debat tersebut.berdasarkan hasil survei litbang kompas periode 29 november 4 desember 2023, 28,7 responden menentukan pilihan menjelang pilpres 2024.lewatkan artikelartikel direkomendasikan membacaartikelartikel direkomendasikanpilpres 2024 kuat dukungan ijtima ulama mengerek elektabilitas aniescak imin?apa kejanggalan kronologi keanehan putusan mahkamah konstitusi batas usia capres?kpu tetapkan nomor urut caprescawapres, pencalonan prabowogibran sah final?putusan mk pintu masuk gibran cawapres prabowo, diuntungkan dirugikan pilpres 2024?akhir artikelartikel direkomendasikansumber gambar, fotogalih pradiptaketerangan gambar, ketua komisi pemilihan kpu ri, hasyim asyari sambutan debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 1212.di sisi lain, direktur algoritma research and consulting dosen ilmu politik universitas indonesia, aditya perdana, menilai debat capres mempengaruhi masyarakat mencari kejelasan terkait program diusung masingmasing paslon.karena dugaan merubah elektabilitas caprescawapres, aditya.hasil survei terbaru periode novemberdesember 2023 lembaga survei indonesia lsi, indikator politik litbang kompas elektabilitas prabowogibran peringkat satu.di sisi lain, perbedaan elektabilitas aniesmuhaimin ganjarmahfud sengit memperebutkan peringkat kedua.sumber gambar, kompas.comketerangan gambar, pasangan calon presiden calon wakil presiden kiri wirantosalahuddin wahid, susilo bambang yudhoyonojusuf kalla, hamzah hazagum gumelar hadir debat kandidat diselenggarakan komisi pemilihan hotel borobudur, juli 2004.juru bicara tim pemenangan nasional tpn ganjar pranowomahfud md, aiman witjaksono, debat kesempatan paslon meningkatkan elektabilitas.sementara, juru bicara tim kampanye nasional tkn prabowogibran, herzaky mahendra putra, menilai debat caprescawapres perubahan elektabilitas calon.sedangkan juru bicara tim nasional pemenangan timnas aniesmuhaimin, angga putra fidrian, debat caprescawapres berpotensi meningkatkan suara 56, upaya kampanye lapangan berpengaruh elektabilitas.apakah debat caprescawapres berpengaruh elektabilitas paslon?lewati podcast lanjutkan membacainvestigasi skandal adopsiinvestigasi menyibak tabir adopsi ilegal indonesia belanda laluepisodeakhir podcastpendiri lembaga riset smrc doktor ilmu politik lulusan ohio state university, saiful mujani, kali pemilihan presiden, perbandingan suara debat pascadebat perubahan signifikan.bahkan, orang menonton debat capres disiarkan langsung cenderung dibandingkan total pemilih 204 juta orang.jadi pengaruhnya elektabilitas pasangan.&#39;,
+ &#39;bandingkan, debat debat perubahannya banyak, signifikan, saiful bbc news indonesia.ia menyebut faktor debat berpengaruh, minim akses debat minat masyarakat cenderung kecil.&#39;,
+ &#39;itu, materi substansi debat perbedaan pasangan calon.&#39;,
+ &#39;sehingga, masyarakat sulit membedakan calon buruk, katanya.untuk memutar video ini, aktifkan javascript coba mesin pencari lainplay video, momen menarik debat capres sori ya lelah oposisi, durasi 9,450945keterangan video, momen menarik debat capres sori ya lelah oposisioleh itu, menyebut debat caprescawapres bersifat seremonial.debat publik kebersamaan antarcalon, baik, suasana kontestasi.&#39;,
+ &#39;kontestasi beda antarcalon.&#39;,
+ &#39;semua, kontestasi?&#39;,
+ &#39;katanya.di sisi lain, pengamat politik universitas indonesia, aditya perdana, debat caprescawapres memiliki peran penting, mengedukasi publik programprogram visimisi dibawa paslon.orang debat, pekan informasi terkait itu.&#39;,
+ &#39;kontroversi terkait cawapres debat itu, aditya.baca jugadebat capres 2024, janji mereka?modifikasi format debat caprescawapres, diuntungkan?debat capres cawapres 2024, ini?ia masyarakat memperhatikan substansi ketimbang mengenal sosok figur berkontestasi pilpres.&#39;,
+ &#39;itu, debat caprescawapres sarana membantu publik menentukan pilihan.debat partisipasi publik juga, benarbenar memperhatikan paslonpaslon menarik perhatian mereka, ungkapnya.peneliti senior pusat riset politik badan riset inovasi nasional brin, firman noor, cuplikan video kali debat capres memiliki peluang tersebar media sosial diolah khalayak umum.&#39;,
+ &#39;diviralkan cepat media sosial.sekarang momen asyik beraninya betulbetul diviralkan momennya, orang terjadi.&#39;,
+ &#39;asam sulfat misalnya, viralnya, firman, merujuk kejadian cawapres gibran rakabuming raka salah menyebut asam folat asam sulfat.hanya saja, menilai minat masyarakat menonton debat langsung tergolong rendah.&#39;,
+ &#39;memilih mengolah mencerna informasi muncul media sosial pascadebat.apakah debat pemilih mengambang menentukan pilihan?saiful mujani masyarakat menonton debat caprescawapres menentukan pilihan dahulu, orang kosong undecided voters.jadi orang menonton meneguhkan yakini calon presiden.&#39;,
+ &#39;bias substansi debat sendiri, partisan penontonnya.karena partisan, pengaruhnya signifikan.&#39;,
+ &#39;sikap partisan kuat argumen rasional.&#39;,
+ &#39;saiful.sementara, pemilih mengambang cenderung berminat menonton debat caprescawapres memiliki akses menontonnya.&#39;,
+ &#39;sebab, pemilih mengambang berasal kelas menengah bawah, menengah atas.mereka memilih menunggu argumen program bagus, tidak.&#39;,
+ &#39;terjangkau saja, termobilisasi langsung sembako, ujarnya.sumber gambar, fotogalih pradiptaketerangan gambar, capres nomor urut prabowo subianto visi misinya debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 1212.peneliti senior brin, firman noor, suara mengambang penentu signifikan kemenangan kandidat pilpres.&#39;,
+ &#39;swing voters memiliki pilihan, berubah pikiran menjelang pencoblosan nanti.jadi sebetulnya, 28 besar.&#39;,
+ &#39;peringatan, survei orang juga, pilihan berubah, firman.oleh itu, pilihan pemilih mengambang berubah seiring waktu.&#39;,
+ &#39;kampanye bergulir membuka peluang elektabilitas calon meningkat pesat jatuh sekejap.meskipun pilih prabowo survei juga.&#39;,
+ &#39;bilang gr gede dulu, siapsiap baju safari pelantikan situasi sekarang.&#39;,
+ &#39;undecided votersnya besar, tuturnya.bagaimana tanggapan timses?juru bicara tpn ganjarmahfud, aiman witjaksono, berusaha pemilih mengambang memilih calon pasangan unggul mereka.ia berharap debat caprescawapres mendongkrak elektabilitas ganjarmahfud percaya kompetensi paslon debat memiliki kemampuan meningkatkan suara.karena pasangan debat pasangan ganjarmahfud.&#39;,
+ &#39;pengalaman lengkap, legislatif, yudikatif, eksekutif.&#39;,
+ &#39;kapabilitas terbaik caprescawapres lain, katanya.sumber gambar, fotogalih pradiptaketerangan gambar, capres nomor urut ganjar pranowo visi misinya debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 1212.juru bicara tkn prabowogibran, herzaky mahendra putra, elektabilitas paslonnya unggul timnya memiliki basis pemilih kuat masingmasing partai koalisi sosok prabowo memiliki daya tarik melebihi partai.oleh itu, debat caprescawapres mengubah elektabilitas drastis.kalau berharap debat momentum game changer, harapan putus asa itu.&#39;,
+ &#39;penerimaan masyarakat bertemu lapangan, herzaky.baca jugagemoy, selepetan sarung, salam jari upaya capres menutup mata gen z?pemilu 2024 pemilih muda, politik dinasti, potensi polarisasi ketahuipemilu 2024 pasangan caprescawapres bertarung pilpres, visi misi mereka?juru bicara timnas aniesmuhaimin, angga putra fidrian, debat caprescawapres salah sarana gagasan serius menyikapinya.namun, pengaruh debat caprescawapres elektabilitas kisaran 56.jadi berharap debat menambah elektabilitas kita.&#39;,
+ &#39;percaya lapangan bermanfaat, angga.seperti format debat pemilu 2024?pada pilpres 2024, sesuai uu pemilu, kali debat capres kali debat cawapres.&#39;,
+ &#39;tetapi, cawapres mendampingi pasangannya debat capres.&#39;,
+ &#39;halnya debat cawapres.namun, perbedaannya proporsi bicara masingmasing capres cawapres, tergantung agenda debat itu, debat capres debat cawapres.supaya publik teamwork kerja capres cawapres penampilan debat, hasyim wartawan, kamis 3011. debat caprescawapres diselenggarakan kali, tema berbeda debat.debat 12 desember 2023 hukum, ham, pemerintahan, pemberantasan korupsi, penguatan demokrasi, peningkatan pelayanan publik, penanganan disinformasi, kerukunan warga.debat 22 desember 2023 ekonomi kerakyatan digital, investasi, perdagangan, pajak digital, keuangan, pengelolaan apbn apbd, infrastruktur, perkotaan.debat ketiga 7 januari 2024 pertahanan, keamanan, geo politik, hubungan internasional.debat keempat 14 januari 2024 pembangunan keberlanjutan, sumber daya alam, lingkungan hidup, energi, pangan, agraria, masyarakat adat, desa.debat 4 februari 2024 kesejahteraan sosial, kebudayaan, teknologi informasi, pendidikan, kesehatan, ketenagakerjaan, sumber daya manusia inklusi.selain jadwal tema itu, debat capres cawapres 150 menit, 120 menit segmen debat 30 menit jeda iklan.&#39;,
+ &#39;model debat format kandidatmoderator, pendalaman materi dipandu moderator.topik terkaitkaum mudapolitikpilpres 2024 indonesiapemilu 2024populismeberita terkaitdebat capres 2024, janji mereka?12 desember 2023modifikasi format debat caprescawapres, diuntungkan?5 desember 2023debat capres cawapres 2024, ini?1 desember 2023&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keyword</span> <span class="o">=</span>  <span class="n">extract_all</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_scores</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-09bdb874-60aa-41a7-b27d-50ea957cb147" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0713</th>
+      <th>12</th>
+      <th>120</th>
+      <th>1212</th>
+      <th>12122023</th>
+      <th>13</th>
+      <th>14</th>
+      <th>150</th>
+      <th>2004</th>
+      <th>2019</th>
+      <th>...</th>
+      <th>waktu</th>
+      <th>warga</th>
+      <th>wartawan</th>
+      <th>wibdebat</th>
+      <th>wirantosalahuddin</th>
+      <th>witjaksono</th>
+      <th>ya</th>
+      <th>yakini</th>
+      <th>yudhoyonojusuf</th>
+      <th>yudikatif</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>580</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>581</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>582</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>583</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>584</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>585 rows × 585 columns</p>
+</div>
+    <div class="colab-df-buttons">
+      
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-09bdb874-60aa-41a7-b27d-50ea957cb147')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+      
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+    
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-09bdb874-60aa-41a7-b27d-50ea957cb147 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-09bdb874-60aa-41a7-b27d-50ea957cb147');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+  
+    </div>
+  </div>
+  </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dokumen ke 1 : debat capres berpengaruh pemilih mengambang?sumber gambar, fotoketerangan gambar, capres nomor urut anies baswedan kanan, capres nomor urut prabowo subianto tengah, capres nomor urut ganjar pranowo kiri beradu gagasan debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 12122023. debat perdana mengangkat topik pemerintahan, hukum ham, pemberantasan korupsi, penguatan demokrasi, peninngkatan layanan publik kerukunan warga.13 desember 2023, 0713 wibdebat caprescawapres dinilai berpengaruh elektabilitas pasangan calon, pengamat. tetapi, tim sukses caprescawapres debat elektabilitas calon.pendiri saiful mujani research and consulting smrc, saiful mujani, menyimpulkan berdasarkan kajian elektabilitas lakukan debat caprescawapres berpengaruh signifikan suara pemilih.kalau mengukur elektabilitas hasil survei debat hasil survei debat, rangkaian pilpres 2004 2019 kemarin, pengaruh debat sebenarnya, jelasnya.sebab, orangorang menonton debat cenderung pengikut setia alias partisan. sementara, pemilih mengambang undecided voters kebanyakan berminat terjangkau debat tersebut.berdasarkan hasil survei litbang kompas periode 29 november 4 desember 2023, 28,7 responden menentukan pilihan menjelang pilpres 2024.lewatkan artikelartikel direkomendasikan membacaartikelartikel direkomendasikanpilpres 2024 kuat dukungan ijtima ulama mengerek elektabilitas aniescak imin?apa kejanggalan kronologi keanehan putusan mahkamah konstitusi batas usia capres?kpu tetapkan nomor urut caprescawapres, pencalonan prabowogibran sah final?putusan mk pintu masuk gibran cawapres prabowo, diuntungkan dirugikan pilpres 2024?akhir artikelartikel direkomendasikansumber gambar, fotogalih pradiptaketerangan gambar, ketua komisi pemilihan kpu ri, hasyim asyari sambutan debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 1212.di sisi lain, direktur algoritma research and consulting dosen ilmu politik universitas indonesia, aditya perdana, menilai debat capres mempengaruhi masyarakat mencari kejelasan terkait program diusung masingmasing paslon.karena dugaan merubah elektabilitas caprescawapres, aditya.hasil survei terbaru periode novemberdesember 2023 lembaga survei indonesia lsi, indikator politik litbang kompas elektabilitas prabowogibran peringkat satu.di sisi lain, perbedaan elektabilitas aniesmuhaimin ganjarmahfud sengit memperebutkan peringkat kedua.sumber gambar, kompas.comketerangan gambar, pasangan calon presiden calon wakil presiden kiri wirantosalahuddin wahid, susilo bambang yudhoyonojusuf kalla, hamzah hazagum gumelar hadir debat kandidat diselenggarakan komisi pemilihan hotel borobudur, juli 2004.juru bicara tim pemenangan nasional tpn ganjar pranowomahfud md, aiman witjaksono, debat kesempatan paslon meningkatkan elektabilitas.sementara, juru bicara tim kampanye nasional tkn prabowogibran, herzaky mahendra putra, menilai debat caprescawapres perubahan elektabilitas calon.sedangkan juru bicara tim nasional pemenangan timnas aniesmuhaimin, angga putra fidrian, debat caprescawapres berpotensi meningkatkan suara 56, upaya kampanye lapangan berpengaruh elektabilitas.apakah debat caprescawapres berpengaruh elektabilitas paslon?lewati podcast lanjutkan membacainvestigasi skandal adopsiinvestigasi menyibak tabir adopsi ilegal indonesia belanda laluepisodeakhir podcastpendiri lembaga riset smrc doktor ilmu politik lulusan ohio state university, saiful mujani, kali pemilihan presiden, perbandingan suara debat pascadebat perubahan signifikan.bahkan, orang menonton debat capres disiarkan langsung cenderung dibandingkan total pemilih 204 juta orang.jadi pengaruhnya elektabilitas pasangan. bandingkan, debat debat perubahannya banyak, signifikan, saiful bbc news indonesia.ia menyebut faktor debat berpengaruh, minim akses debat minat masyarakat cenderung kecil. itu, materi substansi debat perbedaan pasangan calon. sehingga, masyarakat sulit membedakan calon buruk, katanya.untuk memutar video ini, aktifkan javascript coba mesin pencari lainplay video, momen menarik debat capres sori ya lelah oposisi, durasi 9,450945keterangan video, momen menarik debat capres sori ya lelah oposisioleh itu, menyebut debat caprescawapres bersifat seremonial.debat publik kebersamaan antarcalon, baik, suasana kontestasi. kontestasi beda antarcalon. semua, kontestasi? katanya.di sisi lain, pengamat politik universitas indonesia, aditya perdana, debat caprescawapres memiliki peran penting, mengedukasi publik programprogram visimisi dibawa paslon.orang debat, pekan informasi terkait itu. kontroversi terkait cawapres debat itu, aditya.baca jugadebat capres 2024, janji mereka?modifikasi format debat caprescawapres, diuntungkan?debat capres cawapres 2024, ini?ia masyarakat memperhatikan substansi ketimbang mengenal sosok figur berkontestasi pilpres. itu, debat caprescawapres sarana membantu publik menentukan pilihan.debat partisipasi publik juga, benarbenar memperhatikan paslonpaslon menarik perhatian mereka, ungkapnya.peneliti senior pusat riset politik badan riset inovasi nasional brin, firman noor, cuplikan video kali debat capres memiliki peluang tersebar media sosial diolah khalayak umum. diviralkan cepat media sosial.sekarang momen asyik beraninya betulbetul diviralkan momennya, orang terjadi. asam sulfat misalnya, viralnya, firman, merujuk kejadian cawapres gibran rakabuming raka salah menyebut asam folat asam sulfat.hanya saja, menilai minat masyarakat menonton debat langsung tergolong rendah. memilih mengolah mencerna informasi muncul media sosial pascadebat.apakah debat pemilih mengambang menentukan pilihan?saiful mujani masyarakat menonton debat caprescawapres menentukan pilihan dahulu, orang kosong undecided voters.jadi orang menonton meneguhkan yakini calon presiden. bias substansi debat sendiri, partisan penontonnya.karena partisan, pengaruhnya signifikan. sikap partisan kuat argumen rasional. saiful.sementara, pemilih mengambang cenderung berminat menonton debat caprescawapres memiliki akses menontonnya. sebab, pemilih mengambang berasal kelas menengah bawah, menengah atas.mereka memilih menunggu argumen program bagus, tidak. terjangkau saja, termobilisasi langsung sembako, ujarnya.sumber gambar, fotogalih pradiptaketerangan gambar, capres nomor urut prabowo subianto visi misinya debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 1212.peneliti senior brin, firman noor, suara mengambang penentu signifikan kemenangan kandidat pilpres. swing voters memiliki pilihan, berubah pikiran menjelang pencoblosan nanti.jadi sebetulnya, 28 besar. peringatan, survei orang juga, pilihan berubah, firman.oleh itu, pilihan pemilih mengambang berubah seiring waktu. kampanye bergulir membuka peluang elektabilitas calon meningkat pesat jatuh sekejap.meskipun pilih prabowo survei juga. bilang gr gede dulu, siapsiap baju safari pelantikan situasi sekarang. undecided votersnya besar, tuturnya.bagaimana tanggapan timses?juru bicara tpn ganjarmahfud, aiman witjaksono, berusaha pemilih mengambang memilih calon pasangan unggul mereka.ia berharap debat caprescawapres mendongkrak elektabilitas ganjarmahfud percaya kompetensi paslon debat memiliki kemampuan meningkatkan suara.karena pasangan debat pasangan ganjarmahfud. pengalaman lengkap, legislatif, yudikatif, eksekutif. kapabilitas terbaik caprescawapres lain, katanya.sumber gambar, fotogalih pradiptaketerangan gambar, capres nomor urut ganjar pranowo visi misinya debat perdana capres cawapres 2024 gedung kpu, jakarta, selasa 1212.juru bicara tkn prabowogibran, herzaky mahendra putra, elektabilitas paslonnya unggul timnya memiliki basis pemilih kuat masingmasing partai koalisi sosok prabowo memiliki daya tarik melebihi partai.oleh itu, debat caprescawapres mengubah elektabilitas drastis.kalau berharap debat momentum game changer, harapan putus asa itu. penerimaan masyarakat bertemu lapangan, herzaky.baca jugagemoy, selepetan sarung, salam jari upaya capres menutup mata gen z?pemilu 2024 pemilih muda, politik dinasti, potensi polarisasi ketahuipemilu 2024 pasangan caprescawapres bertarung pilpres, visi misi mereka?juru bicara timnas aniesmuhaimin, angga putra fidrian, debat caprescawapres salah sarana gagasan serius menyikapinya.namun, pengaruh debat caprescawapres elektabilitas kisaran 56.jadi berharap debat menambah elektabilitas kita. percaya lapangan bermanfaat, angga.seperti format debat pemilu 2024?pada pilpres 2024, sesuai uu pemilu, kali debat capres kali debat cawapres. tetapi, cawapres mendampingi pasangannya debat capres. halnya debat cawapres.namun, perbedaannya proporsi bicara masingmasing capres cawapres, tergantung agenda debat itu, debat capres debat cawapres.supaya publik teamwork kerja capres cawapres penampilan debat, hasyim wartawan, kamis 3011. debat caprescawapres diselenggarakan kali, tema berbeda debat.debat 12 desember 2023 hukum, ham, pemerintahan, pemberantasan korupsi, penguatan demokrasi, peningkatan pelayanan publik, penanganan disinformasi, kerukunan warga.debat 22 desember 2023 ekonomi kerakyatan digital, investasi, perdagangan, pajak digital, keuangan, pengelolaan apbn apbd, infrastruktur, perkotaan.debat ketiga 7 januari 2024 pertahanan, keamanan, geo politik, hubungan internasional.debat keempat 14 januari 2024 pembangunan keberlanjutan, sumber daya alam, lingkungan hidup, energi, pangan, agraria, masyarakat adat, desa.debat 4 februari 2024 kesejahteraan sosial, kebudayaan, teknologi informasi, pendidikan, kesehatan, ketenagakerjaan, sumber daya manusia inklusi.selain jadwal tema itu, debat capres cawapres 150 menit, 120 menit segmen debat 30 menit jeda iklan. model debat format kandidatmoderator, pendalaman materi dipandu moderator.topik terkaitkaum mudapolitikpilpres 2024 indonesiapemilu 2024populismeberita terkaitdebat capres 2024, janji mereka?12 desember 2023modifikasi format debat caprescawapres, diuntungkan?5 desember 2023debat capres cawapres 2024, ini?1 desember 2023
+3 Kata Kunci : urut, wirantosalahuddin, yudhoyonojusuf
+TextRank Scores:
+Skor: 0.06362442049216582, Kata: yudhoyonojusuf
+Skor: 0.022488825333936126, Kata: wirantosalahuddin
+Skor: 0.02045482027546508, Kata: urut
+Skor: 0.01751988792247164, Kata: wakil
+Skor: 0.01569536449397355, Kata: tim
+Skor: 0.015080262971040828, Kata: voters
+Skor: 0.013886735565475298, Kata: ya
+Skor: 0.012622788428664348, Kata: survei
+Skor: 0.011924575210725435, Kata: wibdebat
+Skor: 0.011828301251095453, Kata: visi
+Skor: 0.011416616562874862, Kata: video
+Skor: 0.01137625759205649, Kata: upaya
+Skor: 0.010781179449137795, Kata: usia
+Skor: 0.008961466213228306, Kata: sumber
+Skor: 0.00852451095141256, Kata: undecided
+Skor: 0.00800810441666684, Kata: universitas
+Skor: 0.0077369990403050185, Kata: tema
+Skor: 0.007434238774928237, Kata: timnas
+Skor: 0.007029156206420016, Kata: tkn
+Skor: 0.0066660984971857705, Kata: terkait
+Skor: 0.006565437858877576, Kata: tpn
+Skor: 0.006460125329963022, Kata: suara
+Skor: 0.006291443875995662, Kata: ulama
+Skor: 0.006288422735677941, Kata: tergantung
+Skor: 0.005715809504277027, Kata: publik
+Skor: 0.005638952685137746, Kata: total
+Skor: 0.005590165114582233, Kata: politik
+Skor: 0.005290308393463485, Kata: signifikan
+Skor: 0.005274777101936307, Kata: topik
+Skor: 0.004584642913557375, Kata: sosial
+Skor: 0.004521283573402217, Kata: sisi
+Skor: 0.004354020170078339, Kata: saiful
+Skor: 0.004340148975684324, Kata: terjangkau
+Skor: 0.004145112230839576, Kata: unggul
+Skor: 0.004021176917402205, Kata: pemilih
+Skor: 0.004001369317628232, Kata: tetapkan
+Skor: 0.0038238866774193787, Kata: pilpres
+Skor: 0.0038228320690996942, Kata: presiden
+Skor: 0.0038182273969462836, Kata: putra
+Skor: 0.0036534660223784144, Kata: yakini
+Skor: 0.003634170662010836, Kata: prabowogibran
+Skor: 0.003501837908501034, Kata: teknologi
+Skor: 0.0034696591270838026, Kata: debat
+Skor: 0.0033956273550885415, Kata: selasa
+Skor: 0.0033543983999911224, Kata: terbaru
+Skor: 0.003347362622371765, Kata: perdana
+Skor: 0.003327092823244903, Kata: smrc
+Skor: 0.0032441310283710654, Kata: tabir
+Skor: 0.003141462831815032, Kata: susilo
+Skor: 0.0031308709312531206, Kata: riset
+Skor: 0.0031091930546113065, Kata: prabowo
+Skor: 0.003080744839129873, Kata: situasi
+Skor: 0.003067473542052188, Kata: teamwork
+Skor: 0.0029719490428740686, Kata: votersnya
+Skor: 0.0028792887857420593, Kata: pilihan
+Skor: 0.002758837023436102, Kata: putusan
+Skor: 0.0026573128243091507, Kata: pasangan
+Skor: 0.002528323146378891, Kata: orang
+Skor: 0.002453246135201201, Kata: state
+Skor: 0.002353556197008074, Kata: paslon
+Skor: 0.002326116735703272, Kata: skandal
+Skor: 0.0023121400593271424, Kata: terkaitkaum
+Skor: 0.0022873147667811385, Kata: serius
+Skor: 0.002236438621509094, Kata: sarana
+Skor: 0.002235507579367064, Kata: masyarakat
+Skor: 0.0022257710998954045, Kata: pemilihan
+Skor: 0.002179775280024076, Kata: sori
+Skor: 0.0021610391168646512, Kata: tergolong
+Skor: 0.0020948392530293876, Kata: sengit
+Skor: 0.002089895930203353, Kata: sulfat
+Skor: 0.002053092403500073, Kata: program
+Skor: 0.0020398976703683855, Kata: research
+Skor: 0.0020363259440867865, Kata: pradiptaketerangan
+Skor: 0.0019956873671693525, Kata: nasional
+Skor: 0.0019808477289536166, Kata: segmen
+Skor: 0.0019749439633518304, Kata: substansi
+Skor: 0.0019085806469769332, Kata: menit
+Skor: 0.001898858544658334, Kata: perubahan
+Skor: 0.0018937880793520943, Kata: visimisi
+Skor: 0.0018866141084741492, Kata: selepetan
+Skor: 0.001872879749289225, Kata: uu
+Skor: 0.0018632232533260006, Kata: sambutan
+Skor: 0.0018578665846685238, Kata: periode
+Skor: 0.0018512933702818156, Kata: salah
+Skor: 0.001818753413691199, Kata: peringkat
+Skor: 0.0017972087299313053, Kata: timnya
+Skor: 0.0017854499271423119, Kata: senior
+Skor: 0.001784821692406968, Kata: nomor
+Skor: 0.001781051912269643, Kata: sah
+Skor: 0.0017470455180363987, Kata: proporsi
+Skor: 0.0017378550470682542, Kata: sulit
+Skor: 0.00173100094462574, Kata: sosok
+Skor: 0.001727761233047418, Kata: mengambang
+Skor: 0.0017220238610450077, Kata: tersebar
+Skor: 0.0017011770911834288, Kata: subianto
+Skor: 0.001682068961629135, Kata: elektabilitas
+Skor: 0.0016799895801274092, Kata: responden
+Skor: 0.0016657656654474637, Kata: siapsiap
+Skor: 0.0016580935201874498, Kata: penguatan
+Skor: 0.0016228387903678254, Kata: terkaitdebat
+Skor: 0.0015585558999864474, Kata: pemenangan
+Skor: 0.001549769781606877, Kata: suasana
+Skor: 0.0015389587520178794, Kata: sukses
+Skor: 0.0015361605635707653, Kata: terbaik
+Skor: 0.0014656695892558778, Kata: kpu
+Skor: 0.0014654633458343318, Kata: menonton
+Skor: 0.0014637976261122371, Kata: momen
+Skor: 0.0014604321544930193, Kata: termobilisasi
+Skor: 0.0014512054267238359, Kata: pranowomahfud
+Skor: 0.0014426142633655098, Kata: perbedaannya
+Skor: 0.0014031506294006728, Kata: capres
+Skor: 0.0013991682880730649, Kata: meningkatkan
+Skor: 0.001386522565071586, Kata: peningkatan
+Skor: 0.0013772502853121606, Kata: masingmasing
+Skor: 0.0013697674112148196, Kata: mujani
+Skor: 0.0013467875663474458, Kata: pemberantasan
+Skor: 0.0013456069499234334, Kata: tarik
+Skor: 0.0013288391968085988, Kata: menilai
+Skor: 0.001325666127659402, Kata: pranowo
+Skor: 0.0013013846184317085, Kata: pengelolaan
+Skor: 0.0012968873321494985, Kata: salam
+Skor: 0.0012861140656050284, Kata: podcastpendiri
+Skor: 0.0012706921522577276, Kata: podcast
+Skor: 0.0012646887267359073, Kata: pendalaman
+Skor: 0.0012556672080043143, Kata: pintu
+Skor: 0.0012420946069899691, Kata: menentukan
+Skor: 0.0012320825996882763, Kata: pascadebat
+Skor: 0.0012155820227608405, Kata: penanganan
+Skor: 0.0011915916550446237, Kata: setia
+Skor: 0.0011865755292165638, Kata: juru
+Skor: 0.001177117553231996, Kata: penampilan
+Skor: 0.0011724064630032123, Kata: swing
+Skor: 0.001168520221263267, Kata: perbedaan
+Skor: 0.0011662250169519471, Kata: pengaruhnya
+Skor: 0.0011653105315284856, Kata: pengaruh
+Skor: 0.001163976278796275, Kata: menarik
+Skor: 0.0011511034806480646, Kata: perubahannya
+Skor: 0.0011490189153573352, Kata: caprescawapres
+Skor: 0.0011314749477189482, Kata: kompas
+Skor: 0.0011094785005207714, Kata: memiliki
+Skor: 0.0010954332654428654, Kata: pembangunan
+Skor: 0.0010899109683718282, Kata: perbandingan
+Skor: 0.0010847923943232698, Kata: menyebut
+Skor: 0.0010782434466568346, Kata: indonesia
+Skor: 0.0010682248876416893, Kata: pencalonan
+Skor: 0.0010652637919212934, Kata: pelayanan
+Skor: 0.001063113541723676, Kata: peluang
+Skor: 0.001053733300207541, Kata: pusat
+Skor: 0.0010536187362477347, Kata: pemilu
+Skor: 0.001051179155005699, Kata: potensi
+Skor: 0.001043116908923165, Kata: mudapolitikpilpres
+Skor: 0.0010328721913820582, Kata: kali
+Skor: 0.001032480337315146, Kata: litbang
+Skor: 0.0010199253107486842, Kata: cawapres
+Skor: 0.001012996919522844, Kata: pengalaman
+Skor: 0.0010125320672030027, Kata: sesuai
+Skor: 0.001010028091658915, Kata: pajak
+Skor: 0.0010045690263615686, Kata: safari
+Skor: 0.0010019901905038765, Kata: lembaga
+Skor: 0.0009954710490998784, Kata: pencari
+Skor: 0.0009954142373676195, Kata: kontestasi
+Skor: 0.0009839540436762297, Kata: partai
+Skor: 0.0009730084097934904, Kata: pilih
+Skor: 0.0009634231273939291, Kata: polarisasi
+Skor: 0.0009592956832915594, Kata: putus
+Skor: 0.0009385119147595081, Kata: oposisioleh
+Skor: 0.0009361550845086116, Kata: ohio
+Skor: 0.0009284956098542475, Kata: novemberdesember
+Skor: 0.0009277598453958313, Kata: sikap
+Skor: 0.0009212992846633372, Kata: menengah
+Skor: 0.0009209712307444383, Kata: november
+Skor: 0.0009140940355258198, Kata: lapangan
+Skor: 0.0009080070540288135, Kata: manusia
+Skor: 0.0009019435550728647, Kata: kerukunan
+Skor: 0.0008972034090098092, Kata: kampanye
+Skor: 0.0008970271485557598, Kata: news
+Skor: 0.0008968315487285286, Kata: komisi
+Skor: 0.0008919921555761976, Kata: mahendra
+Skor: 0.000891146427123492, Kata: januari
+Skor: 0.0008895248574129955, Kata: menjelang
+Skor: 0.0008891194282654934, Kata: lingkungan
+Skor: 0.0008849593505104861, Kata: mk
+Skor: 0.0008817035215559785, Kata: memperhatikan
+Skor: 0.0008787135201959052, Kata: minat
+Skor: 0.0008782364123064395, Kata: merubah
+Skor: 0.0008766047498225548, Kata: pengamat
+Skor: 0.0008717453374218348, Kata: media
+Skor: 0.0008716236448981299, Kata: menyibak
+Skor: 0.0008709628417799, Kata: desember
+Skor: 0.0008694038366329677, Kata: percaya
+Skor: 0.0008656200443489896, Kata: penerimaan
+Skor: 0.000855281827932611, Kata: langsung
+Skor: 0.0008477728826384446, Kata: kuat
+Skor: 0.0008428707786369372, Kata: ketiga
+Skor: 0.0008417694394342102, Kata: rakabuming
+Skor: 0.0008385231064941133, Kata: memilih
+Skor: 0.0008338507668550306, Kata: mengerek
+Skor: 0.0008285472438161548, Kata: pelantikan
+Skor: 0.0008265228470329998, Kata: perhatian
+Skor: 0.0008243026503553599, Kata: lelah
+Skor: 0.0008156622117272963, Kata: mencari
+Skor: 0.0008130796607809564, Kata: tanggapan
+Skor: 0.0008115755122881357, Kata: kesejahteraan
+Skor: 0.000810065822697742, Kata: memperebutkan
+Skor: 0.0008075302008234582, Kata: menunggu
+Skor: 0.0008045523287433826, Kata: mempengaruhi
+Skor: 0.0008025611232267502, Kata: peninngkatan
+Skor: 0.0008025154151720686, Kata: pesat
+Skor: 0.0007991198531151792, Kata: membacainvestigasi
+Skor: 0.0007979765829164427, Kata: kiri
+Skor: 0.0007955508076230191, Kata: rangkaian
+Skor: 0.0007948049500049281, Kata: diviralkan
+Skor: 0.0007937665760155868, Kata: membacaartikelartikel
+Skor: 0.0007865038201452467, Kata: programprogram
+Skor: 0.0007839669614525394, Kata: mesin
+Skor: 0.0007809832633196667, Kata: model
+Skor: 0.0007763429718073832, Kata: masuk
+Skor: 0.0007733378474853608, Kata: kerja
+Skor: 0.0007711370248570594, Kata: hasil
+Skor: 0.0007654381424407354, Kata: mahkamah
+Skor: 0.0007650430116662795, Kata: calon
+Skor: 0.0007645292308911898, Kata: mengenal
+Skor: 0.0007644076640564053, Kata: paslonnya
+Skor: 0.0007615763864950464, Kata: partisan
+Skor: 0.0007609384790399909, Kata: raka
+Skor: 0.000760154562193094, Kata: kerakyatan
+Skor: 0.0007559295081414818, Kata: lulusan
+Skor: 0.0007474507268244539, Kata: keempat
+Skor: 0.0007472772302662982, Kata: ilmu
+Skor: 0.0007398434002993132, Kata: minim
+Skor: 0.0007394474195150199, Kata: pengikut
+Skor: 0.0007279675725501776, Kata: gedung
+Skor: 0.0007275364281268496, Kata: misi
+Skor: 0.0007242625102378305, Kata: paslonpaslon
+Skor: 0.0007207209431448795, Kata: lanjutkan
+Skor: 0.0007203132274143507, Kata: herzaky
+Skor: 0.0007176663195811639, Kata: hasyim
+Skor: 0.0007125226282180178, Kata: laluepisodeakhir
+Skor: 0.0007081755425907077, Kata: gr
+Skor: 0.0007075490154491678, Kata: misinya
+Skor: 0.0007072050803509865, Kata: berpengaruh
+Skor: 0.000705424988493407, Kata: materi
+Skor: 0.0007030934321497165, Kata: bicara
+Skor: 0.0007023099658999045, Kata: janji
+Skor: 0.0007021892270609104, Kata: ganjar
+Skor: 0.0007016492688466575, Kata: format
+Skor: 0.0007009307279686942, Kata: kamis
+Skor: 0.000700596321858803, Kata: memutar
+Skor: 0.0006988801402153748, Kata: kronologi
+Skor: 0.0006965160452720821, Kata: hukum
+Skor: 0.0006916096050277564, Kata: partisipasi
+Skor: 0.0006880115634481852, Kata: konstitusi
+Skor: 0.0006872857111565162, Kata: jeda
+Skor: 0.0006845523662079725, Kata: seiring
+Skor: 0.0006836074436081313, Kata: ganjarmahfud
+Skor: 0.0006819888390540019, Kata: peran
+Skor: 0.0006756314757144228, Kata: membedakan
+Skor: 0.0006700533615163337, Kata: kontroversi
+Skor: 0.000669656886365763, Kata: ketua
+Skor: 0.0006668090110410845, Kata: momentum
+Skor: 0.0006661186941416203, Kata: kesempatan
+Skor: 0.0006647063068268354, Kata: kandidat
+Skor: 0.0006644297364821656, Kata: jadwal
+Skor: 0.0006626209304260565, Kata: kejelasan
+Skor: 0.0006599347967454032, Kata: pikiran
+Skor: 0.0006591628878956794, Kata: kejanggalan
+Skor: 0.0006585494546432444, Kata: informasi
+Skor: 0.0006536643344541964, Kata: pasangannya
+Skor: 0.0006535161576431594, Kata: menutup
+Skor: 0.0006523632196908789, Kata: kebanyakan
+Skor: 0.000649020260514474, Kata: keanehan
+Skor: 0.0006472542252307029, Kata: muncul
+Skor: 0.0006449034922152296, Kata: diuntungkan
+Skor: 0.0006320293589016107, Kata: menambah
+Skor: 0.000631962640286111, Kata: mengubah
+Skor: 0.0006289355672433605, Kata: juta
+Skor: 0.0006252362286088359, Kata: mengangkat
+Skor: 0.0006232605302512759, Kata: cenderung
+Skor: 0.0006222200509977542, Kata: kelas
+Skor: 0.0006212924458905335, Kata: diselenggarakan
+Skor: 0.0006210297949947253, Kata: lainplay
+Skor: 0.000621002735016485, Kata: juli
+Skor: 0.0006203046799212136, Kata: gede
+Skor: 0.0006181675079421371, Kata: orangorang
+Skor: 0.0006175654044202439, Kata: ketimbang
+Skor: 0.0006164026059303255, Kata: gibran
+Skor: 0.0006147873740080469, Kata: fotogalih
+Skor: 0.0006128727288199008, Kata: 2024
+Skor: 0.0006120225652584971, Kata: mata
+Skor: 0.0006083296553995968, Kata: indikator
+Skor: 0.000599745090492604, Kata: layanan
+Skor: 0.0005993274082468133, Kata: ilegal
+Skor: 0.0005992061456587051, Kata: merujuk
+Skor: 0.0005987057797103421, Kata: melebihi
+Skor: 0.0005973398031135127, Kata: hubungan
+Skor: 0.0005966157352222557, Kata: ijtima
+Skor: 0.0005950285575992873, Kata: mengolah
+Skor: 0.0005939306174648979, Kata: hotel
+Skor: 0.0005932730107084257, Kata: daya
+Skor: 0.000593233357953008, Kata: meningkat
+Skor: 0.0005890030638788439, Kata: hazagum
+Skor: 0.0005834824832292909, Kata: menyimpulkan
+Skor: 0.0005812033133549653, Kata: hamzah
+Skor: 0.0005810120267817114, Kata: mendongkrak
+Skor: 0.0005786810050976312, Kata: hadir
+Skor: 0.0005775891389417848, Kata: berasal
+Skor: 0.0005761823940337355, Kata: gumelar
+Skor: 0.000575827389355114, Kata: halnya
+Skor: 0.000575211920724641, Kata: gagasan
+Skor: 0.0005750078578017185, Kata: kebersamaan
+Skor: 0.0005732695795214373, Kata: jugadebat
+Skor: 0.0005719582422773089, Kata: membantu
+Skor: 0.000571824958888364, Kata: cepat
+Skor: 0.0005712381805262397, Kata: penentu
+Skor: 0.0005692885181739064, Kata: geo
+Skor: 0.0005674222005677301, Kata: kisaran
+Skor: 0.0005648327917950741, Kata: koalisi
+Skor: 0.0005640479608473194, Kata: pencoblosan
+Skor: 0.0005629090829705045, Kata: februari
+Skor: 0.0005621094148016935, Kata: indonesiapemilu
+Skor: 0.0005584231931422614, Kata: mengukur
+Skor: 0.0005538043169570347, Kata: firman
+Skor: 0.0005531187463176516, Kata: meneguhkan
+Skor: 0.0005528363408417308, Kata: pekan
+Skor: 0.0005525945260849835, Kata: javascript
+Skor: 0.0005522791846567973, Kata: ketahuipemilu
+Skor: 0.000550605168776171, Kata: ekonomi
+Skor: 0.0005495906031855719, Kata: dukungan
+Skor: 0.0005474560526003031, Kata: dugaan
+Skor: 0.0005453394585130649, Kata: dosen
+Skor: 0.0005447100354264013, Kata: kapabilitas
+Skor: 0.0005432405892698631, Kata: doktor
+Skor: 0.0005422681718445625, Kata: khalayak
+Skor: 0.0005413796999079519, Kata: lakukan
+Skor: 0.0005411592172358745, Kata: diusung
+Skor: 0.0005398679311906015, Kata: faktor
+Skor: 0.0005377327835036378, Kata: kompetensi
+Skor: 0.0005369630378419024, Kata: disiarkan
+Skor: 0.0005362550441433487, Kata: membuka
+Skor: 0.0005353166086431183, Kata: consulting
+Skor: 0.0005332059612815408, Kata: dirugikan
+Skor: 0.0005316016007427724, Kata: mencerna
+Skor: 0.00053120803837409, Kata: direktur
+Skor: 0.0005292263326707079, Kata: direkomendasikansumber
+Skor: 0.0005272606422688677, Kata: direkomendasikanpilpres
+Skor: 0.0005270260229641627, Kata: betulbetul
+Skor: 0.0005256295260124412, Kata: kejadian
+Skor: 0.0005253107686471012, Kata: direkomendasikan
+Skor: 0.000524806296985412, Kata: durasi
+Skor: 0.0005237142856096872, Kata: jari
+Skor: 0.0005233765165939783, Kata: dibandingkan
+Skor: 0.0005202593181481282, Kata: fotoketerangan
+Skor: 0.0005177290255476651, Kata: kemampuan
+Skor: 0.0005132942324728272, Kata: harapan
+Skor: 0.0005112901116666837, Kata: inovasi
+Skor: 0.0005112508467582618, Kata: coba
+Skor: 0.0005108007727172497, Kata: bbc
+Skor: 0.0005103438419440074, Kata: dipandu
+Skor: 0.0005095475544946266, Kata: dinilai
+Skor: 0.0005088221786864392, Kata: berdasarkan
+Skor: 0.0005072893874420794, Kata: gen
+Skor: 0.0005072515617365984, Kata: artikelartikel
+Skor: 0.0005066796210751127, Kata: mengedukasi
+Skor: 0.0005047228623389836, Kata: berminat
+Skor: 0.0005044985644599856, Kata: 2023
+Skor: 0.0005034637786720075, Kata: kajian
+Skor: 0.0005016960606573738, Kata: aniesmuhaimin
+Skor: 0.0005014314436033352, Kata: berbeda
+Skor: 0.0005000077009999959, Kata: bilang
+Skor: 0.0004999181373207355, Kata: game
+Skor: 0.0004977201080208675, Kata: apbn
+Skor: 0.0004958201786077617, Kata: berpotensi
+Skor: 0.0004941324757772227, Kata: diolah
+Skor: 0.0004903890350265574, Kata: and
+Skor: 0.0004901114225673133, Kata: bersifat
+Skor: 0.0004896842622488111, Kata: belanda
+Skor: 0.0004895171359341697, Kata: berharap
+Skor: 0.0004892194898389441, Kata: beraninya
+Skor: 0.0004891947000212938, Kata: beradu
+Skor: 0.00048815302780242905, Kata: batas
+Skor: 0.00048663217291506164, Kata: bambang
+Skor: 0.00048644224987181325, Kata: 2024populismeberita
+Skor: 0.00048588177228581935, Kata: jatuh
+Skor: 0.00048429573003759844, Kata: figur
+Skor: 0.0004836211713683887, Kata: asyari
+Skor: 0.00048345305967511956, Kata: agenda
+Skor: 0.0004823606296263885, Kata: baswedan
+Skor: 0.00048163452960060446, Kata: kemenangan
+Skor: 0.000481550792899118, Kata: cuplikan
+Skor: 0.00048101175359324113, Kata: kosong
+Skor: 0.00047913535678490484, Kata: folat
+Skor: 0.00047746940565566727, Kata: angga
+Skor: 0.00047643667052317366, Kata: aniescak
+Skor: 0.0004757309247689504, Kata: anies
+Skor: 0.00047557190019456607, Kata: aditya
+Skor: 0.00047546242081877263, Kata: bertemu
+Skor: 0.0004733220724206172, Kata: 30
+Skor: 0.00047262997963034594, Kata: algoritma
+Skor: 0.0004722823939733023, Kata: 2023modifikasi
+Skor: 0.00047075016431340417, Kata: berusaha
+Skor: 0.00047004680311047624, Kata: 22
+Skor: 0.000469998835691856, Kata: aiman
+Skor: 0.00046861081207666877, Kata: adopsiinvestigasi
+Skor: 0.00046781460648206985, Kata: bertarung
+Skor: 0.0004672316762409885, Kata: adopsi
+Skor: 0.00046588684709527407, Kata: benarbenar
+Skor: 0.00046544096481307743, Kata: alias
+Skor: 0.000465272018237663, Kata: 150
+Skor: 0.0004650610301078873, Kata: beda
+Skor: 0.0004647808890455412, Kata: aktifkan
+Skor: 0.0004639635021583572, Kata: basis
+Skor: 0.0004634683224906263, Kata: 29
+Skor: 0.0004627960303329029, Kata: berkontestasi
+Skor: 0.0004622259812188061, Kata: 14
+Skor: 0.0004621801273182604, Kata: 28
+Skor: 0.00046084758500688675, Kata: 204
+Skor: 0.00046022751553997297, Kata: dibawa
+Skor: 0.0004596768121668042, Kata: 2023debat
+Skor: 0.0004592230002691905, Kata: 120
+Skor: 0.0004586952813917937, Kata: mendampingi
+Skor: 0.00045814305152815484, Kata: berubah
+Skor: 0.0004580634664846776, Kata: asa
+Skor: 0.000457954241491688, Kata: 2019
+Skor: 0.0004578044299543167, Kata: 2004
+Skor: 0.00045685485635578893, Kata: bias
+Skor: 0.00045685485635578893, Kata: bergulir
+Skor: 0.00045685485635578893, Kata: baju
+Skor: 0.00045685485635578893, Kata: badan
+Skor: 0.00045685485635578893, Kata: asyik
+Skor: 0.00045685485635578893, Kata: asam
+Skor: 0.00045685485635578893, Kata: argumen
+Skor: 0.00045685485635578893, Kata: akses
+Skor: 0.00045685485635578893, Kata: 12
+Skor: 0.00045685485635578893, Kata: 0713
+Skor: 0, Kata: z?pemilu
+Skor: 0, Kata: yudikatif,
+Skor: 0, Kata: witjaksono,
+Skor: 0, Kata: wartawan,
+Skor: 0, Kata: warga.debat
+Skor: 0, Kata: warga.13
+Skor: 0, Kata: waktu.
+Skor: 0, Kata: wahid,
+Skor: 0, Kata: voters.jadi
+Skor: 0, Kata: viralnya,
+Skor: 0, Kata: video,
+Skor: 0, Kata: university,
+Skor: 0, Kata: ungkapnya.peneliti
+Skor: 0, Kata: umum.
+Skor: 0, Kata: ujarnya.sumber
+Skor: 0, Kata: tuturnya.bagaimana
+Skor: 0, Kata: timses?juru
+Skor: 0, Kata: tidak.
+Skor: 0, Kata: tetapi,
+Skor: 0, Kata: tersebut.berdasarkan
+Skor: 0, Kata: terjadi.
+Skor: 0, Kata: tengah,
+Skor: 0, Kata: sulfat.hanya
+Skor: 0, Kata: suara.karena
+Skor: 0, Kata: sosial.sekarang
+Skor: 0, Kata: sosial,
+Skor: 0, Kata: smrc,
+Skor: 0, Kata: signifikan.bahkan,
+Skor: 0, Kata: signifikan.
+Skor: 0, Kata: signifikan,
+Skor: 0, Kata: seremonial.debat
+Skor: 0, Kata: sendiri,
+Skor: 0, Kata: semua,
+Skor: 0, Kata: sementara,
+Skor: 0, Kata: sembako,
+Skor: 0, Kata: sekejap.meskipun
+Skor: 0, Kata: sekarang.
+Skor: 0, Kata: sehingga,
+Skor: 0, Kata: sebetulnya,
+Skor: 0, Kata: sebenarnya,
+Skor: 0, Kata: sebab,
+Skor: 0, Kata: satu.di
+Skor: 0, Kata: sarung,
+Skor: 0, Kata: saja,
+Skor: 0, Kata: saiful.sementara,
+Skor: 0, Kata: ri,
+Skor: 0, Kata: rendah.
+Skor: 0, Kata: rasional.
+Skor: 0, Kata: putra,
+Skor: 0, Kata: publik,
+Skor: 0, Kata: presiden.
+Skor: 0, Kata: presiden,
+Skor: 0, Kata: prabowogibran,
+Skor: 0, Kata: prabowo,
+Skor: 0, Kata: politik,
+Skor: 0, Kata: pilpres.
+Skor: 0, Kata: pilpres,
+Skor: 0, Kata: pilihan?saiful
+Skor: 0, Kata: pilihan.debat
+Skor: 0, Kata: pilihan,
+Skor: 0, Kata: pertahanan,
+Skor: 0, Kata: perkotaan.debat
+Skor: 0, Kata: peringatan,
+Skor: 0, Kata: perdana,
+Skor: 0, Kata: perdagangan,
+Skor: 0, Kata: penting,
+Skor: 0, Kata: penontonnya.karena
+Skor: 0, Kata: pengamat.
+Skor: 0, Kata: pendidikan,
+Skor: 0, Kata: pemilu,
+Skor: 0, Kata: pemilih.kalau
+Skor: 0, Kata: pemerintahan,
+Skor: 0, Kata: paslon?lewati
+Skor: 0, Kata: paslon.orang
+Skor: 0, Kata: paslon.karena
+Skor: 0, Kata: pascadebat.apakah
+Skor: 0, Kata: pasangan.
+Skor: 0, Kata: partisan.
+Skor: 0, Kata: partisan,
+Skor: 0, Kata: partai.oleh
+Skor: 0, Kata: pangan,
+Skor: 0, Kata: orang.jadi
+Skor: 0, Kata: oposisi,
+Skor: 0, Kata: noor,
+Skor: 0, Kata: nanti.jadi
+Skor: 0, Kata: mujani,
+Skor: 0, Kata: muda,
+Skor: 0, Kata: momennya,
+Skor: 0, Kata: moderator.topik
+Skor: 0, Kata: misalnya,
+Skor: 0, Kata: mereka?modifikasi
+Skor: 0, Kata: mereka?juru
+Skor: 0, Kata: mereka?12
+Skor: 0, Kata: mereka.ia
+Skor: 0, Kata: mereka,
+Skor: 0, Kata: menyikapinya.namun,
+Skor: 0, Kata: menontonnya.
+Skor: 0, Kata: menit,
+Skor: 0, Kata: mengambang?sumber
+Skor: 0, Kata: md,
+Skor: 0, Kata: lsi,
+Skor: 0, Kata: lengkap,
+Skor: 0, Kata: legislatif,
+Skor: 0, Kata: lapangan,
+Skor: 0, Kata: lain,
+Skor: 0, Kata: kpu,
+Skor: 0, Kata: korupsi,
+Skor: 0, Kata: kontestasi?
+Skor: 0, Kata: kontestasi.
+Skor: 0, Kata: kompas.comketerangan
+Skor: 0, Kata: kita.
+Skor: 0, Kata: keuangan,
+Skor: 0, Kata: ketenagakerjaan,
+Skor: 0, Kata: kesehatan,
+Skor: 0, Kata: kemarin,
+Skor: 0, Kata: kedua.sumber
+Skor: 0, Kata: kecil.
+Skor: 0, Kata: kebudayaan,
+Skor: 0, Kata: keberlanjutan,
+Skor: 0, Kata: keamanan,
+Skor: 0, Kata: katanya.untuk
+Skor: 0, Kata: katanya.sumber
+Skor: 0, Kata: katanya.di
+Skor: 0, Kata: kandidatmoderator,
+Skor: 0, Kata: kanan,
+Skor: 0, Kata: kalla,
+Skor: 0, Kata: kali,
+Skor: 0, Kata: jugagemoy,
+Skor: 0, Kata: juga.
+Skor: 0, Kata: juga,
+Skor: 0, Kata: jelasnya.sebab,
+Skor: 0, Kata: jakarta,
+Skor: 0, Kata: itu.
+Skor: 0, Kata: itu,
+Skor: 0, Kata: investasi,
+Skor: 0, Kata: internasional.debat
+Skor: 0, Kata: inklusi.selain
+Skor: 0, Kata: ini?ia
+Skor: 0, Kata: ini?1
+Skor: 0, Kata: ini,
+Skor: 0, Kata: infrastruktur,
+Skor: 0, Kata: informasi,
+Skor: 0, Kata: indonesia.ia
+Skor: 0, Kata: indonesia,
+Skor: 0, Kata: imin?apa
+Skor: 0, Kata: iklan.
+Skor: 0, Kata: hukum,
+Skor: 0, Kata: hidup,
+Skor: 0, Kata: herzaky.baca
+Skor: 0, Kata: ham,
+Skor: 0, Kata: ganjarmahfud.
+Skor: 0, Kata: ganjarmahfud,
+Skor: 0, Kata: gambar,
+Skor: 0, Kata: firman.oleh
+Skor: 0, Kata: firman,
+Skor: 0, Kata: final?putusan
+Skor: 0, Kata: fidrian,
+Skor: 0, Kata: energi,
+Skor: 0, Kata: elektabilitas.sementara,
+Skor: 0, Kata: elektabilitas.apakah
+Skor: 0, Kata: eksekutif.
+Skor: 0, Kata: dulu,
+Skor: 0, Kata: drastis.kalau
+Skor: 0, Kata: diuntungkan?debat
+Skor: 0, Kata: diuntungkan?5
+Skor: 0, Kata: disinformasi,
+Skor: 0, Kata: dinasti,
+Skor: 0, Kata: digital,
+Skor: 0, Kata: desa.debat
+Skor: 0, Kata: demokrasi,
+Skor: 0, Kata: debat.debat
+Skor: 0, Kata: debat,
+Skor: 0, Kata: dahulu,
+Skor: 0, Kata: changer,
+Skor: 0, Kata: cawapres.supaya
+Skor: 0, Kata: cawapres.namun,
+Skor: 0, Kata: cawapres.
+Skor: 0, Kata: cawapres,
+Skor: 0, Kata: caprescawapres,
+Skor: 0, Kata: capres?kpu
+Skor: 0, Kata: capres.
+Skor: 0, Kata: calon.sedangkan
+Skor: 0, Kata: calon.pendiri
+Skor: 0, Kata: calon.
+Skor: 0, Kata: calon,
+Skor: 0, Kata: buruk,
+Skor: 0, Kata: brin,
+Skor: 0, Kata: borobudur,
+Skor: 0, Kata: besar.
+Skor: 0, Kata: besar,
+Skor: 0, Kata: berubah,
+Skor: 0, Kata: berpengaruh,
+Skor: 0, Kata: bermanfaat,
+Skor: 0, Kata: bawah,
+Skor: 0, Kata: banyak,
+Skor: 0, Kata: bandingkan,
+Skor: 0, Kata: baik,
+Skor: 0, Kata: bagus,
+Skor: 0, Kata: atas.mereka
+Skor: 0, Kata: apbd,
+Skor: 0, Kata: antarcalon.
+Skor: 0, Kata: antarcalon,
+Skor: 0, Kata: aniesmuhaimin,
+Skor: 0, Kata: angga.seperti
+Skor: 0, Kata: alam,
+Skor: 0, Kata: agraria,
+Skor: 0, Kata: aditya.hasil
+Skor: 0, Kata: aditya.baca
+Skor: 0, Kata: adat,
+Skor: 0, Kata: 9,450945keterangan
+Skor: 0, Kata: 7
+Skor: 0, Kata: 56.jadi
+Skor: 0, Kata: 56,
+Skor: 0, Kata: 4
+Skor: 0, Kata: 3011.
+Skor: 0, Kata: 28,7
+Skor: 0, Kata: 2024?pada
+Skor: 0, Kata: 2024?akhir
+Skor: 0, Kata: 2024.lewatkan
+Skor: 0, Kata: 2024,
+Skor: 0, Kata: 2023,
+Skor: 0, Kata: 2004.juru
+Skor: 0, Kata: 12122023.
+Skor: 0, Kata: 1212.peneliti
+Skor: 0, Kata: 1212.juru
+Skor: 0, Kata: 1212.di
+
+Plot Graph :
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-21-6b1ca5d8d237&gt;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">keyword</span> <span class="o">=</span>  <span class="n">extract_all</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">show_matrics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_scores</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nn">&lt;ipython-input-19-fc79b07d9774&gt;</span> in <span class="ni">extract_all</span><span class="nt">(x, w, plot, show_matrics, show_scores, index, threshold)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="nb">print</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plot Graph :&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="n">plot_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> 
+<span class="g g-Whitespace">     </span><span class="mi">12</span>   <span class="c1"># Menggabungkan kata-kata menjadi satu string terpisah dengan koma</span>
+
+<span class="nn">&lt;ipython-input-16-28ccf0915a29&gt;</span> in <span class="ni">plot_graph</span><span class="nt">(G, figsize, node_size, node_color)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="g g-Whitespace">      </span><span class="mi">9</span>   <span class="c1"># Menggambar graf dengan ukuran canvas yang diperbesar</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>   <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>   <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/networkx/drawing/nx_pylab.py</span> in <span class="ni">draw</span><span class="nt">(G, pos, ax, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>         <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;with_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;labels&quot;</span> <span class="ow">in</span> <span class="n">kwds</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> 
+<span class="ne">--&gt; </span><span class="mi">121</span>     <span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>     <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>     <span class="n">plt</span><span class="o">.</span><span class="n">draw_if_interactive</span><span class="p">()</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/networkx/drawing/nx_pylab.py</span> in <span class="ni">draw_networkx</span><span class="nt">(G, pos, arrows, with_labels, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span> 
+<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwds</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">305</span>     <span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="n">arrows</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="k">if</span> <span class="n">with_labels</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">label_kwds</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/networkx/drawing/nx_pylab.py</span> in <span class="ni">draw_networkx_edges</span><span class="nt">(G, pos, edgelist, width, edge_color, style, alpha, arrowstyle, arrowsize, edge_cmap, edge_vmin, edge_vmax, ax, arrows, label, node_size, nodelist, node_shape, connectionstyle, min_source_margin, min_target_margin)</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">911</span>         <span class="n">fancy_edges_indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edgelist</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">912</span>         <span class="n">edge_viz_obj</span> <span class="o">=</span> <span class="n">_draw_networkx_edges_fancy_arrow_patch</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span> 
+<span class="g g-Whitespace">    </span><span class="mi">914</span>     <span class="c1"># update view after drawing</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/networkx/drawing/nx_pylab.py</span> in <span class="ni">_draw_networkx_edges_fancy_arrow_patch</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>                 <span class="n">linestyle</span> <span class="o">=</span> <span class="n">style</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span> 
+<span class="ne">--&gt; </span><span class="mi">871</span>             <span class="n">arrow</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">FancyArrowPatch</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>                 <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">873</span>                 <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">),</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/matplotlib/_api/deprecation.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span>                 <span class="s2">&quot;parameter will become keyword-only </span><span class="si">%(removal)s</span><span class="s2">.&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>                 <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span> 
+<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="c1"># Don&#39;t modify *func*&#39;s signature, as boilerplate.py needs it.</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/matplotlib/patches.py</span> in <span class="ni">__init__</span><span class="nt">(self, posA, posB, path, arrowstyle, connectionstyle, patchA, patchB, shrinkA, shrinkB, mutation_scale, mutation_aspect, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4118</span>         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;capstyle&quot;</span><span class="p">,</span> <span class="n">CapStyle</span><span class="o">.</span><span class="n">round</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4119</span> 
+<span class="ne">-&gt; </span><span class="mi">4120</span>         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4121</span> 
+<span class="g g-Whitespace">   </span><span class="mi">4122</span>         <span class="k">if</span> <span class="n">posA</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">posB</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/matplotlib/_api/deprecation.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span>                 <span class="s2">&quot;parameter will become keyword-only </span><span class="si">%(removal)s</span><span class="s2">.&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>                 <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span> 
+<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="c1"># Don&#39;t modify *func*&#39;s signature, as boilerplate.py needs it.</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/matplotlib/patches.py</span> in <span class="ni">__init__</span><span class="nt">(self, edgecolor, facecolor, color, linewidth, linestyle, antialiased, hatch, fill, capstyle, joinstyle, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_dash_pattern</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># offset, dash (scaled by linewidth)</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span> 
+<span class="ne">---&gt; </span><span class="mi">91</span>         <span class="bp">self</span><span class="o">.</span><span class="n">set_fill</span><span class="p">(</span><span class="n">fill</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>         <span class="bp">self</span><span class="o">.</span><span class="n">set_linestyle</span><span class="p">(</span><span class="n">linestyle</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span>         <span class="bp">self</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="n">linewidth</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/matplotlib/patches.py</span> in <span class="ni">set_fill</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">432</span>         <span class="bp">self</span><span class="o">.</span><span class="n">stale</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">433</span> 
+<span class="ne">--&gt; </span><span class="mi">434</span>     <span class="k">def</span> <span class="nf">set_fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">435</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">436</span><span class="s2">         Set whether to fill the patch.</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -464,6 +2545,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">TextRank</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
