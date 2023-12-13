@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Crawling Berita &#8212; Pencarian &amp; Penambangan Web</title>
+    <title>Crawling Satu Berita &#8212; Pencarian &amp; Penambangan Web</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'graph';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Crawling Tiga Kategori Berita" href="category.html" />
     <link rel="prev" title="Crawling Playstore" href="playstore.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -138,6 +139,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="intro.html">
@@ -172,7 +174,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Data Text</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LDA.html">Implementasi LDA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="playstore.html">Crawling Playstore</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling Berita</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling Satu Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="category.html">Crawling Tiga Kategori Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Ringkasan Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TextRank.html">bsio</a></li>
 </ul>
 
     </div>
@@ -357,6 +362,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -366,6 +372,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -385,7 +392,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Crawling Berita</h1>
+    <h1>Crawling Satu Berita</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,8 +406,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="crawling-berita">
-<h1>Crawling Berita<a class="headerlink" href="#crawling-berita" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="crawling-satu-berita">
+<h1>Crawling Satu Berita<a class="headerlink" href="#crawling-satu-berita" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#melakukan web scraping pada halaman berita yang berasal dari URL</span>
@@ -438,7 +445,8 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Apa tujuan akhir invasi darat Israel ke Gaza?
 Sumber gambar, ReutersKeterangan gambar, Militer Israel telah memanggil sejumlah tentara cadangan untuk bertempur melawan Hamas.1 November 2023Paul KirbyBBC NewsPara pemimpin Israel telah menegaskan bahwa kelompok milisi Palestina, Hamas, akan dimusnahkan dari muka bumi dan Gaza tidak akan pernah kembali seperti semula.“Setiap anggota Hamas adalah orang mati,” kata Perdana Menteri Benjamin Netanyahu setelah kelompok milisi tersebut membunuh lebih dari 1.300 orang dalam serangan yang tak terduga ke Israel pada 7 Oktober.Tujuan Operasi Pedang Besi – operasi serangan balasan Israel atas serangan Hamas – nampaknya jauh lebih ambisius dibandingkan apa pun yang direncanakan militer Israel di Gaza sebelumnya.
-Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanTentara Israel serbu RS Al-Shifa, Menkes Palestina minta bukti keberadaan markas HamasNasib sejumlah rumah sakit di Gaza yang lumpuh akibat perang Israel-Hamas Palestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankKomunitas Palestina terbesar di luar dunia Arab dan Israel berada di Cile, mengapa?Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?
+Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanPalestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankSejarah Deklarasi Balfour: 67 kata yang membentuk Negara Israel dan mengubah sejarah Bangsa PalestinaSiapa Abu Ubaida, apa kaitannya dengan Hamas?Pasukan Israel sudah berada ‘di jantung Kota Gaza‘, apakah Gaza akan segera jatuh ke tangan Israel?
+Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?
 Invasi darat ke Jalur Gaza melibatkan pertempuran dari rumah ke rumah di perkotaan, membawa risiko besar bagi penduduk sipil.
 Serangan udara Israel yang dilakukan tak lama setelah serangan Hamas, telah merenggut ribuan nyawa warga Gaza dan lebih dari 400.000 orang terpaksa mengungsi.
 Selain invasi darat, militer Israel memiliki misi tambahan menyelamatkan sedikitnya 150 sandera, yang ditahan di lokasi yang tidak diketahui di seluruh Gaza.Herzi Halevi, kepala staf Pasukan Pertahanan Israel (IDF), berjanji untuk &quot;membongkar&quot; Hamas.
@@ -500,437 +508,448 @@ Mantan kepala dinas keamanan Shin Bet, Yoram Cohen, yakin zona &quot;tembak di t
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kalimat 1: Apa tujuan akhir invasi darat Israel ke Gaza?
-akhir: 0.4128
-apa: 0.4128
-darat: 0.3395
-gaza: 0.2220
-invasi: 0.4128
-israel: 0.1967
-ke: 0.3395
-tujuan: 0.4128
+akhir: 0.4198
+apa: 0.3913
+darat: 0.3464
+gaza: 0.2286
+invasi: 0.4198
+israel: 0.1956
+ke: 0.3280
+tujuan: 0.4198
 
 Kalimat 2: Sumber gambar, ReutersKeterangan gambar, Militer Israel telah memanggil sejumlah tentara cadangan untuk bertempur melawan Hamas.1 November 2023Paul KirbyBBC NewsPara pemimpin Israel telah menegaskan bahwa kelompok milisi Palestina, Hamas, akan dimusnahkan dari muka bumi dan Gaza tidak akan pernah kembali seperti semula.“Setiap anggota Hamas adalah orang mati,” kata Perdana Menteri Benjamin Netanyahu setelah kelompok milisi tersebut membunuh lebih dari 1.300 orang dalam serangan yang tak terduga ke Israel pada 7 Oktober.Tujuan Operasi Pedang Besi – operasi serangan balasan Israel atas serangan Hamas – nampaknya jauh lebih ambisius dibandingkan apa pun yang direncanakan militer Israel di Gaza sebelumnya.
-2023paul: 0.1170
-300: 0.1170
-adalah: 0.0759
-akan: 0.1353
-ambisius: 0.1170
+2023paul: 0.1169
+300: 0.1169
+adalah: 0.0763
+akan: 0.1294
+ambisius: 0.1169
 anggota: 0.1037
-apa: 0.0870
+apa: 0.0813
 atas: 0.1037
-bahwa: 0.0943
-balasan: 0.1170
-benjamin: 0.1170
-bertempur: 0.1170
-besi: 0.1170
-bumi: 0.1170
+bahwa: 0.0944
+balasan: 0.1169
+benjamin: 0.1169
+bertempur: 0.1169
+besi: 0.1169
+bumi: 0.1169
 cadangan: 0.1037
-dalam: 0.0759
-dan: 0.0556
-dari: 0.1112
-di: 0.0509
-dibandingkan: 0.1170
-dimusnahkan: 0.1170
+dalam: 0.0763
+dan: 0.0538
+dari: 0.1123
+di: 0.0515
+dibandingkan: 0.1169
+dimusnahkan: 0.1169
 direncanakan: 0.1037
-gambar: 0.1886
-gaza: 0.0936
-hamas: 0.1951
-israel: 0.2072
+gambar: 0.1888
+gaza: 0.0949
+hamas: 0.1977
+israel: 0.2030
 jauh: 0.1037
-kata: 0.0810
-ke: 0.0715
-kelompok: 0.1886
-kembali: 0.0943
-kirbybbc: 0.1170
-lebih: 0.1430
-mati: 0.1170
+kata: 0.0763
+ke: 0.0681
+kelompok: 0.1888
+kembali: 0.0944
+kirbybbc: 0.1169
+lebih: 0.1438
+mati: 0.1169
 melawan: 0.1037
-memanggil: 0.1170
-membunuh: 0.0943
-menegaskan: 0.1170
-menteri: 0.1170
-milisi: 0.2074
-militer: 0.1284
-muka: 0.1170
-nampaknya: 0.1170
-netanyahu: 0.0943
-newspara: 0.1170
-november: 0.1170
-oktober: 0.1170
-operasi: 0.1619
-orang: 0.1619
-pada: 0.0715
-palestina: 0.0715
-pedang: 0.1170
-pemimpin: 0.0810
-perdana: 0.1170
+memanggil: 0.1169
+membunuh: 0.0944
+menegaskan: 0.1169
+menteri: 0.1169
+milisi: 0.2075
+militer: 0.1294
+muka: 0.1169
+nampaknya: 0.1169
+netanyahu: 0.0944
+newspara: 0.1169
+november: 0.1169
+oktober: 0.1169
+operasi: 0.1625
+orang: 0.1625
+pada: 0.0719
+palestina: 0.0763
+pedang: 0.1169
+pemimpin: 0.0813
+perdana: 0.1169
 pernah: 0.1037
 pun: 0.1037
-reutersketerangan: 0.1170
+reutersketerangan: 0.1169
 sebelumnya: 0.1037
-sejumlah: 0.0943
-semula: 0.1170
+sejumlah: 0.1037
+semula: 0.1169
 seperti: 0.1037
-serangan: 0.2030
-setelah: 0.0810
-setiap: 0.0943
-sumber: 0.0943
+serangan: 0.2043
+setelah: 0.0813
+setiap: 0.0944
+sumber: 0.0944
 tak: 0.1037
-telah: 0.1284
-tentara: 0.0870
-terduga: 0.1170
-tersebut: 0.0810
-tidak: 0.0611
-tujuan: 0.0870
-untuk: 0.0531
-yang: 0.0862
+telah: 0.1294
+tentara: 0.0872
+terduga: 0.1169
+tersebut: 0.0813
+tidak: 0.0616
+tujuan: 0.0872
+untuk: 0.0538
+yang: 0.0844
 
-Kalimat 3: Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanTentara Israel serbu RS Al-Shifa, Menkes Palestina minta bukti keberadaan markas HamasNasib sejumlah rumah sakit di Gaza yang lumpuh akibat perang Israel-Hamas Palestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankKomunitas Palestina terbesar di luar dunia Arab dan Israel berada di Cile, mengapa?Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?
-akhir: 0.0784
-akibat: 0.0935
-al: 0.1870
-ambisi: 0.1055
-apakah: 0.1055
-arab: 0.1055
-artikel: 0.5274
-bagaimana: 0.0730
-berada: 0.0935
-bukti: 0.0935
-cile: 0.1055
-dan: 0.1503
-dari: 0.0501
-dengan: 0.0730
-di: 0.1835
-direkomendasikan: 0.1055
-direkomendasikanakan: 0.1055
-direkomendasikantentara: 0.1055
-dunia: 0.0935
-gaza: 0.0843
-hamas: 0.0440
-hamasnasib: 0.1055
-ini: 0.0525
-israel: 0.1868
-itu: 0.0784
-keberadaan: 0.1055
-komandan: 0.1055
-lewatkan: 0.1055
-luar: 0.1055
-lumpuh: 0.1055
-markas: 0.1055
-membacaartikel: 0.1055
-mengapa: 0.0850
-menkes: 0.1055
-merealisasikan: 0.1055
-militer: 0.1157
-minta: 0.1055
-operasi: 0.0730
-palestina: 0.1934
-para: 0.0784
-perang: 0.0784
-realistis: 0.0935
-rs: 0.2110
-rumah: 0.0850
-sakit: 0.0935
-sejumlah: 0.0850
-serbu: 0.2110
-shifa: 0.2110
-tankkomunitas: 0.1055
-tentara: 0.0784
-terbesar: 0.1055
-terus: 0.0850
-tetapi: 0.0935
-yang: 0.1944
+Kalimat 3: Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanPalestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankSejarah Deklarasi Balfour: 67 kata yang membentuk Negara Israel dan mengubah sejarah Bangsa PalestinaSiapa Abu Ubaida, apa kaitannya dengan Hamas?Pasukan Israel sudah berada ‘di jantung Kota Gaza‘, apakah Gaza akan segera jatuh ke tangan Israel?
+67: 0.1486
+abu: 0.1486
+akan: 0.0822
+al: 0.1319
+apa: 0.1033
+apakah: 0.1319
+artikel: 0.3956
+balfour: 0.1486
+bangsa: 0.1486
+berada: 0.1319
+dan: 0.1367
+deklarasi: 0.1486
+dengan: 0.2065
+di: 0.1310
+direkomendasikan: 0.1486
+direkomendasikanpalestina: 0.1486
+gaza: 0.1810
+hamas: 0.0628
+israel: 0.2064
+jantung: 0.1486
+jatuh: 0.1486
+kaitannya: 0.1486
+kata: 0.0969
+ke: 0.0866
+kota: 0.1319
+lewatkan: 0.1486
+membacaartikel: 0.1486
+membentuk: 0.1486
+mengubah: 0.1486
+negara: 0.1033
+palestinasiapa: 0.1319
+pasukan: 0.1108
+rs: 0.1486
+segera: 0.1319
+sejarah: 0.1319
+serbu: 0.1486
+shifa: 0.1486
+sudah: 0.1319
+tangan: 0.1319
+tanksejarah: 0.1486
+tentara: 0.1108
+terus: 0.1200
+ubaida: 0.1486
+yang: 0.1609
 
-Kalimat 4: Invasi darat ke Jalur Gaza melibatkan pertempuran dari rumah ke rumah di perkotaan, membawa risiko besar bagi penduduk sipil.
-bagi: 0.2242
-besar: 0.1805
-darat: 0.1701
-dari: 0.1322
-di: 0.1210
-gaza: 0.1113
-invasi: 0.2068
-jalur: 0.2068
-ke: 0.3402
-melibatkan: 0.2467
-membawa: 0.2467
-penduduk: 0.2467
-perkotaan: 0.2784
-pertempuran: 0.2467
-risiko: 0.2784
-rumah: 0.4485
-sipil: 0.2068
+Kalimat 4: Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?
+akhir: 0.1944
+ambisi: 0.2607
+apakah: 0.2314
+artikel: 0.4628
+bagaimana: 0.1812
+dan: 0.1199
+dari: 0.1253
+direkomendasikanakan: 0.2607
+ini: 0.1311
+israel: 0.0906
+itu: 0.1944
+komandan: 0.2607
+merealisasikan: 0.2607
+militer: 0.2885
+operasi: 0.1812
+para: 0.1944
+realistis: 0.2314
+tetapi: 0.2314
+yang: 0.1882
 
-Kalimat 5: Serangan udara Israel yang dilakukan tak lama setelah serangan Hamas, telah merenggut ribuan nyawa warga Gaza dan lebih dari 400.000 orang terpaksa mengungsi.
-000: 0.2180
-400: 0.2706
-dan: 0.1285
-dari: 0.1285
-dilakukan: 0.2180
-gaza: 0.1081
-hamas: 0.1127
-israel: 0.0958
-lama: 0.2398
-lebih: 0.1654
-mengungsi: 0.2398
-merenggut: 0.2706
-nyawa: 0.2706
-orang: 0.1872
-ribuan: 0.2398
-serangan: 0.3128
-setelah: 0.1872
-tak: 0.2398
-telah: 0.1484
-terpaksa: 0.2706
-udara: 0.2398
-warga: 0.1755
-yang: 0.0997
+Kalimat 5: Invasi darat ke Jalur Gaza melibatkan pertempuran dari rumah ke rumah di perkotaan, membawa risiko besar bagi penduduk sipil.
+bagi: 0.2209
+besar: 0.1784
+darat: 0.1682
+dari: 0.1314
+di: 0.1205
+gaza: 0.1110
+invasi: 0.2039
+jalur: 0.2039
+ke: 0.3186
+melibatkan: 0.2427
+membawa: 0.2427
+penduduk: 0.2427
+perkotaan: 0.2735
+pertempuran: 0.2427
+risiko: 0.2735
+rumah: 0.4854
+sipil: 0.2039
 
-Kalimat 6: Selain invasi darat, militer Israel memiliki misi tambahan menyelamatkan sedikitnya 150 sandera, yang ditahan di lokasi yang tidak diketahui di seluruh Gaza.Herzi Halevi, kepala staf Pasukan Pertahanan Israel (IDF), berjanji untuk &quot;membongkar&quot; Hamas.
-150: 0.2127
-berjanji: 0.1885
-darat: 0.1300
-di: 0.1850
-diketahui: 0.2127
-ditahan: 0.1714
-gaza: 0.0850
-halevi: 0.2127
-hamas: 0.0886
-herzi: 0.2127
-idf: 0.1885
-invasi: 0.1581
-israel: 0.1507
-kepala: 0.1885
-lokasi: 0.1885
-membongkar: 0.2127
-memiliki: 0.1472
-menyelamatkan: 0.1885
-militer: 0.1167
-misi: 0.2127
-pasukan: 0.1714
-pertahanan: 0.2127
-sandera: 0.1581
-sedikitnya: 0.2127
-selain: 0.2127
-seluruh: 0.2127
-staf: 0.2127
-tambahan: 0.2127
-tidak: 0.1110
-untuk: 0.0966
-yang: 0.1568
+Kalimat 6: Serangan udara Israel yang dilakukan tak lama setelah serangan Hamas, telah merenggut ribuan nyawa warga Gaza dan lebih dari 400.000 orang terpaksa mengungsi.
+000: 0.2181
+400: 0.2700
+dan: 0.1242
+dari: 0.1297
+dilakukan: 0.2181
+gaza: 0.1096
+hamas: 0.1142
+israel: 0.0938
+lama: 0.2397
+lebih: 0.1661
+mengungsi: 0.2397
+merenggut: 0.2700
+nyawa: 0.2700
+orang: 0.1877
+ribuan: 0.2397
+serangan: 0.3146
+setelah: 0.1877
+tak: 0.2397
+telah: 0.1494
+terpaksa: 0.2700
+udara: 0.2397
+warga: 0.1761
+yang: 0.0975
 
-Kalimat 7: Namun, bagaimana nasib Gaza setelah 16 tahun dikuasai Hamas?
-16: 0.4353
-bagaimana: 0.3012
-dikuasai: 0.4353
-gaza: 0.1740
-hamas: 0.1814
-namun: 0.3507
-nasib: 0.3858
-setelah: 0.3012
-tahun: 0.3234
+Kalimat 7: Selain invasi darat, militer Israel memiliki misi tambahan menyelamatkan sedikitnya 150 sandera, yang ditahan di lokasi yang tidak diketahui di seluruh Gaza.Herzi Halevi, kepala staf Pasukan Pertahanan Israel (IDF), berjanji untuk &quot;membongkar&quot; Hamas.
+150: 0.2130
+berjanji: 0.1890
+darat: 0.1310
+di: 0.1878
+diketahui: 0.2130
+ditahan: 0.1720
+gaza: 0.0865
+halevi: 0.2130
+hamas: 0.0901
+herzi: 0.2130
+idf: 0.1890
+invasi: 0.1588
+israel: 0.1480
+kepala: 0.1890
+lokasi: 0.1890
+membongkar: 0.2130
+memiliki: 0.1481
+menyelamatkan: 0.1890
+militer: 0.1179
+misi: 0.2130
+pasukan: 0.1588
+pertahanan: 0.2130
+sandera: 0.1588
+sedikitnya: 0.2130
+selain: 0.2130
+seluruh: 0.2130
+staf: 0.2130
+tambahan: 0.2130
+tidak: 0.1122
+untuk: 0.0980
+yang: 0.1537
 
-Kalimat 8: Sumber gambar,  Ahmed Zakot/SOPA Images/LightRocketKeterangan gambar, Yahya Sinwar, pemimpin Hamas di Gaza diidentifikasi sebagai sasaran utama oleh Israel“Saya kira Israel tidak bisa membubarkan setiap anggota Hamas, karena ini adalah gagasan Islam ekstremis,” kata analis militer Amir Bar Shalom dari Radio Angkatan Darat Israel.
-adalah: 0.1136
+Kalimat 8: Namun, bagaimana nasib Gaza setelah 16 tahun dikuasai Hamas?
+16: 0.4341
+bagaimana: 0.3018
+dikuasai: 0.4341
+gaza: 0.1763
+hamas: 0.1836
+namun: 0.3506
+nasib: 0.3853
+setelah: 0.3018
+tahun: 0.3237
+
+Kalimat 9: Sumber gambar,  Ahmed Zakot/SOPA Images/LightRocketKeterangan gambar, Yahya Sinwar, pemimpin Hamas di Gaza diidentifikasi sebagai sasaran utama oleh Israel“Saya kira Israel tidak bisa membubarkan setiap anggota Hamas, karena ini adalah gagasan Islam ekstremis,” kata analis militer Amir Bar Shalom dari Radio Angkatan Darat Israel.
+adalah: 0.1142
 ahmed: 0.1751
-amir: 0.1552
+amir: 0.1554
 analis: 0.1751
-anggota: 0.1552
+anggota: 0.1554
 angkatan: 0.1751
-bar: 0.1552
-bisa: 0.1301
-darat: 0.1070
-dari: 0.0832
-di: 0.0761
+bar: 0.1554
+bisa: 0.1305
+darat: 0.1077
+dari: 0.0841
+di: 0.0772
 diidentifikasi: 0.1751
 ekstremis: 0.1751
 gagasan: 0.1751
-gambar: 0.2821
-gaza: 0.0700
-hamas: 0.1459
+gambar: 0.2828
+gaza: 0.0711
+hamas: 0.1480
 images: 0.1751
-ini: 0.0871
-islam: 0.1552
-israel: 0.1860
-karena: 0.1552
-kata: 0.1212
+ini: 0.0880
+islam: 0.1554
+israel: 0.1824
+karena: 0.1554
+kata: 0.1142
 kira: 0.1751
 lightrocketketerangan: 0.1751
 membubarkan: 0.1751
-militer: 0.0961
-oleh: 0.1301
-pemimpin: 0.1212
+militer: 0.0969
+oleh: 0.1305
+pemimpin: 0.1217
 radio: 0.1751
 sasaran: 0.1751
-saya: 0.1552
-sebagai: 0.1552
-setiap: 0.1411
-shalom: 0.1552
-sinwar: 0.1552
+saya: 0.1554
+sebagai: 0.1554
+setiap: 0.1414
+shalom: 0.1554
+sinwar: 0.1554
 sopa: 0.1751
-sumber: 0.1411
-tidak: 0.0914
-utama: 0.1552
-yahya: 0.1552
+sumber: 0.1414
+tidak: 0.0922
+utama: 0.1554
+yahya: 0.1554
 zakot: 0.1751
 
-Kalimat 9: “Tetapi [Israel] dapat melemahkannya sebanyak yang [Israel] bisa sehingga Hamas tidak mempunyai kemampuan operasional.”Itu mungkin merupakan tujuan yang lebih realistis.
-bisa: 0.2065
-dapat: 0.1803
-hamas: 0.1158
-israel: 0.1968
-itu: 0.2065
+Kalimat 10: “Tetapi [Israel] dapat melemahkannya sebanyak yang [Israel] bisa sehingga Hamas tidak mempunyai kemampuan operasional.”Itu mungkin merupakan tujuan yang lebih realistis.
+bisa: 0.2072
+dapat: 0.1813
+hamas: 0.1175
+israel: 0.1931
+itu: 0.2072
 kemampuan: 0.2779
-lebih: 0.1698
+lebih: 0.1710
 melemahkannya: 0.2779
 mempunyai: 0.2779
 merupakan: 0.2779
-mungkin: 0.2239
+mungkin: 0.2244
 operasional: 0.2779
-realistis: 0.2463
+realistis: 0.2466
 sebanyak: 0.2779
-sehingga: 0.2463
-tetapi: 0.2463
-tidak: 0.1450
-tujuan: 0.2065
-yang: 0.2048
+sehingga: 0.2466
+tetapi: 0.2466
+tidak: 0.1464
+tujuan: 0.2072
+yang: 0.2006
 
-Kalimat 10: Sejauh ini, Israel telah berperang empat kali dengan Hamas, dan setiap upaya untuk menghentikan serangan roketnya selalu gagal.Juru bicara IDF, Letkol Jonathan Conricus, mengatakan bahwa pada akhir perang ini, Hamas seharusnya tidak lagi memiliki kapasitas militer untuk &quot;mengancam atau membunuh warga sipil Israel&quot;.Invasi darat penuh dengan risikoOperasi militer bergantung pada beberapa faktor yang dapat menggagalkannya.Organisasi sayap Hamas, Brigade Izzedine al-Qassam, telah bersiap menghadapi serangan Israel.
+Kalimat 11: Sejauh ini, Israel telah berperang empat kali dengan Hamas, dan setiap upaya untuk menghentikan serangan roketnya selalu gagal.Juru bicara IDF, Letkol Jonathan Conricus, mengatakan bahwa pada akhir perang ini, Hamas seharusnya tidak lagi memiliki kapasitas militer untuk &quot;mengancam atau membunuh warga sipil Israel&quot;.Invasi darat penuh dengan risikoOperasi militer bergantung pada beberapa faktor yang dapat menggagalkannya.Organisasi sayap Hamas, Brigade Izzedine al-Qassam, telah bersiap menghadapi serangan Israel.
 akhir: 0.1051
-al: 0.1253
+al: 0.1251
 atau: 0.1051
 bahwa: 0.1139
 beberapa: 0.1139
-bergantung: 0.1414
+bergantung: 0.1410
 berperang: 0.1139
-bersiap: 0.1414
-bicara: 0.1414
-brigade: 0.1414
-conricus: 0.1414
-dan: 0.0672
-dapat: 0.0917
-darat: 0.0864
-dengan: 0.1957
-empat: 0.1414
-faktor: 0.1414
-gagal: 0.1414
-hamas: 0.1768
-idf: 0.1253
-ini: 0.1407
+bersiap: 0.1410
+bicara: 0.1410
+brigade: 0.1410
+conricus: 0.1410
+dan: 0.0648
+dapat: 0.0920
+darat: 0.0867
+dengan: 0.1960
+empat: 0.1410
+faktor: 0.1410
+gagal: 0.1410
+hamas: 0.1788
+idf: 0.1251
+ini: 0.1417
 invasi: 0.1051
-israel: 0.1502
-izzedine: 0.1414
-jonathan: 0.1414
-juru: 0.1414
-kali: 0.1253
-kapasitas: 0.1414
-lagi: 0.1253
-letkol: 0.1414
+israel: 0.1469
+izzedine: 0.1410
+jonathan: 0.1410
+juru: 0.1410
+kali: 0.1251
+kapasitas: 0.1410
+lagi: 0.1251
+letkol: 0.1410
 membunuh: 0.1139
-memiliki: 0.0978
+memiliki: 0.0980
 mengancam: 0.1139
-mengatakan: 0.1414
-menggagalkannya: 0.1414
-menghadapi: 0.1253
-menghentikan: 0.1414
-militer: 0.1551
-organisasi: 0.1253
-pada: 0.1729
-penuh: 0.1414
-perang: 0.1051
-qassam: 0.1414
-risikooperasi: 0.1414
-roketnya: 0.1414
-sayap: 0.1414
-seharusnya: 0.1414
+mengatakan: 0.1410
+menggagalkannya: 0.1410
+menghadapi: 0.1251
+menghentikan: 0.1410
+militer: 0.1560
+organisasi: 0.1251
+pada: 0.1735
+penuh: 0.1410
+perang: 0.1139
+qassam: 0.1410
+risikooperasi: 0.1410
+roketnya: 0.1410
+sayap: 0.1410
+seharusnya: 0.1410
 sejauh: 0.1139
-selalu: 0.1414
-serangan: 0.1635
+selalu: 0.1410
+serangan: 0.1643
 setiap: 0.1139
 sipil: 0.1051
-telah: 0.1551
-tidak: 0.0738
-untuk: 0.1285
-upaya: 0.1414
-warga: 0.0917
-yang: 0.0521
+telah: 0.1560
+tidak: 0.0743
+untuk: 0.1297
+upaya: 0.1410
+warga: 0.0920
+yang: 0.0509
 
-Kalimat 11: Alat peledak telah dipasang, dan penyergapan direncanakan.
-alat: 0.4429
-dan: 0.2104
-dipasang: 0.4429
-direncanakan: 0.3925
-peledak: 0.4429
-penyergapan: 0.3925
-telah: 0.2430
+Kalimat 12: Alat peledak telah dipasang, dan penyergapan direncanakan.
+alat: 0.4431
+dan: 0.2038
+dipasang: 0.4431
+direncanakan: 0.3933
+peledak: 0.4431
+penyergapan: 0.3933
+telah: 0.2452
 
-Kalimat 12: Mereka dapat menggunakan jaringan terowongan Hamas yang terkenal dan luas untuk menyerang pasukan Israel.Baca juga:Israel segera melancarkan serangan darat ke Gaza, bagaimana pertempuran bakal berlangsung?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Pada 2014, batalion infanteri Israel menderita kerugian besar akibat ranjau anti-tank, penembak jitu dan penyergapan, sementara ratusan warga sipil tewas dalam pertempuran di lingkungan utara Kota Gaza.Itulah salah satu alasan Israel menuntut evakuasi 1,1 juta warga Palestina dari bagian utara Jalur Gaza.Warga Israel telah diperingatkan bahwa perang bisa memakan waktu berbulan-bulan, dan tercatat 360.000 tentara cadangan telah melapor untuk bertugas.Pertanyaannya adalah berapa lama Israel dapat menjalankan operasinya tanpa adanya tekanan internasional untuk mundur?Lembaga yang menangani pengungsi di bawah PBB telah memperingatkan bahwa Gaza dengan cepat menjadi “lubang neraka”.Jumlah korban tewas meningkat dengan cepat; Pasokan air, listrik, dan bahan bakar telah diputus, dan kini separuh penduduk diminta mengungsi dari wilayah lain.“Pemerintah dan militer merasa mendapat dukungan dari komunitas internasional – setidaknya dari para pemimpin Barat.
-000: 0.0649
+Kalimat 13: Mereka dapat menggunakan jaringan terowongan Hamas yang terkenal dan luas untuk menyerang pasukan Israel.Baca juga:Israel segera melancarkan serangan darat ke Gaza, bagaimana pertempuran bakal berlangsung?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Pada 2014, batalion infanteri Israel menderita kerugian besar akibat ranjau anti-tank, penembak jitu dan penyergapan, sementara ratusan warga sipil tewas dalam pertempuran di lingkungan utara Kota Gaza.Itulah salah satu alasan Israel menuntut evakuasi 1,1 juta warga Palestina dari bagian utara Jalur Gaza.Warga Israel telah diperingatkan bahwa perang bisa memakan waktu berbulan-bulan, dan tercatat 360.000 tentara cadangan telah melapor untuk bertugas.Pertanyaannya adalah berapa lama Israel dapat menjalankan operasinya tanpa adanya tekanan internasional untuk mundur?Lembaga yang menangani pengungsi di bawah PBB telah memperingatkan bahwa Gaza dengan cepat menjadi “lubang neraka”.Jumlah korban tewas meningkat dengan cepat; Pasokan air, listrik, dan bahan bakar telah diputus, dan kini separuh penduduk diminta mengungsi dari wilayah lain.“Pemerintah dan militer merasa mendapat dukungan dari komunitas internasional – setidaknya dari para pemimpin Barat.
+000: 0.0651
 2014: 0.0806
 360: 0.0806
-adalah: 0.0522
+adalah: 0.0526
 adanya: 0.0806
 air: 0.0806
-akibat: 0.0714
+akibat: 0.0806
 alasan: 0.0806
 anti: 0.0806
-baca: 0.0714
-bagaimana: 0.0557
+baca: 0.0715
+bagaimana: 0.0560
 bagian: 0.0806
 bahan: 0.0806
-bahwa: 0.1298
+bahwa: 0.1301
 bakal: 0.0806
 bakar: 0.0806
-barat: 0.0714
+barat: 0.0715
 batalion: 0.0806
 bawah: 0.0806
 berapa: 0.0806
 berbulan: 0.0806
 berlangsung: 0.0806
-berperang: 0.0649
+berperang: 0.0651
 bertugas: 0.0806
-besar: 0.0522
-bisa: 0.0598
+besar: 0.0526
+bisa: 0.0601
 bulan: 0.0806
-cadangan: 0.0714
-cepat: 0.1428
-dalam: 0.0522
-dan: 0.2295
-dapat: 0.1045
-darat: 0.0492
-dari: 0.1530
-dengan: 0.1115
-di: 0.0700
+cadangan: 0.0715
+cepat: 0.1430
+dalam: 0.0526
+dan: 0.2223
+dapat: 0.1051
+darat: 0.0496
+dari: 0.1548
+dengan: 0.1120
+di: 0.0710
 diminta: 0.0806
 diperingatkan: 0.0806
 diputus: 0.0806
 dukungan: 0.0806
 evakuasi: 0.0806
-gaza: 0.1288
-gencatan: 0.0714
-hamas: 0.0671
+gaza: 0.1308
+gencatan: 0.0715
+hamas: 0.0681
 infanteri: 0.0806
-ini: 0.0401
+ini: 0.0405
 internasional: 0.1611
-israel: 0.1997
+israel: 0.1959
 itulah: 0.0806
-jalur: 0.0598
+jalur: 0.0601
 jaringan: 0.0806
 jitu: 0.0806
-juga: 0.0557
+juga: 0.0560
 jumlah: 0.0806
 juta: 0.0806
-ke: 0.0492
+ke: 0.0469
 kerugian: 0.0806
 kini: 0.0806
-komunitas: 0.0714
+komunitas: 0.0715
 korban: 0.0806
-kota: 0.0806
-lain: 0.0714
-lama: 0.0714
+kota: 0.0715
+lain: 0.0715
+lama: 0.0715
 lembaga: 0.0806
 lingkungan: 0.0806
 listrik: 0.0806
-luas: 0.0714
+luas: 0.0715
 lubang: 0.0806
 melancarkan: 0.0806
 melapor: 0.0806
@@ -940,737 +959,737 @@ menangani: 0.0806
 mendapat: 0.0806
 menderita: 0.0806
 menggunakan: 0.0806
-mengungsi: 0.0714
+mengungsi: 0.0715
 meningkat: 0.0806
-menjadi: 0.0649
+menjadi: 0.0651
 menjalankan: 0.0806
 menuntut: 0.0806
 menyerang: 0.0806
 merasa: 0.0806
-mereka: 0.0598
-militer: 0.0442
+mereka: 0.0601
+militer: 0.0446
 mundur: 0.0806
 neraka: 0.0806
-netanyahu: 0.0649
+netanyahu: 0.0651
 operasinya: 0.0806
-pada: 0.0492
-palestina: 0.0492
-para: 0.0598
+pada: 0.0496
+palestina: 0.0526
+para: 0.0601
 pasokan: 0.0806
-pasukan: 0.0649
+pasukan: 0.0601
 pbb: 0.0806
-pemerintah: 0.0714
-pemimpin: 0.0557
-penduduk: 0.0714
+pemerintah: 0.0715
+pemimpin: 0.0560
+penduduk: 0.0715
 penembak: 0.0806
 pengungsi: 0.0806
-penyergapan: 0.0714
-perang: 0.1197
-pertanyaannya: 0.0714
-pertempuran: 0.1428
+penyergapan: 0.0715
+perang: 0.1301
+pertanyaannya: 0.0715
+pertempuran: 0.1430
 ranjau: 0.0806
 ratusan: 0.0806
-salah: 0.0649
-satu: 0.0598
-segera: 0.0806
+salah: 0.0651
+satu: 0.0601
+segera: 0.0715
 sementara: 0.0806
-senjata: 0.0714
+senjata: 0.0715
 separuh: 0.0806
-serangan: 0.0466
+serangan: 0.0469
 setidaknya: 0.0806
-sipil: 0.0598
+sipil: 0.0601
 tank: 0.0806
 tanpa: 0.0806
-tekanan: 0.0649
-telah: 0.1767
-tentara: 0.0598
+tekanan: 0.0651
+telah: 0.1783
+tentara: 0.0601
 tercatat: 0.0806
 terkenal: 0.0806
 terowongan: 0.0806
 tewas: 0.1611
-tolak: 0.0714
-untuk: 0.1098
-utara: 0.1428
-waktu: 0.0714
-waktunya: 0.0714
-warga: 0.1567
-wilayah: 0.0714
-yang: 0.0594
+tolak: 0.0715
+untuk: 0.1112
+utara: 0.1430
+waktu: 0.0715
+waktunya: 0.0715
+warga: 0.1577
+wilayah: 0.0715
+yang: 0.0581
 
-Kalimat 13: Filosofinya adalah &#39;mari kita bergerak, kita punya banyak waktu&#39;,” kata Yossi Melman, salah satu jurnalis keamanan dan intelijen terkemuka Israel.Namun cepat atau lambat dia yakin sekutu Israel akan turun tangan jika mereka melihat gambaran orang-orang kelaparan.Penyelamatan para sanderaLewati Podcast dan lanjutkan membacaInvestigasi: Skandal AdopsiInvestigasi untuk menyibak tabir adopsi ilegal dari Indonesia ke Belanda di masa laluEpisodeAkhir dari PodcastBanyak dari para sandera adalah warga Israel, namun terdapat juga sejumlah besar warga negara asing dan mereka yang memiliki kewarganegaraan ganda, sehingga beberapa negara lain, termasuk Amerika Serikat, Prancis, dan Inggris, memiliki kepentingan dalam operasi ini dan pembebasan warga negara mereka secara aman.
-adalah: 0.1339
-adopsi: 0.1032
-adopsiinvestigasi: 0.1032
-akan: 0.0597
-aman: 0.1032
-amerika: 0.1032
-asing: 0.1032
-atau: 0.0767
-banyak: 0.0915
-beberapa: 0.0831
-belanda: 0.1032
-bergerak: 0.1032
-besar: 0.0669
-cepat: 0.0915
-dalam: 0.0669
-dan: 0.2451
-dari: 0.1470
-di: 0.0449
-dia: 0.0767
-filosofinya: 0.1032
-gambaran: 0.1032
-ganda: 0.0915
-ilegal: 0.1032
-indonesia: 0.1032
-inggris: 0.1032
-ini: 0.0513
-intelijen: 0.1032
-israel: 0.1096
-jika: 0.0831
-juga: 0.0714
-jurnalis: 0.1032
-kata: 0.0714
-ke: 0.0631
-keamanan: 0.0831
-kelaparan: 0.1032
-kepentingan: 0.1032
-kewarganegaraan: 0.1032
-kita: 0.2064
-lain: 0.0915
-laluepisodeakhir: 0.1032
-lambat: 0.1032
-lanjutkan: 0.1032
-mari: 0.1032
-masa: 0.1032
-melihat: 0.1032
+Kalimat 14: Filosofinya adalah &#39;mari kita bergerak, kita punya banyak waktu&#39;,” kata Yossi Melman, salah satu jurnalis keamanan dan intelijen terkemuka Israel.Namun cepat atau lambat dia yakin sekutu Israel akan turun tangan jika mereka melihat gambaran orang-orang kelaparan.Penyelamatan para sanderaLewati Podcast dan lanjutkan membacaInvestigasi: Skandal AdopsiInvestigasi untuk menyibak tabir adopsi ilegal dari Indonesia ke Belanda di masa laluEpisodeAkhir dari PodcastBanyak dari para sandera adalah warga Israel, namun terdapat juga sejumlah besar warga negara asing dan mereka yang memiliki kewarganegaraan ganda, sehingga beberapa negara lain, termasuk Amerika Serikat, Prancis, dan Inggris, memiliki kepentingan dalam operasi ini dan pembebasan warga negara mereka secara aman.
+adalah: 0.1353
+adopsi: 0.1037
+adopsiinvestigasi: 0.1037
+akan: 0.0574
+aman: 0.1037
+amerika: 0.1037
+asing: 0.1037
+atau: 0.0773
+banyak: 0.0920
+beberapa: 0.0837
+belanda: 0.1037
+bergerak: 0.1037
+besar: 0.0676
+cepat: 0.0920
+dalam: 0.0676
+dan: 0.2384
+dari: 0.1495
+di: 0.0457
+dia: 0.0773
+filosofinya: 0.1037
+gambaran: 0.1037
+ganda: 0.0920
+ilegal: 0.1037
+indonesia: 0.1037
+inggris: 0.1037
+ini: 0.0521
+intelijen: 0.1037
+israel: 0.1081
+jika: 0.0837
+juga: 0.0721
+jurnalis: 0.1037
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>melman: 0.1032
-membacainvestigasi: 0.1032
-memiliki: 0.1428
-menyibak: 0.1032
-mereka: 0.2300
-namun: 0.1663
-negara: 0.2300
-operasi: 0.0714
-orang: 0.1428
-para: 0.1533
-pembebasan: 0.0915
-penyelamatan: 0.1032
-podcast: 0.1032
-podcastbanyak: 0.1032
-prancis: 0.0915
-punya: 0.0915
-salah: 0.0831
-sandera: 0.0767
-sanderalewati: 0.1032
-satu: 0.0767
-secara: 0.0831
-sehingga: 0.0915
-sejumlah: 0.0831
-sekutu: 0.1032
-serikat: 0.1032
-skandal: 0.1032
-tabir: 0.1032
-tangan: 0.1032
-terdapat: 0.0831
-terkemuka: 0.1032
-termasuk: 0.1032
-turun: 0.1032
-untuk: 0.0469
-waktu: 0.0915
-warga: 0.2008
-yakin: 0.0714
-yang: 0.0380
-yossi: 0.1032
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>kata: 0.0676
+ke: 0.0604
+keamanan: 0.0837
+kelaparan: 0.1037
+kepentingan: 0.1037
+kewarganegaraan: 0.1037
+kita: 0.2074
+lain: 0.0920
+laluepisodeakhir: 0.1037
+lambat: 0.1037
+lanjutkan: 0.1037
+mari: 0.1037
+masa: 0.1037
+melihat: 0.1037
+melman: 0.1037
+membacainvestigasi: 0.1037
+memiliki: 0.1442
+menyibak: 0.1037
+mereka: 0.2320
+namun: 0.1675
+negara: 0.2162
+operasi: 0.0721
+orang: 0.1442
+para: 0.1547
+pembebasan: 0.0920
+penyelamatan: 0.1037
+podcast: 0.1037
+podcastbanyak: 0.1037
+prancis: 0.0920
+punya: 0.0920
+salah: 0.0837
+sandera: 0.0773
+sanderalewati: 0.1037
+satu: 0.0773
+secara: 0.0837
+sehingga: 0.0920
+sejumlah: 0.0920
+sekutu: 0.1037
+serikat: 0.1037
+skandal: 0.1037
+tabir: 0.1037
+tangan: 0.0920
+terdapat: 0.0837
+terkemuka: 0.1037
+termasuk: 0.1037
+turun: 0.1037
+untuk: 0.0477
+waktu: 0.0920
+warga: 0.2029
+yakin: 0.0721
+yang: 0.0374
+yossi: 0.1037
 
-Kalimat 14: Presiden Prancis, Emmanuel Macron, telah berjanji kepada keluarga Prancis-Israel yang kerabatnya disandera Hamas untuk membawa pulang orang yang mereka cintai: &quot;Prancis tidak akan pernah meninggalkan anak-anaknya.
-akan: 0.1180
+Kalimat 15: Presiden Prancis, Emmanuel Macron, telah berjanji kepada keluarga Prancis-Israel yang kerabatnya disandera Hamas untuk membawa pulang orang yang mereka cintai: &quot;Prancis tidak akan pernah meninggalkan anak-anaknya.
+akan: 0.1130
 anak: 0.2042
 anaknya: 0.2042
-berjanji: 0.1810
+berjanji: 0.1812
 cintai: 0.2042
 disandera: 0.2042
 emmanuel: 0.2042
-hamas: 0.0851
-israel: 0.0723
+hamas: 0.0863
+israel: 0.0709
 keluarga: 0.2042
-kepada: 0.1810
+kepada: 0.1812
 kerabatnya: 0.2042
 macron: 0.2042
-membawa: 0.1810
+membawa: 0.1812
 meninggalkan: 0.2042
-mereka: 0.1517
-orang: 0.1413
-pernah: 0.1810
-prancis: 0.5429
-presiden: 0.1810
+mereka: 0.1523
+orang: 0.1419
+pernah: 0.1812
+prancis: 0.5436
+presiden: 0.1812
 pulang: 0.2042
-telah: 0.1120
-tidak: 0.1066
-untuk: 0.0927
-yang: 0.1505
+telah: 0.1130
+tidak: 0.1076
+untuk: 0.0939
+yang: 0.1474
 
-Kalimat 15: &quot;Sejauh mana nasib para sandera akan mempengaruhi perencana militer masih belum jelas, dan terdapat juga tekanan dalam negeri terhadap para pemimpin Israel.Lebih jauh tentang konflik Israel dan Hamas: Perkembangan terbaru konflik Israel-PalestinaSiapa Hamas dan bagaimana kiprahnya?
-akan: 0.1115
-bagaimana: 0.1334
-belum: 0.1709
-dalam: 0.1251
-dan: 0.2747
-hamas: 0.1607
-israel: 0.2048
-jauh: 0.1709
-jelas: 0.1928
-juga: 0.1334
-kiprahnya: 0.1928
-konflik: 0.2865
-lebih: 0.1178
-mana: 0.1709
-masih: 0.1928
-mempengaruhi: 0.1709
-militer: 0.1058
-nasib: 0.1709
-negeri: 0.1928
-palestinasiapa: 0.1928
-para: 0.2865
-pemimpin: 0.1334
-perencana: 0.1928
-perkembangan: 0.1928
-sandera: 0.1433
-sejauh: 0.1553
-tekanan: 0.1553
-tentang: 0.1928
-terbaru: 0.1709
-terdapat: 0.1553
-terhadap: 0.1433
+Kalimat 16: &quot;Sejauh mana nasib para sandera akan mempengaruhi perencana militer masih belum jelas, dan terdapat juga tekanan dalam negeri terhadap para pemimpin Israel.Lebih jauh tentang konflik Israel dan Hamas: Perkembangan terbaru konflik Israel-PalestinaSiapa Hamas dan bagaimana kiprahnya?
+akan: 0.1073
+bagaimana: 0.1348
+belum: 0.1721
+dalam: 0.1265
+dan: 0.2675
+hamas: 0.1640
+israel: 0.2020
+jauh: 0.1721
+jelas: 0.1939
+juga: 0.1348
+kiprahnya: 0.1939
+konflik: 0.2892
+lebih: 0.1193
+mana: 0.1721
+masih: 0.1939
+mempengaruhi: 0.1721
+militer: 0.1073
+nasib: 0.1721
+negeri: 0.1939
+palestinasiapa: 0.1721
+para: 0.2892
+pemimpin: 0.1348
+perencana: 0.1939
+perkembangan: 0.1939
+sandera: 0.1446
+sejauh: 0.1566
+tekanan: 0.1566
+tentang: 0.1939
+terbaru: 0.1721
+terdapat: 0.1566
+terhadap: 0.1446
 
-Kalimat 16: Sejarah konflik berkepanjangan Israel-PalestinaSejarah Jalur Gaza, ‘penjara terbuka paling besar di dunia’Amir Bar Shalom membandingkan situasi ini dengan insiden yang terjadi pada saat Olimpiade Munich tahun 1972, ketika sekelompok orang bersenjata Palestina menangkap atlet Israel dan membunuh 11 orang.Sebuah operasi diluncurkan untuk mencari dan membunuh semua orang yang terlibat dalam serangan tersebut dan dia yakin pemerintah ingin memburu semua orang di balik penculikan tersebut.Menyelamatkan begitu banyak orang yang ditahan di berbagai wilayah di Gaza mungkin tidak dapat dilakukan oleh pasukan komando unit elit Israel, Sayeret Matkal.
-11: 0.1134
-1972: 0.1134
+Kalimat 17: Sejarah konflik berkepanjangan Israel-PalestinaSejarah Jalur Gaza, ‘penjara terbuka paling besar di dunia’Amir Bar Shalom membandingkan situasi ini dengan insiden yang terjadi pada saat Olimpiade Munich tahun 1972, ketika sekelompok orang bersenjata Palestina menangkap atlet Israel dan membunuh 11 orang.Sebuah operasi diluncurkan untuk mencari dan membunuh semua orang yang terlibat dalam serangan tersebut dan dia yakin pemerintah ingin memburu semua orang di balik penculikan tersebut.Menyelamatkan begitu banyak orang yang ditahan di berbagai wilayah di Gaza mungkin tidak dapat dilakukan oleh pasukan komando unit elit Israel, Sayeret Matkal.
+11: 0.1133
+1972: 0.1133
 amir: 0.1005
-atlet: 0.1134
-balik: 0.1134
+atlet: 0.1133
+balik: 0.1133
 banyak: 0.1005
 bar: 0.1005
-begitu: 0.1134
-berbagai: 0.1134
-berkepanjangan: 0.1134
-bersenjata: 0.1134
-besar: 0.0735
-dalam: 0.0735
-dan: 0.1615
-dapat: 0.0735
-dengan: 0.0784
-di: 0.1972
-dia: 0.0842
-dilakukan: 0.0913
-diluncurkan: 0.1134
-ditahan: 0.0913
-dunia: 0.1005
-elit: 0.1134
-gaza: 0.0906
-ingin: 0.0913
-ini: 0.0564
-insiden: 0.1134
-israel: 0.1204
-jalur: 0.0842
+begitu: 0.1133
+berbagai: 0.1133
+berkepanjangan: 0.1133
+bersenjata: 0.1133
+besar: 0.0739
+dalam: 0.0739
+dan: 0.1563
+dapat: 0.0739
+dengan: 0.0787
+di: 0.1997
+dia: 0.0845
+dilakukan: 0.0915
+diluncurkan: 0.1133
+ditahan: 0.0915
+dunia: 0.1133
+elit: 0.1133
+gaza: 0.0920
+ingin: 0.0915
+ini: 0.0570
+insiden: 0.1133
+israel: 0.1181
+jalur: 0.0845
 ketika: 0.1005
-komando: 0.1134
-konflik: 0.0842
-matkal: 0.1134
-membandingkan: 0.1134
-membunuh: 0.1827
-memburu: 0.1134
-menangkap: 0.1134
-mencari: 0.1134
+komando: 0.1133
+konflik: 0.0845
+matkal: 0.1133
+membandingkan: 0.1133
+membunuh: 0.1830
+memburu: 0.1133
+menangkap: 0.1133
+mencari: 0.1133
 menyelamatkan: 0.1005
-mungkin: 0.0913
-munich: 0.1134
-oleh: 0.0842
-olimpiade: 0.1134
-operasi: 0.0784
-orang: 0.3922
-pada: 0.0693
-palestina: 0.0693
-palestinasejarah: 0.1134
-paling: 0.1134
-pasukan: 0.0913
+mungkin: 0.0915
+munich: 0.1133
+oleh: 0.0845
+olimpiade: 0.1133
+operasi: 0.0787
+orang: 0.3937
+pada: 0.0697
+palestina: 0.0739
+palestinasejarah: 0.1133
+paling: 0.1133
+pasukan: 0.0845
 pemerintah: 0.1005
-penculikan: 0.1134
-penjara: 0.1134
+penculikan: 0.1133
+penjara: 0.1133
 saat: 0.1005
-sayeret: 0.1134
-sebuah: 0.0913
-sejarah: 0.1134
-sekelompok: 0.1134
-semua: 0.2267
-serangan: 0.0655
+sayeret: 0.1133
+sebuah: 0.0915
+sejarah: 0.1005
+sekelompok: 0.1133
+semua: 0.2266
+serangan: 0.0660
 shalom: 0.1005
 situasi: 0.1005
-tahun: 0.0842
-terbuka: 0.1134
-terjadi: 0.0784
-terlibat: 0.1134
-tersebut: 0.1569
-tidak: 0.0592
-unit: 0.1134
-untuk: 0.0515
+tahun: 0.0845
+terbuka: 0.1133
+terjadi: 0.0787
+terlibat: 0.1133
+tersebut: 0.1575
+tidak: 0.0597
+unit: 0.1133
+untuk: 0.0521
 wilayah: 0.1005
-yakin: 0.0784
-yang: 0.1253
+yakin: 0.0787
+yang: 0.1227
 
-Kalimat 17: Untuk memutar video ini, aktifkan JavaScript atau coba di mesin pencari lainPlay video, &quot;Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?
-aktifkan: 0.2432
-atau: 0.1807
-coba: 0.2432
-di: 0.3172
-gaza: 0.0972
-ini: 0.1210
-javascript: 0.2432
-kehidupan: 0.2155
-konflik: 0.1807
-lainplay: 0.2432
-memutar: 0.2432
-mengapa: 0.1959
-mesin: 0.2432
-pencari: 0.2432
-sana: 0.2155
-terjadi: 0.1682
-terus: 0.1959
-untuk: 0.1104
-video: 0.4311
-
-Kalimat 18: &quot;, Durasi 7,1307:13Keterangan video, Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?Hamas telah mengancam akan menembak sandera sebagai pencegah serangan Israel.Pada 2011, Israel menukar lebih dari 1.000 tahanan untuk pembebasan seorang tentara, Gilad Shalit, yang ditahan oleh Hamas selama lima tahun.
-000: 0.1540
-1307: 0.1911
-13keterangan: 0.1911
-2011: 0.1911
-akan: 0.1105
-dari: 0.0908
-di: 0.1662
-ditahan: 0.1540
-durasi: 0.1694
-gaza: 0.0764
-gilad: 0.1911
-hamas: 0.1593
-israel: 0.1354
-kehidupan: 0.1694
-konflik: 0.1420
-lebih: 0.1168
-lima: 0.1911
-menembak: 0.1911
-mengancam: 0.1540
-mengapa: 0.1540
-menukar: 0.1911
-oleh: 0.1420
-pada: 0.1168
-pembebasan: 0.1694
-pencegah: 0.1911
-sana: 0.1694
-sandera: 0.1420
-sebagai: 0.1694
-selama: 0.1911
-seorang: 0.1911
-serangan: 0.1105
-shalit: 0.1911
-tahanan: 0.1694
-tahun: 0.1420
-telah: 0.1048
-tentara: 0.1420
-terjadi: 0.1322
-terus: 0.1540
-untuk: 0.0868
-video: 0.1694
-yang: 0.0704
-
-Kalimat 19: Namun Israel akan berpikir dua kali sebelum melepaskan tahanan secara besar-besaran, karena salah satu tahanan yang dibebaskan dalam pertukaran itu adalah Yahya Sinwar, yang kemudian menjadi pemimpin politik Hamas di Gaza.Negara tetangga mengawasi dengan cermatHal yang juga dapat mempengaruhi durasi dan hasil serangan darat adalah bagaimana reaksi negara-negara tetangga Israel.Mereka mungkin menghadapi peningkatan tuntutan dari Mesir, yang berbatasan dengan Gaza dan sudah mendorong agar bantuan diizinkan melalui perbatasan Rafah.“Semakin besar penderitaan yang dialami warga Gaza setelah operasi militer Israel, semakin besar pula tekanan yang akan dihadapi Mesir, agar terlihat seolah-olah mereka tidak berpaling dari Palestina,” kata Ofir Winter dari Institut Kajian Keamanan Nasional Israel.Namun hal itu tidak akan terjadi jika Kairo mengizinkan penyeberangan massal warga Gaza ke Mesir atau bertindak secara militer melawan Israel atas nama mereka, dia yakin.Sumber gambar, SAID KHATIB/AFPKeterangan gambar, Serangan udara dan artileri Israel telah membombardir Gaza setelah Hamas melakukan serangan terhadap warga Israel Perbatasan utara Israel dengan Lebanon juga berada dalam pengawasan ketat.Sejauh ini telah terjadi beberapa serangan lintas batas yang melibatkan kelompok militan Islam Hizbullah, namun serangan tersebut belum menjadi sebuah front baru terhadap Israel.Iran, sponsor utama Hizbullah, sudah mengancam akan meluncurkan “front baru” melawan Israel.
-adalah: 0.0878
-afpketerangan: 0.0677
-agar: 0.1354
-akan: 0.1565
-artileri: 0.0677
-atas: 0.0600
-atau: 0.0503
-bagaimana: 0.0468
-bantuan: 0.0677
-baru: 0.1200
-batas: 0.0677
-beberapa: 0.0545
-belum: 0.0600
-berada: 0.0600
-berbatasan: 0.0677
-berpaling: 0.0677
-berpikir: 0.0600
-bertindak: 0.0677
-besar: 0.1317
-besaran: 0.0677
-cermathal: 0.0677
-dalam: 0.0878
-dan: 0.0964
-dapat: 0.0439
-darat: 0.0414
-dari: 0.0964
-dengan: 0.1405
-di: 0.0294
-dia: 0.0503
-dialami: 0.0677
-dibebaskan: 0.0677
-dihadapi: 0.0677
-diizinkan: 0.0677
-dua: 0.0677
-durasi: 0.0600
-front: 0.1354
-gambar: 0.1091
-gaza: 0.1353
-hal: 0.0600
-hamas: 0.0564
-hasil: 0.0545
-hizbullah: 0.1354
-ini: 0.0337
-institut: 0.0677
-iran: 0.0677
-islam: 0.0600
-israel: 0.2397
-itu: 0.1006
-jika: 0.0545
-juga: 0.0937
-kairo: 0.0677
-kajian: 0.0677
-kali: 0.0600
+Kalimat 18: Untuk memutar video ini, aktifkan JavaScript atau coba di mesin pencari lainPlay video, &quot;Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?
+aktifkan: 0.2416
+atau: 0.1801
+coba: 0.2416
+di: 0.3194
+gaza: 0.0981
+ini: 0.1214
+javascript: 0.2416
+kehidupan: 0.2144
+konflik: 0.1801
+lainplay: 0.2416
+memutar: 0.2416
+mengapa: 0.2144
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>karena: 0.0600
-kata: 0.0468
-ke: 0.0414
-keamanan: 0.0545
-kelompok: 0.0545
-kemudian: 0.0677
-ketat: 0.0545
-khatib: 0.0677
-lebanon: 0.0677
-lintas: 0.0677
-massal: 0.0677
-melakukan: 0.0677
-melalui: 0.0677
-melawan: 0.1200
-melepaskan: 0.0677
-melibatkan: 0.0600
-meluncurkan: 0.0677
-membombardir: 0.0677
-mempengaruhi: 0.0600
-mendorong: 0.0677
-mengancam: 0.0545
-mengawasi: 0.0677
-menghadapi: 0.0600
-mengizinkan: 0.0677
-menjadi: 0.1091
-mereka: 0.1509
-mesir: 0.1800
-militan: 0.0677
-militer: 0.0743
-mungkin: 0.0545
-nama: 0.0677
-namun: 0.1636
-nasional: 0.0677
-negara: 0.1509
-ofir: 0.0600
-olah: 0.0677
-operasi: 0.0468
-palestina: 0.0414
-pemimpin: 0.0468
-penderitaan: 0.0677
-pengawasan: 0.0677
-peningkatan: 0.0677
-penyeberangan: 0.0677
-perbatasan: 0.1354
-pertukaran: 0.0677
-politik: 0.0677
-pula: 0.0677
-rafah: 0.0677
-reaksi: 0.0677
-said: 0.0677
-salah: 0.0545
-satu: 0.0503
-sebelum: 0.0600
-sebuah: 0.0545
-secara: 0.1091
-sejauh: 0.0545
-semakin: 0.1354
-seolah: 0.0677
-serangan: 0.1957
-setelah: 0.0937
-sinwar: 0.0600
-sponsor: 0.0677
-sudah: 0.1354
-sumber: 0.0545
-tahanan: 0.1200
-tekanan: 0.0545
-telah: 0.0743
-terhadap: 0.1006
-terjadi: 0.0937
-terlihat: 0.0677
-tersebut: 0.0468
-tetangga: 0.1354
-tidak: 0.0706
-tuntutan: 0.0677
-udara: 0.0600
-utama: 0.0600
-utara: 0.0600
-warga: 0.1317
-winter: 0.0600
-yahya: 0.0600
-yakin: 0.0468
-yang: 0.1746
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mesin: 0.2416
+pencari: 0.2416
+sana: 0.2144
+terjadi: 0.1679
+terus: 0.1951
+untuk: 0.1111
+video: 0.4287
 
-Kalimat 20: Hal-hal tersebut menjadi fokus peringatan Presiden AS Joe Biden baru-baru ini, ketika dia berkata: &quot;Kepada negara mana pun, organisasi mana pun, siapa pun yang berpikir untuk mengambil keuntungan dari situasi ini, saya punya satu kata: Jangan!
-as: 0.1450
-baru: 0.2899
+Kalimat 19: &quot;, Durasi 7,1307:13Keterangan video, Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?Hamas telah mengancam akan menembak sandera sebagai pencegah serangan Israel.Pada 2011, Israel menukar lebih dari 1.000 tahanan untuk pembebasan seorang tentara, Gilad Shalit, yang ditahan oleh Hamas selama lima tahun.
+000: 0.1537
+1307: 0.1904
+13keterangan: 0.1904
+2011: 0.1904
+akan: 0.1053
+dari: 0.0915
+di: 0.1678
+ditahan: 0.1537
+durasi: 0.1689
+gaza: 0.0773
+gilad: 0.1904
+hamas: 0.1610
+israel: 0.1322
+kehidupan: 0.1689
+konflik: 0.1420
+lebih: 0.1171
+lima: 0.1904
+menembak: 0.1904
+mengancam: 0.1537
+mengapa: 0.1689
+menukar: 0.1904
+oleh: 0.1420
+pada: 0.1171
+pembebasan: 0.1689
+pencegah: 0.1904
+sana: 0.1689
+sandera: 0.1420
+sebagai: 0.1689
+selama: 0.1904
+seorang: 0.1904
+serangan: 0.1109
+shalit: 0.1904
+tahanan: 0.1689
+tahun: 0.1420
+telah: 0.1053
+tentara: 0.1420
+terjadi: 0.1323
+terus: 0.1537
+untuk: 0.0875
+video: 0.1689
+yang: 0.0687
+
+Kalimat 20: Namun Israel akan berpikir dua kali sebelum melepaskan tahanan secara besar-besaran, karena salah satu tahanan yang dibebaskan dalam pertukaran itu adalah Yahya Sinwar, yang kemudian menjadi pemimpin politik Hamas di Gaza.Negara tetangga mengawasi dengan cermatHal yang juga dapat mempengaruhi durasi dan hasil serangan darat adalah bagaimana reaksi negara-negara tetangga Israel.Mereka mungkin menghadapi peningkatan tuntutan dari Mesir, yang berbatasan dengan Gaza dan sudah mendorong agar bantuan diizinkan melalui perbatasan Rafah.“Semakin besar penderitaan yang dialami warga Gaza setelah operasi militer Israel, semakin besar pula tekanan yang akan dihadapi Mesir, agar terlihat seolah-olah mereka tidak berpaling dari Palestina,” kata Ofir Winter dari Institut Kajian Keamanan Nasional Israel.Namun hal itu tidak akan terjadi jika Kairo mengizinkan penyeberangan massal warga Gaza ke Mesir atau bertindak secara militer melawan Israel atas nama mereka, dia yakin.Sumber gambar, SAID KHATIB/AFPKeterangan gambar, Serangan udara dan artileri Israel telah membombardir Gaza setelah Hamas melakukan serangan terhadap warga Israel Perbatasan utara Israel dengan Lebanon juga berada dalam pengawasan ketat.Sejauh ini telah terjadi beberapa serangan lintas batas yang melibatkan kelompok militan Islam Hizbullah, namun serangan tersebut belum menjadi sebuah front baru terhadap Israel.Iran, sponsor utama Hizbullah, sudah mengancam akan meluncurkan “front baru” melawan Israel.
+adalah: 0.0887
+afpketerangan: 0.0680
+agar: 0.1360
+akan: 0.1505
+artileri: 0.0680
+atas: 0.0603
+atau: 0.0507
+bagaimana: 0.0473
+bantuan: 0.0680
+baru: 0.1207
+batas: 0.0680
+beberapa: 0.0549
+belum: 0.0603
+berada: 0.0603
+berbatasan: 0.0680
+berpaling: 0.0680
+berpikir: 0.0603
+bertindak: 0.0680
+besar: 0.1330
+besaran: 0.0680
+cermathal: 0.0680
+dalam: 0.0887
+dan: 0.0938
+dapat: 0.0443
+darat: 0.0418
+dari: 0.0980
+dengan: 0.1418
+di: 0.0300
+dia: 0.0507
+dialami: 0.0680
+dibebaskan: 0.0680
+dihadapi: 0.0680
+diizinkan: 0.0680
+dua: 0.0680
+durasi: 0.0603
+front: 0.1360
+gambar: 0.1098
+gaza: 0.1380
+hal: 0.0603
+hamas: 0.0575
+hasil: 0.0549
+hizbullah: 0.1360
+ini: 0.0342
+institut: 0.0680
+iran: 0.0680
+islam: 0.0603
+israel: 0.2361
+itu: 0.1014
+jika: 0.0549
+juga: 0.0945
+kairo: 0.0680
+kajian: 0.0680
+kali: 0.0603
+karena: 0.0603
+kata: 0.0443
+ke: 0.0396
+keamanan: 0.0549
+kelompok: 0.0549
+kemudian: 0.0680
+ketat: 0.0549
+khatib: 0.0680
+lebanon: 0.0680
+lintas: 0.0680
+massal: 0.0680
+melakukan: 0.0680
+melalui: 0.0680
+melawan: 0.1207
+melepaskan: 0.0680
+melibatkan: 0.0603
+meluncurkan: 0.0680
+membombardir: 0.0680
+mempengaruhi: 0.0603
+mendorong: 0.0680
+mengancam: 0.0549
+mengawasi: 0.0680
+menghadapi: 0.0603
+mengizinkan: 0.0680
+menjadi: 0.1098
+mereka: 0.1521
+mesir: 0.1810
+militan: 0.0680
+militer: 0.0752
+mungkin: 0.0549
+nama: 0.0680
+namun: 0.1647
+nasional: 0.0680
+negara: 0.1418
+ofir: 0.0603
+olah: 0.0680
+operasi: 0.0473
+palestina: 0.0443
+pemimpin: 0.0473
+penderitaan: 0.0680
+pengawasan: 0.0680
+peningkatan: 0.0680
+penyeberangan: 0.0680
+perbatasan: 0.1360
+pertukaran: 0.0680
+politik: 0.0680
+pula: 0.0680
+rafah: 0.0680
+reaksi: 0.0680
+said: 0.0680
+salah: 0.0549
+satu: 0.0507
+sebelum: 0.0603
+sebuah: 0.0549
+secara: 0.1098
+sejauh: 0.0549
+semakin: 0.1360
+seolah: 0.0680
+serangan: 0.1980
+setelah: 0.0945
+sinwar: 0.0603
+sponsor: 0.0680
+sudah: 0.1207
+sumber: 0.0549
+tahanan: 0.1207
+tekanan: 0.0549
+telah: 0.0752
+terhadap: 0.1014
+terjadi: 0.0945
+terlihat: 0.0680
+tersebut: 0.0473
+tetangga: 0.1360
+tidak: 0.0716
+tuntutan: 0.0680
+udara: 0.0603
+utama: 0.0603
+utara: 0.0603
+warga: 0.1330
+winter: 0.0603
+yahya: 0.0603
+yakin: 0.0473
+yang: 0.1717
+
+Kalimat 21: Hal-hal tersebut menjadi fokus peringatan Presiden AS Joe Biden baru-baru ini, ketika dia berkata: &quot;Kepada negara mana pun, organisasi mana pun, siapa pun yang berpikir untuk mengambil keuntungan dari situasi ini, saya punya satu kata: Jangan!
+as: 0.1452
+baru: 0.2904
 berkata: 0.1636
-berpikir: 0.1450
+berpikir: 0.1452
 biden: 0.1636
-dari: 0.0777
-dia: 0.1215
+dari: 0.0786
+dia: 0.1220
 fokus: 0.1636
-hal: 0.2899
-ini: 0.1627
+hal: 0.2904
+ini: 0.1645
 jangan: 0.1636
 joe: 0.1636
-kata: 0.1132
-kepada: 0.1450
-ketika: 0.1450
+kata: 0.1067
+kepada: 0.1452
+ketika: 0.1452
 keuntungan: 0.1636
-mana: 0.2899
+mana: 0.2904
 mengambil: 0.1636
-menjadi: 0.1318
-negara: 0.1215
-organisasi: 0.1450
+menjadi: 0.1321
+negara: 0.1137
+organisasi: 0.1452
 peringatan: 0.1636
-presiden: 0.1450
-pun: 0.4349
-punya: 0.1450
-satu: 0.1215
-saya: 0.1450
+presiden: 0.1452
+pun: 0.4355
+punya: 0.1452
+satu: 0.1220
+saya: 0.1452
 siapa: 0.1636
-situasi: 0.1450
-tersebut: 0.1132
-untuk: 0.0743
-yang: 0.0603
+situasi: 0.1452
+tersebut: 0.1137
+untuk: 0.0752
+yang: 0.0590
 
-Kalimat 21: &quot;Sebuah kapal induk AS telah dikirim ke Mediterania Timur untuk menekankan pesan tersebut.Apa tujuan akhir Israel terhadap Gaza?Jika Hamas melemah secara signifikan, pertanyaannya adalah apa yang bisa dilakukan untuk menggantikannya?Israel menarik tentaranya dan ribuan pemukim keluar dari Jalur Gaza pada tahun 2005 dan tidak memiliki niat untuk kembali menduduki Kawasan itu.Ofir Winter yakin peralihan kekuasaan berpotensi membuka jalan bagi kembalinya Otoritas Palestina (PA) secara bertahap, yang diusir dari Gaza oleh Hamas pada tahun 2007.
-2005: 0.1309
-2007: 0.1309
-adalah: 0.0849
-akhir: 0.0973
-apa: 0.1945
-as: 0.1160
-bagi: 0.1055
-berpotensi: 0.1309
-bertahap: 0.1309
-bisa: 0.0973
-dan: 0.1244
-dari: 0.1244
-dikirim: 0.1309
-dilakukan: 0.1055
-diusir: 0.1309
-gaza: 0.1570
-hamas: 0.1091
-induk: 0.1309
-israel: 0.0927
-itu: 0.0973
-jalan: 0.1309
-jalur: 0.0973
-jika: 0.1055
-kapal: 0.1309
-kawasan: 0.1309
-ke: 0.0800
-kekuasaan: 0.1309
-keluar: 0.1309
-kembali: 0.1055
-kembalinya: 0.1309
-mediterania: 0.1309
-melemah: 0.1309
-membuka: 0.1309
-memiliki: 0.0906
-menarik: 0.1309
-menduduki: 0.1309
-menekankan: 0.1309
-menggantikannya: 0.1309
-niat: 0.1309
-ofir: 0.1160
-oleh: 0.0973
-otoritas: 0.1309
-pa: 0.1160
-pada: 0.1600
-palestina: 0.0800
-pemukim: 0.1309
-peralihan: 0.1309
-pertanyaannya: 0.1160
-pesan: 0.1309
-ribuan: 0.1160
-sebuah: 0.1055
-secara: 0.2109
-signifikan: 0.1309
-tahun: 0.1945
-telah: 0.0718
-tentaranya: 0.1309
-terhadap: 0.0973
-tersebut: 0.0906
-tidak: 0.0683
-timur: 0.1309
-tujuan: 0.0973
-untuk: 0.1784
-winter: 0.1160
-yakin: 0.0906
-yang: 0.0965
+Kalimat 22: &quot;Sebuah kapal induk AS telah dikirim ke Mediterania Timur untuk menekankan pesan tersebut.Apa tujuan akhir Israel terhadap Gaza?Jika Hamas melemah secara signifikan, pertanyaannya adalah apa yang bisa dilakukan untuk menggantikannya?Israel menarik tentaranya dan ribuan pemukim keluar dari Jalur Gaza pada tahun 2005 dan tidak memiliki niat untuk kembali menduduki Kawasan itu.Ofir Winter yakin peralihan kekuasaan berpotensi membuka jalan bagi kembalinya Otoritas Palestina (PA) secara bertahap, yang diusir dari Gaza oleh Hamas pada tahun 2007.
+2005: 0.1310
+2007: 0.1310
+adalah: 0.0855
+akhir: 0.0977
+apa: 0.1821
+as: 0.1163
+bagi: 0.1058
+berpotensi: 0.1310
+bertahap: 0.1310
+bisa: 0.0977
+dan: 0.1205
+dari: 0.1259
+dikirim: 0.1310
+dilakukan: 0.1058
+diusir: 0.1310
+gaza: 0.1596
+hamas: 0.1108
+induk: 0.1310
+israel: 0.0910
+itu: 0.0977
+jalan: 0.1310
+jalur: 0.0977
+jika: 0.1058
+kapal: 0.1310
+kawasan: 0.1310
+ke: 0.0763
+kekuasaan: 0.1310
+keluar: 0.1310
+kembali: 0.1058
+kembalinya: 0.1310
+mediterania: 0.1310
+melemah: 0.1310
+membuka: 0.1310
+memiliki: 0.0911
+menarik: 0.1310
+menduduki: 0.1310
+menekankan: 0.1310
+menggantikannya: 0.1310
+niat: 0.1310
+ofir: 0.1163
+oleh: 0.0977
+otoritas: 0.1310
+pa: 0.1163
+pada: 0.1612
+palestina: 0.0855
+pemukim: 0.1310
+peralihan: 0.1310
+pertanyaannya: 0.1163
+pesan: 0.1310
+ribuan: 0.1163
+sebuah: 0.1058
+secara: 0.2116
+signifikan: 0.1310
+tahun: 0.1954
+telah: 0.0725
+tentaranya: 0.1310
+terhadap: 0.0977
+tersebut: 0.0911
+tidak: 0.0690
+timur: 0.1310
+tujuan: 0.0977
+untuk: 0.1808
+winter: 0.1163
+yakin: 0.0911
+yang: 0.0946
 
-Kalimat 22: PA, yang bukan kelompok milisi, saat ini menguasai sebagian Tepi Barat.
-barat: 0.3100
-bukan: 0.3498
-ini: 0.1740
-kelompok: 0.2818
-menguasai: 0.3498
-milisi: 0.3100
-pa: 0.3100
-saat: 0.3100
-sebagian: 0.3498
-tepi: 0.3498
-yang: 0.1289
+Kalimat 23: PA, yang bukan kelompok milisi, saat ini menguasai sebagian Tepi Barat.
+barat: 0.3102
+bukan: 0.3495
+ini: 0.1757
+kelompok: 0.2823
+menguasai: 0.3495
+milisi: 0.3102
+pa: 0.3102
+saat: 0.3102
+sebagian: 0.3495
+tepi: 0.3495
+yang: 0.1261
 
-Kalimat 23: Baca juga:Apa hasil analisis terbaru dari bukti-bukti di lokasi ledakan rumah sakit di Gaza?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Kesaksian warga Thailand yang terperangkap perang Israel-Hamas: &#39;Kami melompati tembok dan ditembaki dari belakang&#39;Mesir juga akan menyambut negara tetangganya yang lebih pragmatis, ujarnya.Infrastruktur Gaza yang hancur pada akhirnya harus dibangun kembali seperti setelah perang sebelumnya.Bahkan sebelum kekejaman Hamas di Israel, terdapat pembatasan ketat terhadap “barang-barang penggunaan ganda” yang memasuki Gaza yang dapat memiliki peran militer dan juga sipil.
-akan: 0.0678
-akhirnya: 0.1173
-analisis: 0.1173
-apa: 0.0872
-baca: 0.1040
-bahkan: 0.1173
-barang: 0.2347
-belakang: 0.1173
-berperang: 0.0945
-bukti: 0.2080
-dan: 0.1115
-dapat: 0.0761
-dari: 0.1115
+Kalimat 24: Baca juga:Apa hasil analisis terbaru dari bukti-bukti di lokasi ledakan rumah sakit di Gaza?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Kesaksian warga Thailand yang terperangkap perang Israel-Hamas: &#39;Kami melompati tembok dan ditembaki dari belakang&#39;Mesir juga akan menyambut negara tetangganya yang lebih pragmatis, ujarnya.Infrastruktur Gaza yang hancur pada akhirnya harus dibangun kembali seperti setelah perang sebelumnya.Bahkan sebelum kekejaman Hamas di Israel, terdapat pembatasan ketat terhadap “barang-barang penggunaan ganda” yang memasuki Gaza yang dapat memiliki peran militer dan juga sipil.
+akan: 0.0640
+akhirnya: 0.1158
+analisis: 0.1158
+apa: 0.0805
+baca: 0.1027
+bahkan: 0.1158
+barang: 0.2315
+belakang: 0.1158
+berperang: 0.0935
+bukti: 0.2315
+dan: 0.1065
+dapat: 0.0755
+dari: 0.1112
 di: 0.1531
-dibangun: 0.1173
-ditembaki: 0.1173
-ganda: 0.1040
-gaza: 0.1407
-gencatan: 0.1040
-hamas: 0.1467
-hancur: 0.1173
-harus: 0.1173
-hasil: 0.0945
-infrastruktur: 0.1173
-ini: 0.0584
-israel: 0.1247
-juga: 0.2435
-kami: 0.1173
-kekejaman: 0.1173
-kembali: 0.0945
-kesaksian: 0.1173
-ketat: 0.0945
-lebih: 0.0717
-ledakan: 0.1173
-lokasi: 0.1040
-melompati: 0.1173
-memasuki: 0.1173
-memiliki: 0.0812
-menyambut: 0.1173
-mesir: 0.1040
-militer: 0.0644
-negara: 0.0872
-netanyahu: 0.0945
-pada: 0.0717
-pembatasan: 0.1040
-penggunaan: 0.1173
-peran: 0.1173
-perang: 0.2616
-pragmatis: 0.1173
-rumah: 0.0945
-sakit: 0.1040
-sebelum: 0.1040
-sebelumnya: 0.1040
-senjata: 0.1040
-seperti: 0.1040
-setelah: 0.0812
-sipil: 0.0872
-tembok: 0.1173
-terbaru: 0.1040
-terdapat: 0.0945
-terhadap: 0.0872
-terperangkap: 0.1173
-tetangganya: 0.1173
-thailand: 0.1173
-tolak: 0.1040
-ujarnya: 0.1173
-waktunya: 0.1040
-warga: 0.0761
-yang: 0.2162
+dibangun: 0.1158
+ditembaki: 0.1158
+ganda: 0.1027
+gaza: 0.1410
+gencatan: 0.1027
+hamas: 0.1468
+hancur: 0.1158
+harus: 0.1158
+hasil: 0.0935
+infrastruktur: 0.1158
+ini: 0.0582
+israel: 0.1206
+juga: 0.2414
+kami: 0.1158
+kekejaman: 0.1158
+kembali: 0.0935
+kesaksian: 0.1158
+ketat: 0.0935
+lebih: 0.0712
+ledakan: 0.1158
+lokasi: 0.1027
+melompati: 0.1158
+memasuki: 0.1158
+memiliki: 0.0805
+menyambut: 0.1158
+mesir: 0.1027
+militer: 0.0640
+negara: 0.0805
+netanyahu: 0.0935
+pada: 0.0712
+pembatasan: 0.1027
+penggunaan: 0.1158
+peran: 0.1158
+perang: 0.2805
+pragmatis: 0.1158
+rumah: 0.1027
+sakit: 0.1158
+sebelum: 0.1027
+sebelumnya: 0.1027
+senjata: 0.1027
+seperti: 0.1027
+setelah: 0.0805
+sipil: 0.0863
+tembok: 0.1158
+terbaru: 0.1027
+terdapat: 0.0935
+terhadap: 0.0863
+terperangkap: 0.1158
+tetangganya: 0.1158
+thailand: 0.1158
+tolak: 0.1027
+ujarnya: 0.1158
+waktunya: 0.1027
+warga: 0.0755
+yang: 0.2089
 
-Kalimat 24: Israel ingin menerapkan pembatasan yang lebih ketat.Ada seruan untuk membangun zona penyangga yang luas di sepanjang pagar Gaza untuk memberikan perlindungan yang lebih besar bagi komunitas Israel.
-ada: 0.2062
-bagi: 0.1874
-besar: 0.1509
-di: 0.1012
-gaza: 0.0930
-ingin: 0.1874
-israel: 0.1648
-ketat: 0.1874
-komunitas: 0.2062
-lebih: 0.2844
-luas: 0.2062
-membangun: 0.2327
-memberikan: 0.2327
-menerapkan: 0.2327
-pagar: 0.2327
-pembatasan: 0.2062
-penyangga: 0.2327
-perlindungan: 0.2327
-sepanjang: 0.2062
-seruan: 0.2327
-untuk: 0.2113
-yang: 0.2572
-zona: 0.2062
+Kalimat 25: Israel ingin menerapkan pembatasan yang lebih ketat.Ada seruan untuk membangun zona penyangga yang luas di sepanjang pagar Gaza untuk memberikan perlindungan yang lebih besar bagi komunitas Israel.
+ada: 0.2064
+bagi: 0.1879
+besar: 0.1517
+di: 0.1025
+gaza: 0.0944
+ingin: 0.1879
+israel: 0.1616
+ketat: 0.1879
+komunitas: 0.2064
+lebih: 0.2862
+luas: 0.2064
+membangun: 0.2326
+memberikan: 0.2326
+menerapkan: 0.2326
+pagar: 0.2326
+pembatasan: 0.2064
+penyangga: 0.2326
+perlindungan: 0.2326
+sepanjang: 0.2064
+seruan: 0.2326
+untuk: 0.2139
+yang: 0.2518
+zona: 0.2064
 
-Kalimat 25: Mantan kepala dinas keamanan Shin Bet, Yoram Cohen, yakin zona &quot;tembak di tempat&quot; sepanjang 2 km akan diperlukan untuk menggantikan zona yang ada.Apapun hasil perangnya, Israel ingin memastikan serangan serupa tidak akan terjadi lagi.Topik terkaitMesirIsrael-PalestinaPolitikMiliterTimur tengahDunia ArabIsrael Palestina
-ada: 0.1563
-akan: 0.2039
-apapun: 0.1763
-arabisrael: 0.1763
-bet: 0.1763
-cohen: 0.1763
-di: 0.0767
-dinas: 0.1763
-diperlukan: 0.1763
-hasil: 0.1420
-ingin: 0.1420
-israel: 0.0624
-keamanan: 0.1420
-kepala: 0.1563
-km: 0.1763
-lagi: 0.1563
-mantan: 0.1763
-memastikan: 0.1763
-menggantikan: 0.1763
-palestina: 0.1078
-palestinapolitikmilitertimur: 0.1763
-perangnya: 0.1763
-sepanjang: 0.1563
-serangan: 0.1019
-serupa: 0.1763
-shin: 0.1763
-tembak: 0.1763
-tempat: 0.1763
-tengahdunia: 0.1763
-terjadi: 0.1220
-terkaitmesirisrael: 0.1763
-tidak: 0.0920
-topik: 0.1763
-untuk: 0.0801
-yakin: 0.1220
-yang: 0.0650
-yoram: 0.1763
-zona: 0.3126
+Kalimat 26: Mantan kepala dinas keamanan Shin Bet, Yoram Cohen, yakin zona &quot;tembak di tempat&quot; sepanjang 2 km akan diperlukan untuk menggantikan zona yang ada.Apapun hasil perangnya, Israel ingin memastikan serangan serupa tidak akan terjadi lagi.Topik terkaitMesirIsrael-PalestinaPolitikMiliterTimur tengahDunia ArabIsrael Palestina
+ada: 0.1565
+akan: 0.1952
+apapun: 0.1764
+arabisrael: 0.1764
+bet: 0.1764
+cohen: 0.1764
+di: 0.0777
+dinas: 0.1764
+diperlukan: 0.1764
+hasil: 0.1424
+ingin: 0.1424
+israel: 0.0613
+keamanan: 0.1424
+kepala: 0.1565
+km: 0.1764
+lagi: 0.1565
+mantan: 0.1764
+memastikan: 0.1764
+menggantikan: 0.1764
+palestina: 0.1150
+palestinapolitikmilitertimur: 0.1764
+perangnya: 0.1764
+sepanjang: 0.1565
+serangan: 0.1027
+serupa: 0.1764
+shin: 0.1764
+tembak: 0.1764
+tempat: 0.1764
+tengahdunia: 0.1764
+terjadi: 0.1226
+terkaitmesirisrael: 0.1764
+tidak: 0.0929
+topik: 0.1764
+untuk: 0.0811
+yakin: 0.1226
+yang: 0.0636
+yoram: 0.1764
+zona: 0.3130
 </pre></div>
 </div>
 </div>
@@ -1698,7 +1717,7 @@ zona: 0.3126
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity antara Kalimat 1 dan Kalimat 2: 0.1576
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity antara Kalimat 1 dan Kalimat 2: 0.1521
 </pre></div>
 </div>
 </div>
@@ -1720,306 +1739,331 @@ zona: 0.3126
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity antara Kalimat 1 dan Kalimat 2: 0.1576
-Cosine Similarity antara Kalimat 1 dan Kalimat 3: 0.0878
-Cosine Similarity antara Kalimat 1 dan Kalimat 4: 0.2833
-Cosine Similarity antara Kalimat 1 dan Kalimat 5: 0.0429
-Cosine Similarity antara Kalimat 1 dan Kalimat 6: 0.1579
-Cosine Similarity antara Kalimat 1 dan Kalimat 7: 0.0386
-Cosine Similarity antara Kalimat 1 dan Kalimat 8: 0.0885
-Cosine Similarity antara Kalimat 1 dan Kalimat 9: 0.1240
-Cosine Similarity antara Kalimat 1 dan Kalimat 10: 0.1456
-Cosine Similarity antara Kalimat 1 dan Kalimat 11: 0.0000
-Cosine Similarity antara Kalimat 1 dan Kalimat 12: 0.1013
-Cosine Similarity antara Kalimat 1 dan Kalimat 13: 0.0430
-Cosine Similarity antara Kalimat 1 dan Kalimat 14: 0.0142
-Cosine Similarity antara Kalimat 1 dan Kalimat 15: 0.0403
-Cosine Similarity antara Kalimat 1 dan Kalimat 16: 0.0438
-Cosine Similarity antara Kalimat 1 dan Kalimat 17: 0.0216
-Cosine Similarity antara Kalimat 1 dan Kalimat 18: 0.0436
-Cosine Similarity antara Kalimat 1 dan Kalimat 19: 0.1053
-Cosine Similarity antara Kalimat 1 dan Kalimat 20: 0.0000
-Cosine Similarity antara Kalimat 1 dan Kalimat 21: 0.2409
-Cosine Similarity antara Kalimat 1 dan Kalimat 22: 0.0000
-Cosine Similarity antara Kalimat 1 dan Kalimat 23: 0.0918
-Cosine Similarity antara Kalimat 1 dan Kalimat 24: 0.0531
-Cosine Similarity antara Kalimat 1 dan Kalimat 25: 0.0123
-Cosine Similarity antara Kalimat 2 dan Kalimat 3: 0.1505
-Cosine Similarity antara Kalimat 2 dan Kalimat 4: 0.0556
-Cosine Similarity antara Kalimat 2 dan Kalimat 5: 0.2585
-Cosine Similarity antara Kalimat 2 dan Kalimat 6: 0.1063
-Cosine Similarity antara Kalimat 2 dan Kalimat 7: 0.0760
-Cosine Similarity antara Kalimat 2 dan Kalimat 8: 0.2287
-Cosine Similarity antara Kalimat 2 dan Kalimat 9: 0.1321
-Cosine Similarity antara Kalimat 2 dan Kalimat 10: 0.2028
-Cosine Similarity antara Kalimat 2 dan Kalimat 11: 0.0836
-Cosine Similarity antara Kalimat 2 dan Kalimat 12: 0.2026
-Cosine Similarity antara Kalimat 2 dan Kalimat 13: 0.1369
-Cosine Similarity antara Kalimat 2 dan Kalimat 14: 0.1280
-Cosine Similarity antara Kalimat 2 dan Kalimat 15: 0.1726
-Cosine Similarity antara Kalimat 2 dan Kalimat 16: 0.2045
-Cosine Similarity antara Kalimat 2 dan Kalimat 17: 0.0311
-Cosine Similarity antara Kalimat 2 dan Kalimat 18: 0.1837
-Cosine Similarity antara Kalimat 2 dan Kalimat 19: 0.2907
-Cosine Similarity antara Kalimat 2 dan Kalimat 20: 0.0812
-Cosine Similarity antara Kalimat 2 dan Kalimat 21: 0.1791
-Cosine Similarity antara Kalimat 2 dan Kalimat 22: 0.1285
-Cosine Similarity antara Kalimat 2 dan Kalimat 23: 0.1990
-Cosine Similarity antara Kalimat 2 dan Kalimat 24: 0.1221
-Cosine Similarity antara Kalimat 2 dan Kalimat 25: 0.0883
-Cosine Similarity antara Kalimat 3 dan Kalimat 4: 0.0763
-Cosine Similarity antara Kalimat 3 dan Kalimat 5: 0.0771
-Cosine Similarity antara Kalimat 3 dan Kalimat 6: 0.1171
-Cosine Similarity antara Kalimat 3 dan Kalimat 7: 0.0446
-Cosine Similarity antara Kalimat 3 dan Kalimat 8: 0.0809
-Cosine Similarity antara Kalimat 3 dan Kalimat 9: 0.1439
-Cosine Similarity antara Kalimat 3 dan Kalimat 10: 0.1356
-Cosine Similarity antara Kalimat 3 dan Kalimat 11: 0.0316
-Cosine Similarity antara Kalimat 3 dan Kalimat 12: 0.1720
-Cosine Similarity antara Kalimat 3 dan Kalimat 13: 0.1073
-Cosine Similarity antara Kalimat 3 dan Kalimat 14: 0.0465
-Cosine Similarity antara Kalimat 3 dan Kalimat 15: 0.1310
-Cosine Similarity antara Kalimat 3 dan Kalimat 16: 0.1522
-Cosine Similarity antara Kalimat 3 dan Kalimat 17: 0.1060
-Cosine Similarity antara Kalimat 3 dan Kalimat 18: 0.1247
-Cosine Similarity antara Kalimat 3 dan Kalimat 19: 0.1663
-Cosine Similarity antara Kalimat 3 dan Kalimat 20: 0.0241
-Cosine Similarity antara Kalimat 3 dan Kalimat 21: 0.1097
-Cosine Similarity antara Kalimat 3 dan Kalimat 22: 0.0342
-Cosine Similarity antara Kalimat 3 dan Kalimat 23: 0.2022
-Cosine Similarity antara Kalimat 3 dan Kalimat 24: 0.1072
-Cosine Similarity antara Kalimat 3 dan Kalimat 25: 0.0592
-Cosine Similarity antara Kalimat 4 dan Kalimat 5: 0.0290
-Cosine Similarity antara Kalimat 4 dan Kalimat 6: 0.0867
-Cosine Similarity antara Kalimat 4 dan Kalimat 7: 0.0194
-Cosine Similarity antara Kalimat 4 dan Kalimat 8: 0.0462
-Cosine Similarity antara Kalimat 4 dan Kalimat 9: 0.0000
-Cosine Similarity antara Kalimat 4 dan Kalimat 10: 0.0582
-Cosine Similarity antara Kalimat 4 dan Kalimat 11: 0.0000
-Cosine Similarity antara Kalimat 4 dan Kalimat 12: 0.1552
-Cosine Similarity antara Kalimat 4 dan Kalimat 13: 0.0584
-Cosine Similarity antara Kalimat 4 dan Kalimat 14: 0.0446
-Cosine Similarity antara Kalimat 4 dan Kalimat 15: 0.0000
-Cosine Similarity antara Kalimat 4 dan Kalimat 16: 0.0646
-Cosine Similarity antara Kalimat 4 dan Kalimat 17: 0.0492
-Cosine Similarity antara Kalimat 4 dan Kalimat 18: 0.0406
-Cosine Similarity antara Kalimat 4 dan Kalimat 19: 0.0911
-Cosine Similarity antara Kalimat 4 dan Kalimat 20: 0.0103
-Cosine Similarity antara Kalimat 4 dan Kalimat 21: 0.1049
-Cosine Similarity antara Kalimat 4 dan Kalimat 22: 0.0000
-Cosine Similarity antara Kalimat 4 dan Kalimat 23: 0.1093
-Cosine Similarity antara Kalimat 4 dan Kalimat 24: 0.0919
-Cosine Similarity antara Kalimat 4 dan Kalimat 25: 0.0093
-Cosine Similarity antara Kalimat 5 dan Kalimat 6: 0.0493
-Cosine Similarity antara Kalimat 5 dan Kalimat 7: 0.0956
-Cosine Similarity antara Kalimat 5 dan Kalimat 8: 0.0525
-Cosine Similarity antara Kalimat 5 dan Kalimat 9: 0.0804
-Cosine Similarity antara Kalimat 5 dan Kalimat 10: 0.1384
-Cosine Similarity antara Kalimat 5 dan Kalimat 11: 0.0631
-Cosine Similarity antara Kalimat 5 dan Kalimat 12: 0.2124
-Cosine Similarity antara Kalimat 5 dan Kalimat 13: 0.1266
-Cosine Similarity antara Kalimat 5 dan Kalimat 14: 0.0746
-Cosine Similarity antara Kalimat 5 dan Kalimat 15: 0.0925
-Cosine Similarity antara Kalimat 5 dan Kalimat 16: 0.1684
-Cosine Similarity antara Kalimat 5 dan Kalimat 17: 0.0105
-Cosine Similarity antara Kalimat 5 dan Kalimat 18: 0.1609
-Cosine Similarity antara Kalimat 5 dan Kalimat 19: 0.2134
-Cosine Similarity antara Kalimat 5 dan Kalimat 20: 0.0160
-Cosine Similarity antara Kalimat 5 dan Kalimat 21: 0.1412
-Cosine Similarity antara Kalimat 5 dan Kalimat 22: 0.0129
-Cosine Similarity antara Kalimat 5 dan Kalimat 23: 0.1343
-Cosine Similarity antara Kalimat 5 dan Kalimat 24: 0.0985
-Cosine Similarity antara Kalimat 5 dan Kalimat 25: 0.0443
-Cosine Similarity antara Kalimat 6 dan Kalimat 7: 0.0309
-Cosine Similarity antara Kalimat 6 dan Kalimat 8: 0.0963
-Cosine Similarity antara Kalimat 6 dan Kalimat 9: 0.0881
-Cosine Similarity antara Kalimat 6 dan Kalimat 10: 0.1511
-Cosine Similarity antara Kalimat 6 dan Kalimat 11: 0.0000
-Cosine Similarity antara Kalimat 6 dan Kalimat 12: 0.1025
-Cosine Similarity antara Kalimat 6 dan Kalimat 13: 0.0684
-Cosine Similarity antara Kalimat 6 dan Kalimat 14: 0.0969
-Cosine Similarity antara Kalimat 6 dan Kalimat 15: 0.0801
-Cosine Similarity antara Kalimat 6 dan Kalimat 16: 0.1438
-Cosine Similarity antara Kalimat 6 dan Kalimat 17: 0.0776
-Cosine Similarity antara Kalimat 6 dan Kalimat 18: 0.1400
-Cosine Similarity antara Kalimat 6 dan Kalimat 19: 0.1073
-Cosine Similarity antara Kalimat 6 dan Kalimat 20: 0.0166
-Cosine Similarity antara Kalimat 6 dan Kalimat 21: 0.0903
-Cosine Similarity antara Kalimat 6 dan Kalimat 22: 0.0202
-Cosine Similarity antara Kalimat 6 dan Kalimat 23: 0.1450
-Cosine Similarity antara Kalimat 6 dan Kalimat 24: 0.1122
-Cosine Similarity antara Kalimat 6 dan Kalimat 25: 0.0812
-Cosine Similarity antara Kalimat 7 dan Kalimat 8: 0.0387
-Cosine Similarity antara Kalimat 7 dan Kalimat 9: 0.0210
-Cosine Similarity antara Kalimat 7 dan Kalimat 10: 0.0321
-Cosine Similarity antara Kalimat 7 dan Kalimat 11: 0.0000
-Cosine Similarity antara Kalimat 7 dan Kalimat 12: 0.0514
-Cosine Similarity antara Kalimat 7 dan Kalimat 13: 0.0583
-Cosine Similarity antara Kalimat 7 dan Kalimat 14: 0.0154
-Cosine Similarity antara Kalimat 7 dan Kalimat 15: 0.1353
-Cosine Similarity antara Kalimat 7 dan Kalimat 16: 0.0430
-Cosine Similarity antara Kalimat 7 dan Kalimat 17: 0.0169
-Cosine Similarity antara Kalimat 7 dan Kalimat 18: 0.0881
-Cosine Similarity antara Kalimat 7 dan Kalimat 19: 0.1334
-Cosine Similarity antara Kalimat 7 dan Kalimat 20: 0.0000
-Cosine Similarity antara Kalimat 7 dan Kalimat 21: 0.1100
-Cosine Similarity antara Kalimat 7 dan Kalimat 22: 0.0000
-Cosine Similarity antara Kalimat 7 dan Kalimat 23: 0.0755
-Cosine Similarity antara Kalimat 7 dan Kalimat 24: 0.0162
-Cosine Similarity antara Kalimat 7 dan Kalimat 25: 0.0000
-Cosine Similarity antara Kalimat 8 dan Kalimat 9: 0.0936
-Cosine Similarity antara Kalimat 8 dan Kalimat 10: 0.1130
-Cosine Similarity antara Kalimat 8 dan Kalimat 11: 0.0000
-Cosine Similarity antara Kalimat 8 dan Kalimat 12: 0.1075
-Cosine Similarity antara Kalimat 8 dan Kalimat 13: 0.0644
-Cosine Similarity antara Kalimat 8 dan Kalimat 14: 0.0356
-Cosine Similarity antara Kalimat 8 dan Kalimat 15: 0.0879
-Cosine Similarity antara Kalimat 8 dan Kalimat 16: 0.1118
-Cosine Similarity antara Kalimat 8 dan Kalimat 17: 0.0415
-Cosine Similarity antara Kalimat 8 dan Kalimat 18: 0.1187
-Cosine Similarity antara Kalimat 8 dan Kalimat 19: 0.1998
-Cosine Similarity antara Kalimat 8 dan Kalimat 20: 0.0568
-Cosine Similarity antara Kalimat 8 dan Kalimat 21: 0.0957
-Cosine Similarity antara Kalimat 8 dan Kalimat 22: 0.0152
-Cosine Similarity antara Kalimat 8 dan Kalimat 23: 0.0866
-Cosine Similarity antara Kalimat 8 dan Kalimat 24: 0.0449
-Cosine Similarity antara Kalimat 8 dan Kalimat 25: 0.0259
-Cosine Similarity antara Kalimat 9 dan Kalimat 10: 0.0880
-Cosine Similarity antara Kalimat 9 dan Kalimat 11: 0.0000
-Cosine Similarity antara Kalimat 9 dan Kalimat 12: 0.0904
-Cosine Similarity antara Kalimat 9 dan Kalimat 13: 0.0519
-Cosine Similarity antara Kalimat 9 dan Kalimat 14: 0.0704
-Cosine Similarity antara Kalimat 9 dan Kalimat 15: 0.0789
-Cosine Similarity antara Kalimat 9 dan Kalimat 16: 0.0917
-Cosine Similarity antara Kalimat 9 dan Kalimat 17: 0.0000
-Cosine Similarity antara Kalimat 9 dan Kalimat 18: 0.0794
-Cosine Similarity antara Kalimat 9 dan Kalimat 19: 0.1406
-Cosine Similarity antara Kalimat 9 dan Kalimat 20: 0.0123
-Cosine Similarity antara Kalimat 9 dan Kalimat 21: 0.1208
-Cosine Similarity antara Kalimat 9 dan Kalimat 22: 0.0264
-Cosine Similarity antara Kalimat 9 dan Kalimat 23: 0.1117
-Cosine Similarity antara Kalimat 9 dan Kalimat 24: 0.1334
-Cosine Similarity antara Kalimat 9 dan Kalimat 25: 0.0389
-Cosine Similarity antara Kalimat 10 dan Kalimat 11: 0.0518
-Cosine Similarity antara Kalimat 10 dan Kalimat 12: 0.2216
-Cosine Similarity antara Kalimat 10 dan Kalimat 13: 0.0981
-Cosine Similarity antara Kalimat 10 dan Kalimat 14: 0.0709
-Cosine Similarity antara Kalimat 10 dan Kalimat 15: 0.1117
-Cosine Similarity antara Kalimat 10 dan Kalimat 16: 0.1200
-Cosine Similarity antara Kalimat 10 dan Kalimat 17: 0.0502
-Cosine Similarity antara Kalimat 10 dan Kalimat 18: 0.1354
-Cosine Similarity antara Kalimat 10 dan Kalimat 19: 0.2127
-Cosine Similarity antara Kalimat 10 dan Kalimat 20: 0.0537
-Cosine Similarity antara Kalimat 10 dan Kalimat 21: 0.1324
-Cosine Similarity antara Kalimat 10 dan Kalimat 22: 0.0312
-Cosine Similarity antara Kalimat 10 dan Kalimat 23: 0.1633
-Cosine Similarity antara Kalimat 10 dan Kalimat 24: 0.0653
-Cosine Similarity antara Kalimat 10 dan Kalimat 25: 0.0661
-Cosine Similarity antara Kalimat 11 dan Kalimat 12: 0.1193
-Cosine Similarity antara Kalimat 11 dan Kalimat 13: 0.0516
-Cosine Similarity antara Kalimat 11 dan Kalimat 14: 0.0272
-Cosine Similarity antara Kalimat 11 dan Kalimat 15: 0.0578
-Cosine Similarity antara Kalimat 11 dan Kalimat 16: 0.0340
-Cosine Similarity antara Kalimat 11 dan Kalimat 17: 0.0000
-Cosine Similarity antara Kalimat 11 dan Kalimat 18: 0.0255
-Cosine Similarity antara Kalimat 11 dan Kalimat 19: 0.0383
-Cosine Similarity antara Kalimat 11 dan Kalimat 20: 0.0000
-Cosine Similarity antara Kalimat 11 dan Kalimat 21: 0.0436
-Cosine Similarity antara Kalimat 11 dan Kalimat 22: 0.0000
-Cosine Similarity antara Kalimat 11 dan Kalimat 23: 0.0234
-Cosine Similarity antara Kalimat 11 dan Kalimat 24: 0.0000
-Cosine Similarity antara Kalimat 11 dan Kalimat 25: 0.0000
-Cosine Similarity antara Kalimat 12 dan Kalimat 13: 0.2248
-Cosine Similarity antara Kalimat 12 dan Kalimat 14: 0.0681
-Cosine Similarity antara Kalimat 12 dan Kalimat 15: 0.1755
-Cosine Similarity antara Kalimat 12 dan Kalimat 16: 0.1613
-Cosine Similarity antara Kalimat 12 dan Kalimat 17: 0.0517
-Cosine Similarity antara Kalimat 12 dan Kalimat 18: 0.1347
-Cosine Similarity antara Kalimat 12 dan Kalimat 19: 0.2535
-Cosine Similarity antara Kalimat 12 dan Kalimat 20: 0.0460
-Cosine Similarity antara Kalimat 12 dan Kalimat 21: 0.1717
-Cosine Similarity antara Kalimat 12 dan Kalimat 22: 0.0368
-Cosine Similarity antara Kalimat 12 dan Kalimat 23: 0.2471
-Cosine Similarity antara Kalimat 12 dan Kalimat 24: 0.1278
-Cosine Similarity antara Kalimat 12 dan Kalimat 25: 0.0405
-Cosine Similarity antara Kalimat 13 dan Kalimat 14: 0.1298
-Cosine Similarity antara Kalimat 13 dan Kalimat 15: 0.1822
-Cosine Similarity antara Kalimat 13 dan Kalimat 16: 0.1644
-Cosine Similarity antara Kalimat 13 dan Kalimat 17: 0.0395
-Cosine Similarity antara Kalimat 13 dan Kalimat 18: 0.0754
-Cosine Similarity antara Kalimat 13 dan Kalimat 19: 0.2907
-Cosine Similarity antara Kalimat 13 dan Kalimat 20: 0.0935
-Cosine Similarity antara Kalimat 13 dan Kalimat 21: 0.1331
-Cosine Similarity antara Kalimat 13 dan Kalimat 22: 0.0138
-Cosine Similarity antara Kalimat 13 dan Kalimat 23: 0.1612
-Cosine Similarity antara Kalimat 13 dan Kalimat 24: 0.0524
-Cosine Similarity antara Kalimat 13 dan Kalimat 25: 0.0492
-Cosine Similarity antara Kalimat 14 dan Kalimat 15: 0.0416
-Cosine Similarity antara Kalimat 14 dan Kalimat 16: 0.0941
-Cosine Similarity antara Kalimat 14 dan Kalimat 17: 0.0102
-Cosine Similarity antara Kalimat 14 dan Kalimat 18: 0.0668
-Cosine Similarity antara Kalimat 14 dan Kalimat 19: 0.1056
-Cosine Similarity antara Kalimat 14 dan Kalimat 20: 0.0684
-Cosine Similarity antara Kalimat 14 dan Kalimat 21: 0.0624
-Cosine Similarity antara Kalimat 14 dan Kalimat 22: 0.0194
-Cosine Similarity antara Kalimat 14 dan Kalimat 23: 0.0620
-Cosine Similarity antara Kalimat 14 dan Kalimat 24: 0.0702
-Cosine Similarity antara Kalimat 14 dan Kalimat 25: 0.0556
-Cosine Similarity antara Kalimat 15 dan Kalimat 16: 0.1024
-Cosine Similarity antara Kalimat 15 dan Kalimat 17: 0.0518
-Cosine Similarity antara Kalimat 15 dan Kalimat 18: 0.1404
-Cosine Similarity antara Kalimat 15 dan Kalimat 19: 0.1978
-Cosine Similarity antara Kalimat 15 dan Kalimat 20: 0.0495
-Cosine Similarity antara Kalimat 15 dan Kalimat 21: 0.0846
-Cosine Similarity antara Kalimat 15 dan Kalimat 22: 0.0000
-Cosine Similarity antara Kalimat 15 dan Kalimat 23: 0.1800
-Cosine Similarity antara Kalimat 15 dan Kalimat 24: 0.0673
-Cosine Similarity antara Kalimat 15 dan Kalimat 25: 0.0355
-Cosine Similarity antara Kalimat 16 dan Kalimat 17: 0.1123
-Cosine Similarity antara Kalimat 16 dan Kalimat 18: 0.1449
-Cosine Similarity antara Kalimat 16 dan Kalimat 19: 0.1728
-Cosine Similarity antara Kalimat 16 dan Kalimat 20: 0.0777
-Cosine Similarity antara Kalimat 16 dan Kalimat 21: 0.1608
-Cosine Similarity antara Kalimat 16 dan Kalimat 22: 0.0571
-Cosine Similarity antara Kalimat 16 dan Kalimat 23: 0.1169
-Cosine Similarity antara Kalimat 16 dan Kalimat 24: 0.1196
-Cosine Similarity antara Kalimat 16 dan Kalimat 25: 0.0866
-Cosine Similarity antara Kalimat 17 dan Kalimat 18: 0.3240
-Cosine Similarity antara Kalimat 17 dan Kalimat 19: 0.0514
-Cosine Similarity antara Kalimat 17 dan Kalimat 20: 0.0279
-Cosine Similarity antara Kalimat 17 dan Kalimat 21: 0.0350
-Cosine Similarity antara Kalimat 17 dan Kalimat 22: 0.0210
-Cosine Similarity antara Kalimat 17 dan Kalimat 23: 0.0693
-Cosine Similarity antara Kalimat 17 dan Kalimat 24: 0.0645
-Cosine Similarity antara Kalimat 17 dan Kalimat 25: 0.0537
-Cosine Similarity antara Kalimat 18 dan Kalimat 19: 0.1757
-Cosine Similarity antara Kalimat 18 dan Kalimat 20: 0.0177
-Cosine Similarity antara Kalimat 18 dan Kalimat 21: 0.1431
-Cosine Similarity antara Kalimat 18 dan Kalimat 22: 0.0091
-Cosine Similarity antara Kalimat 18 dan Kalimat 23: 0.1260
-Cosine Similarity antara Kalimat 18 dan Kalimat 24: 0.1159
-Cosine Similarity antara Kalimat 18 dan Kalimat 25: 0.0826
-Cosine Similarity antara Kalimat 19 dan Kalimat 20: 0.1399
-Cosine Similarity antara Kalimat 19 dan Kalimat 21: 0.1912
-Cosine Similarity antara Kalimat 19 dan Kalimat 22: 0.0437
-Cosine Similarity antara Kalimat 19 dan Kalimat 23: 0.2393
-Cosine Similarity antara Kalimat 19 dan Kalimat 24: 0.1301
-Cosine Similarity antara Kalimat 19 dan Kalimat 25: 0.1240
-Cosine Similarity antara Kalimat 20 dan Kalimat 21: 0.0558
-Cosine Similarity antara Kalimat 20 dan Kalimat 22: 0.0361
-Cosine Similarity antara Kalimat 20 dan Kalimat 23: 0.0418
-Cosine Similarity antara Kalimat 20 dan Kalimat 24: 0.0312
-Cosine Similarity antara Kalimat 20 dan Kalimat 25: 0.0099
-Cosine Similarity antara Kalimat 21 dan Kalimat 22: 0.0484
-Cosine Similarity antara Kalimat 21 dan Kalimat 23: 0.1525
-Cosine Similarity antara Kalimat 21 dan Kalimat 24: 0.1122
-Cosine Similarity antara Kalimat 21 dan Kalimat 25: 0.0523
-Cosine Similarity antara Kalimat 22 dan Kalimat 23: 0.0380
-Cosine Similarity antara Kalimat 22 dan Kalimat 24: 0.0332
-Cosine Similarity antara Kalimat 22 dan Kalimat 25: 0.0084
-Cosine Similarity antara Kalimat 23 dan Kalimat 24: 0.1643
-Cosine Similarity antara Kalimat 23 dan Kalimat 25: 0.0608
-Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity antara Kalimat 1 dan Kalimat 2: 0.1521
+Cosine Similarity antara Kalimat 1 dan Kalimat 3: 0.1505
+Cosine Similarity antara Kalimat 1 dan Kalimat 4: 0.0993
+Cosine Similarity antara Kalimat 1 dan Kalimat 5: 0.2738
+Cosine Similarity antara Kalimat 1 dan Kalimat 6: 0.0434
+Cosine Similarity antara Kalimat 1 dan Kalimat 7: 0.1608
+Cosine Similarity antara Kalimat 1 dan Kalimat 8: 0.0403
+Cosine Similarity antara Kalimat 1 dan Kalimat 9: 0.0892
+Cosine Similarity antara Kalimat 1 dan Kalimat 10: 0.1248
+Cosine Similarity antara Kalimat 1 dan Kalimat 11: 0.1471
+Cosine Similarity antara Kalimat 1 dan Kalimat 12: 0.0000
+Cosine Similarity antara Kalimat 1 dan Kalimat 13: 0.1008
+Cosine Similarity antara Kalimat 1 dan Kalimat 14: 0.0409
+Cosine Similarity antara Kalimat 1 dan Kalimat 15: 0.0139
+Cosine Similarity antara Kalimat 1 dan Kalimat 16: 0.0395
+Cosine Similarity antara Kalimat 1 dan Kalimat 17: 0.0441
+Cosine Similarity antara Kalimat 1 dan Kalimat 18: 0.0224
+Cosine Similarity antara Kalimat 1 dan Kalimat 19: 0.0435
+Cosine Similarity antara Kalimat 1 dan Kalimat 20: 0.1052
+Cosine Similarity antara Kalimat 1 dan Kalimat 21: 0.0000
+Cosine Similarity antara Kalimat 1 dan Kalimat 22: 0.2326
+Cosine Similarity antara Kalimat 1 dan Kalimat 23: 0.0000
+Cosine Similarity antara Kalimat 1 dan Kalimat 24: 0.0873
+Cosine Similarity antara Kalimat 1 dan Kalimat 25: 0.0532
+Cosine Similarity antara Kalimat 1 dan Kalimat 26: 0.0120
+Cosine Similarity antara Kalimat 2 dan Kalimat 3: 0.1411
+Cosine Similarity antara Kalimat 2 dan Kalimat 4: 0.1216
+Cosine Similarity antara Kalimat 2 dan Kalimat 5: 0.0532
+Cosine Similarity antara Kalimat 2 dan Kalimat 6: 0.2596
+Cosine Similarity antara Kalimat 2 dan Kalimat 7: 0.1061
+Cosine Similarity antara Kalimat 2 dan Kalimat 8: 0.0775
+Cosine Similarity antara Kalimat 2 dan Kalimat 9: 0.2282
+Cosine Similarity antara Kalimat 2 dan Kalimat 10: 0.1310
+Cosine Similarity antara Kalimat 2 dan Kalimat 11: 0.2032
+Cosine Similarity antara Kalimat 2 dan Kalimat 12: 0.0835
+Cosine Similarity antara Kalimat 2 dan Kalimat 13: 0.2024
+Cosine Similarity antara Kalimat 2 dan Kalimat 14: 0.1365
+Cosine Similarity antara Kalimat 2 dan Kalimat 15: 0.1267
+Cosine Similarity antara Kalimat 2 dan Kalimat 16: 0.1712
+Cosine Similarity antara Kalimat 2 dan Kalimat 17: 0.2048
+Cosine Similarity antara Kalimat 2 dan Kalimat 18: 0.0317
+Cosine Similarity antara Kalimat 2 dan Kalimat 19: 0.1830
+Cosine Similarity antara Kalimat 2 dan Kalimat 20: 0.2894
+Cosine Similarity antara Kalimat 2 dan Kalimat 21: 0.0804
+Cosine Similarity antara Kalimat 2 dan Kalimat 22: 0.1780
+Cosine Similarity antara Kalimat 2 dan Kalimat 23: 0.1283
+Cosine Similarity antara Kalimat 2 dan Kalimat 24: 0.1946
+Cosine Similarity antara Kalimat 2 dan Kalimat 25: 0.1210
+Cosine Similarity antara Kalimat 2 dan Kalimat 26: 0.0869
+Cosine Similarity antara Kalimat 3 dan Kalimat 4: 0.2789
+Cosine Similarity antara Kalimat 3 dan Kalimat 5: 0.0634
+Cosine Similarity antara Kalimat 3 dan Kalimat 6: 0.0790
+Cosine Similarity antara Kalimat 3 dan Kalimat 7: 0.1188
+Cosine Similarity antara Kalimat 3 dan Kalimat 8: 0.0434
+Cosine Similarity antara Kalimat 3 dan Kalimat 9: 0.0810
+Cosine Similarity antara Kalimat 3 dan Kalimat 10: 0.0795
+Cosine Similarity antara Kalimat 3 dan Kalimat 11: 0.1156
+Cosine Similarity antara Kalimat 3 dan Kalimat 12: 0.0278
+Cosine Similarity antara Kalimat 3 dan Kalimat 13: 0.1768
+Cosine Similarity antara Kalimat 3 dan Kalimat 14: 0.1179
+Cosine Similarity antara Kalimat 3 dan Kalimat 15: 0.0531
+Cosine Similarity antara Kalimat 3 dan Kalimat 16: 0.1201
+Cosine Similarity antara Kalimat 3 dan Kalimat 17: 0.1472
+Cosine Similarity antara Kalimat 3 dan Kalimat 18: 0.0830
+Cosine Similarity antara Kalimat 3 dan Kalimat 19: 0.1273
+Cosine Similarity antara Kalimat 3 dan Kalimat 20: 0.2096
+Cosine Similarity antara Kalimat 3 dan Kalimat 21: 0.0316
+Cosine Similarity antara Kalimat 3 dan Kalimat 22: 0.1117
+Cosine Similarity antara Kalimat 3 dan Kalimat 23: 0.0203
+Cosine Similarity antara Kalimat 3 dan Kalimat 24: 0.1497
+Cosine Similarity antara Kalimat 3 dan Kalimat 25: 0.1044
+Cosine Similarity antara Kalimat 3 dan Kalimat 26: 0.0491
+Cosine Similarity antara Kalimat 4 dan Kalimat 5: 0.0165
+Cosine Similarity antara Kalimat 4 dan Kalimat 6: 0.0580
+Cosine Similarity antara Kalimat 4 dan Kalimat 7: 0.0763
+Cosine Similarity antara Kalimat 4 dan Kalimat 8: 0.0547
+Cosine Similarity antara Kalimat 4 dan Kalimat 9: 0.0665
+Cosine Similarity antara Kalimat 4 dan Kalimat 10: 0.2097
+Cosine Similarity antara Kalimat 4 dan Kalimat 11: 0.1147
+Cosine Similarity antara Kalimat 4 dan Kalimat 12: 0.0244
+Cosine Similarity antara Kalimat 4 dan Kalimat 13: 0.1147
+Cosine Similarity antara Kalimat 4 dan Kalimat 14: 0.1141
+Cosine Similarity antara Kalimat 4 dan Kalimat 15: 0.0342
+Cosine Similarity antara Kalimat 4 dan Kalimat 16: 0.1620
+Cosine Similarity antara Kalimat 4 dan Kalimat 17: 0.0743
+Cosine Similarity antara Kalimat 4 dan Kalimat 18: 0.0159
+Cosine Similarity antara Kalimat 4 dan Kalimat 19: 0.0364
+Cosine Similarity antara Kalimat 4 dan Kalimat 20: 0.1403
+Cosine Similarity antara Kalimat 4 dan Kalimat 21: 0.0425
+Cosine Similarity antara Kalimat 4 dan Kalimat 22: 0.0942
+Cosine Similarity antara Kalimat 4 dan Kalimat 23: 0.0468
+Cosine Similarity antara Kalimat 4 dan Kalimat 24: 0.1030
+Cosine Similarity antara Kalimat 4 dan Kalimat 25: 0.0620
+Cosine Similarity antara Kalimat 4 dan Kalimat 26: 0.0175
+Cosine Similarity antara Kalimat 5 dan Kalimat 6: 0.0292
+Cosine Similarity antara Kalimat 5 dan Kalimat 7: 0.0867
+Cosine Similarity antara Kalimat 5 dan Kalimat 8: 0.0196
+Cosine Similarity antara Kalimat 5 dan Kalimat 9: 0.0464
+Cosine Similarity antara Kalimat 5 dan Kalimat 10: 0.0000
+Cosine Similarity antara Kalimat 5 dan Kalimat 11: 0.0575
+Cosine Similarity antara Kalimat 5 dan Kalimat 12: 0.0000
+Cosine Similarity antara Kalimat 5 dan Kalimat 13: 0.1526
+Cosine Similarity antara Kalimat 5 dan Kalimat 14: 0.0565
+Cosine Similarity antara Kalimat 5 dan Kalimat 15: 0.0440
+Cosine Similarity antara Kalimat 5 dan Kalimat 16: 0.0000
+Cosine Similarity antara Kalimat 5 dan Kalimat 17: 0.0647
+Cosine Similarity antara Kalimat 5 dan Kalimat 18: 0.0494
+Cosine Similarity antara Kalimat 5 dan Kalimat 19: 0.0408
+Cosine Similarity antara Kalimat 5 dan Kalimat 20: 0.0898
+Cosine Similarity antara Kalimat 5 dan Kalimat 21: 0.0103
+Cosine Similarity antara Kalimat 5 dan Kalimat 22: 0.1019
+Cosine Similarity antara Kalimat 5 dan Kalimat 23: 0.0000
+Cosine Similarity antara Kalimat 5 dan Kalimat 24: 0.1162
+Cosine Similarity antara Kalimat 5 dan Kalimat 25: 0.0914
+Cosine Similarity antara Kalimat 5 dan Kalimat 26: 0.0094
+Cosine Similarity antara Kalimat 6 dan Kalimat 7: 0.0486
+Cosine Similarity antara Kalimat 6 dan Kalimat 8: 0.0969
+Cosine Similarity antara Kalimat 6 dan Kalimat 9: 0.0527
+Cosine Similarity antara Kalimat 6 dan Kalimat 10: 0.0795
+Cosine Similarity antara Kalimat 6 dan Kalimat 11: 0.1384
+Cosine Similarity antara Kalimat 6 dan Kalimat 12: 0.0619
+Cosine Similarity antara Kalimat 6 dan Kalimat 13: 0.2115
+Cosine Similarity antara Kalimat 6 dan Kalimat 14: 0.1256
+Cosine Similarity antara Kalimat 6 dan Kalimat 15: 0.0744
+Cosine Similarity antara Kalimat 6 dan Kalimat 16: 0.0907
+Cosine Similarity antara Kalimat 6 dan Kalimat 17: 0.1671
+Cosine Similarity antara Kalimat 6 dan Kalimat 18: 0.0108
+Cosine Similarity antara Kalimat 6 dan Kalimat 19: 0.1614
+Cosine Similarity antara Kalimat 6 dan Kalimat 20: 0.2141
+Cosine Similarity antara Kalimat 6 dan Kalimat 21: 0.0160
+Cosine Similarity antara Kalimat 6 dan Kalimat 22: 0.1410
+Cosine Similarity antara Kalimat 6 dan Kalimat 23: 0.0123
+Cosine Similarity antara Kalimat 6 dan Kalimat 24: 0.1318
+Cosine Similarity antara Kalimat 6 dan Kalimat 25: 0.0976
+Cosine Similarity antara Kalimat 6 dan Kalimat 26: 0.0443
+Cosine Similarity antara Kalimat 7 dan Kalimat 8: 0.0318
+Cosine Similarity antara Kalimat 7 dan Kalimat 9: 0.0968
+Cosine Similarity antara Kalimat 7 dan Kalimat 10: 0.0864
+Cosine Similarity antara Kalimat 7 dan Kalimat 11: 0.1513
+Cosine Similarity antara Kalimat 7 dan Kalimat 12: 0.0000
+Cosine Similarity antara Kalimat 7 dan Kalimat 13: 0.1009
+Cosine Similarity antara Kalimat 7 dan Kalimat 14: 0.0686
+Cosine Similarity antara Kalimat 7 dan Kalimat 15: 0.0964
+Cosine Similarity antara Kalimat 7 dan Kalimat 16: 0.0803
+Cosine Similarity antara Kalimat 7 dan Kalimat 17: 0.1418
+Cosine Similarity antara Kalimat 7 dan Kalimat 18: 0.0793
+Cosine Similarity antara Kalimat 7 dan Kalimat 19: 0.1404
+Cosine Similarity antara Kalimat 7 dan Kalimat 20: 0.1065
+Cosine Similarity antara Kalimat 7 dan Kalimat 21: 0.0164
+Cosine Similarity antara Kalimat 7 dan Kalimat 22: 0.0907
+Cosine Similarity antara Kalimat 7 dan Kalimat 23: 0.0194
+Cosine Similarity antara Kalimat 7 dan Kalimat 24: 0.1430
+Cosine Similarity antara Kalimat 7 dan Kalimat 25: 0.1110
+Cosine Similarity antara Kalimat 7 dan Kalimat 26: 0.0814
+Cosine Similarity antara Kalimat 8 dan Kalimat 9: 0.0397
+Cosine Similarity antara Kalimat 8 dan Kalimat 10: 0.0216
+Cosine Similarity antara Kalimat 8 dan Kalimat 11: 0.0328
+Cosine Similarity antara Kalimat 8 dan Kalimat 12: 0.0000
+Cosine Similarity antara Kalimat 8 dan Kalimat 13: 0.0525
+Cosine Similarity antara Kalimat 8 dan Kalimat 14: 0.0587
+Cosine Similarity antara Kalimat 8 dan Kalimat 15: 0.0158
+Cosine Similarity antara Kalimat 8 dan Kalimat 16: 0.1371
+Cosine Similarity antara Kalimat 8 dan Kalimat 17: 0.0436
+Cosine Similarity antara Kalimat 8 dan Kalimat 18: 0.0173
+Cosine Similarity antara Kalimat 8 dan Kalimat 19: 0.0891
+Cosine Similarity antara Kalimat 8 dan Kalimat 20: 0.1354
+Cosine Similarity antara Kalimat 8 dan Kalimat 21: 0.0000
+Cosine Similarity antara Kalimat 8 dan Kalimat 22: 0.1117
+Cosine Similarity antara Kalimat 8 dan Kalimat 23: 0.0000
+Cosine Similarity antara Kalimat 8 dan Kalimat 24: 0.0761
+Cosine Similarity antara Kalimat 8 dan Kalimat 25: 0.0166
+Cosine Similarity antara Kalimat 8 dan Kalimat 26: 0.0000
+Cosine Similarity antara Kalimat 9 dan Kalimat 10: 0.0932
+Cosine Similarity antara Kalimat 9 dan Kalimat 11: 0.1132
+Cosine Similarity antara Kalimat 9 dan Kalimat 12: 0.0000
+Cosine Similarity antara Kalimat 9 dan Kalimat 13: 0.1075
+Cosine Similarity antara Kalimat 9 dan Kalimat 14: 0.0636
+Cosine Similarity antara Kalimat 9 dan Kalimat 15: 0.0356
+Cosine Similarity antara Kalimat 9 dan Kalimat 16: 0.0879
+Cosine Similarity antara Kalimat 9 dan Kalimat 17: 0.1119
+Cosine Similarity antara Kalimat 9 dan Kalimat 18: 0.0423
+Cosine Similarity antara Kalimat 9 dan Kalimat 19: 0.1189
+Cosine Similarity antara Kalimat 9 dan Kalimat 20: 0.2000
+Cosine Similarity antara Kalimat 9 dan Kalimat 21: 0.0558
+Cosine Similarity antara Kalimat 9 dan Kalimat 22: 0.0966
+Cosine Similarity antara Kalimat 9 dan Kalimat 23: 0.0155
+Cosine Similarity antara Kalimat 9 dan Kalimat 24: 0.0862
+Cosine Similarity antara Kalimat 9 dan Kalimat 25: 0.0441
+Cosine Similarity antara Kalimat 9 dan Kalimat 26: 0.0257
+Cosine Similarity antara Kalimat 10 dan Kalimat 11: 0.0871
+Cosine Similarity antara Kalimat 10 dan Kalimat 12: 0.0000
+Cosine Similarity antara Kalimat 10 dan Kalimat 13: 0.0890
+Cosine Similarity antara Kalimat 10 dan Kalimat 14: 0.0511
+Cosine Similarity antara Kalimat 10 dan Kalimat 15: 0.0691
+Cosine Similarity antara Kalimat 10 dan Kalimat 16: 0.0787
+Cosine Similarity antara Kalimat 10 dan Kalimat 17: 0.0901
+Cosine Similarity antara Kalimat 10 dan Kalimat 18: 0.0000
+Cosine Similarity antara Kalimat 10 dan Kalimat 19: 0.0783
+Cosine Similarity antara Kalimat 10 dan Kalimat 20: 0.1387
+Cosine Similarity antara Kalimat 10 dan Kalimat 21: 0.0118
+Cosine Similarity antara Kalimat 10 dan Kalimat 22: 0.1204
+Cosine Similarity antara Kalimat 10 dan Kalimat 23: 0.0253
+Cosine Similarity antara Kalimat 10 dan Kalimat 24: 0.1083
+Cosine Similarity antara Kalimat 10 dan Kalimat 25: 0.1306
+Cosine Similarity antara Kalimat 10 dan Kalimat 26: 0.0382
+Cosine Similarity antara Kalimat 11 dan Kalimat 12: 0.0515
+Cosine Similarity antara Kalimat 11 dan Kalimat 13: 0.2233
+Cosine Similarity antara Kalimat 11 dan Kalimat 14: 0.0973
+Cosine Similarity antara Kalimat 11 dan Kalimat 15: 0.0711
+Cosine Similarity antara Kalimat 11 dan Kalimat 16: 0.1109
+Cosine Similarity antara Kalimat 11 dan Kalimat 17: 0.1190
+Cosine Similarity antara Kalimat 11 dan Kalimat 18: 0.0506
+Cosine Similarity antara Kalimat 11 dan Kalimat 19: 0.1355
+Cosine Similarity antara Kalimat 11 dan Kalimat 20: 0.2129
+Cosine Similarity antara Kalimat 11 dan Kalimat 21: 0.0542
+Cosine Similarity antara Kalimat 11 dan Kalimat 22: 0.1328
+Cosine Similarity antara Kalimat 11 dan Kalimat 23: 0.0313
+Cosine Similarity antara Kalimat 11 dan Kalimat 24: 0.1655
+Cosine Similarity antara Kalimat 11 dan Kalimat 25: 0.0643
+Cosine Similarity antara Kalimat 11 dan Kalimat 26: 0.0661
+Cosine Similarity antara Kalimat 12 dan Kalimat 13: 0.1171
+Cosine Similarity antara Kalimat 12 dan Kalimat 14: 0.0486
+Cosine Similarity antara Kalimat 12 dan Kalimat 15: 0.0277
+Cosine Similarity antara Kalimat 12 dan Kalimat 16: 0.0545
+Cosine Similarity antara Kalimat 12 dan Kalimat 17: 0.0319
+Cosine Similarity antara Kalimat 12 dan Kalimat 18: 0.0000
+Cosine Similarity antara Kalimat 12 dan Kalimat 19: 0.0258
+Cosine Similarity antara Kalimat 12 dan Kalimat 20: 0.0376
+Cosine Similarity antara Kalimat 12 dan Kalimat 21: 0.0000
+Cosine Similarity antara Kalimat 12 dan Kalimat 22: 0.0423
+Cosine Similarity antara Kalimat 12 dan Kalimat 23: 0.0000
+Cosine Similarity antara Kalimat 12 dan Kalimat 24: 0.0217
+Cosine Similarity antara Kalimat 12 dan Kalimat 25: 0.0000
+Cosine Similarity antara Kalimat 12 dan Kalimat 26: 0.0000
+Cosine Similarity antara Kalimat 13 dan Kalimat 14: 0.2229
+Cosine Similarity antara Kalimat 13 dan Kalimat 15: 0.0681
+Cosine Similarity antara Kalimat 13 dan Kalimat 16: 0.1718
+Cosine Similarity antara Kalimat 13 dan Kalimat 17: 0.1586
+Cosine Similarity antara Kalimat 13 dan Kalimat 18: 0.0528
+Cosine Similarity antara Kalimat 13 dan Kalimat 19: 0.1351
+Cosine Similarity antara Kalimat 13 dan Kalimat 20: 0.2536
+Cosine Similarity antara Kalimat 13 dan Kalimat 21: 0.0465
+Cosine Similarity antara Kalimat 13 dan Kalimat 22: 0.1717
+Cosine Similarity antara Kalimat 13 dan Kalimat 23: 0.0366
+Cosine Similarity antara Kalimat 13 dan Kalimat 24: 0.2487
+Cosine Similarity antara Kalimat 13 dan Kalimat 25: 0.1272
+Cosine Similarity antara Kalimat 13 dan Kalimat 26: 0.0411
+Cosine Similarity antara Kalimat 14 dan Kalimat 15: 0.1299
+Cosine Similarity antara Kalimat 14 dan Kalimat 16: 0.1790
+Cosine Similarity antara Kalimat 14 dan Kalimat 17: 0.1631
+Cosine Similarity antara Kalimat 14 dan Kalimat 18: 0.0402
+Cosine Similarity antara Kalimat 14 dan Kalimat 19: 0.0749
+Cosine Similarity antara Kalimat 14 dan Kalimat 20: 0.2866
+Cosine Similarity antara Kalimat 14 dan Kalimat 21: 0.0901
+Cosine Similarity antara Kalimat 14 dan Kalimat 22: 0.1320
+Cosine Similarity antara Kalimat 14 dan Kalimat 23: 0.0139
+Cosine Similarity antara Kalimat 14 dan Kalimat 24: 0.1556
+Cosine Similarity antara Kalimat 14 dan Kalimat 25: 0.0520
+Cosine Similarity antara Kalimat 14 dan Kalimat 26: 0.0484
+Cosine Similarity antara Kalimat 15 dan Kalimat 16: 0.0406
+Cosine Similarity antara Kalimat 15 dan Kalimat 17: 0.0936
+Cosine Similarity antara Kalimat 15 dan Kalimat 18: 0.0104
+Cosine Similarity antara Kalimat 15 dan Kalimat 19: 0.0654
+Cosine Similarity antara Kalimat 15 dan Kalimat 20: 0.1034
+Cosine Similarity antara Kalimat 15 dan Kalimat 21: 0.0684
+Cosine Similarity antara Kalimat 15 dan Kalimat 22: 0.0625
+Cosine Similarity antara Kalimat 15 dan Kalimat 23: 0.0186
+Cosine Similarity antara Kalimat 15 dan Kalimat 24: 0.0592
+Cosine Similarity antara Kalimat 15 dan Kalimat 25: 0.0687
+Cosine Similarity antara Kalimat 15 dan Kalimat 26: 0.0534
+Cosine Similarity antara Kalimat 16 dan Kalimat 17: 0.0994
+Cosine Similarity antara Kalimat 16 dan Kalimat 18: 0.0521
+Cosine Similarity antara Kalimat 16 dan Kalimat 19: 0.1400
+Cosine Similarity antara Kalimat 16 dan Kalimat 20: 0.1957
+Cosine Similarity antara Kalimat 16 dan Kalimat 21: 0.0500
+Cosine Similarity antara Kalimat 16 dan Kalimat 22: 0.0829
+Cosine Similarity antara Kalimat 16 dan Kalimat 23: 0.0000
+Cosine Similarity antara Kalimat 16 dan Kalimat 24: 0.1765
+Cosine Similarity antara Kalimat 16 dan Kalimat 25: 0.0668
+Cosine Similarity antara Kalimat 16 dan Kalimat 26: 0.0333
+Cosine Similarity antara Kalimat 17 dan Kalimat 18: 0.1140
+Cosine Similarity antara Kalimat 17 dan Kalimat 19: 0.1452
+Cosine Similarity antara Kalimat 17 dan Kalimat 20: 0.1723
+Cosine Similarity antara Kalimat 17 dan Kalimat 21: 0.0779
+Cosine Similarity antara Kalimat 17 dan Kalimat 22: 0.1608
+Cosine Similarity antara Kalimat 17 dan Kalimat 23: 0.0567
+Cosine Similarity antara Kalimat 17 dan Kalimat 24: 0.1139
+Cosine Similarity antara Kalimat 17 dan Kalimat 25: 0.1187
+Cosine Similarity antara Kalimat 17 dan Kalimat 26: 0.0880
+Cosine Similarity antara Kalimat 18 dan Kalimat 19: 0.3298
+Cosine Similarity antara Kalimat 18 dan Kalimat 20: 0.0523
+Cosine Similarity antara Kalimat 18 dan Kalimat 21: 0.0283
+Cosine Similarity antara Kalimat 18 dan Kalimat 22: 0.0357
+Cosine Similarity antara Kalimat 18 dan Kalimat 23: 0.0213
+Cosine Similarity antara Kalimat 18 dan Kalimat 24: 0.0698
+Cosine Similarity antara Kalimat 18 dan Kalimat 25: 0.0658
+Cosine Similarity antara Kalimat 18 dan Kalimat 26: 0.0544
+Cosine Similarity antara Kalimat 19 dan Kalimat 20: 0.1742
+Cosine Similarity antara Kalimat 19 dan Kalimat 21: 0.0178
+Cosine Similarity antara Kalimat 19 dan Kalimat 22: 0.1442
+Cosine Similarity antara Kalimat 19 dan Kalimat 23: 0.0087
+Cosine Similarity antara Kalimat 19 dan Kalimat 24: 0.1241
+Cosine Similarity antara Kalimat 19 dan Kalimat 25: 0.1154
+Cosine Similarity antara Kalimat 19 dan Kalimat 26: 0.0808
+Cosine Similarity antara Kalimat 20 dan Kalimat 21: 0.1379
+Cosine Similarity antara Kalimat 20 dan Kalimat 22: 0.1919
+Cosine Similarity antara Kalimat 20 dan Kalimat 23: 0.0432
+Cosine Similarity antara Kalimat 20 dan Kalimat 24: 0.2332
+Cosine Similarity antara Kalimat 20 dan Kalimat 25: 0.1280
+Cosine Similarity antara Kalimat 20 dan Kalimat 26: 0.1222
+Cosine Similarity antara Kalimat 21 dan Kalimat 22: 0.0563
+Cosine Similarity antara Kalimat 21 dan Kalimat 23: 0.0363
+Cosine Similarity antara Kalimat 21 dan Kalimat 24: 0.0398
+Cosine Similarity antara Kalimat 21 dan Kalimat 25: 0.0310
+Cosine Similarity antara Kalimat 21 dan Kalimat 26: 0.0099
+Cosine Similarity antara Kalimat 22 dan Kalimat 23: 0.0480
+Cosine Similarity antara Kalimat 22 dan Kalimat 24: 0.1481
+Cosine Similarity antara Kalimat 22 dan Kalimat 25: 0.1121
+Cosine Similarity antara Kalimat 22 dan Kalimat 26: 0.0537
+Cosine Similarity antara Kalimat 23 dan Kalimat 24: 0.0366
+Cosine Similarity antara Kalimat 23 dan Kalimat 25: 0.0318
+Cosine Similarity antara Kalimat 23 dan Kalimat 26: 0.0080
+Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.1602
+Cosine Similarity antara Kalimat 24 dan Kalimat 26: 0.0584
+Cosine Similarity antara Kalimat 25 dan Kalimat 26: 0.2073
 </pre></div>
 </div>
 </div>
@@ -2046,7 +2090,7 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-1008c508-af82-4519-96ff-578fec8351eb" class="colab-df-container">
+  <div id="df-aaaec2f1-0dda-4787-8e13-e2f7a58946eb" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2076,7 +2120,6 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
       <th>Kalimat 9</th>
       <th>Kalimat 10</th>
       <th>...</th>
-      <th>Kalimat 16</th>
       <th>Kalimat 17</th>
       <th>Kalimat 18</th>
       <th>Kalimat 19</th>
@@ -2086,617 +2129,642 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
       <th>Kalimat 23</th>
       <th>Kalimat 24</th>
       <th>Kalimat 25</th>
+      <th>Kalimat 26</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>Kalimat 1</th>
       <td>1.000000</td>
-      <td>0.157595</td>
-      <td>0.087814</td>
-      <td>0.283344</td>
-      <td>0.042861</td>
-      <td>0.157901</td>
-      <td>0.038634</td>
-      <td>0.088475</td>
-      <td>0.123951</td>
-      <td>0.145634</td>
+      <td>0.152126</td>
+      <td>0.150536</td>
+      <td>0.099341</td>
+      <td>0.273756</td>
+      <td>0.043403</td>
+      <td>0.160784</td>
+      <td>0.040289</td>
+      <td>0.089226</td>
+      <td>0.124761</td>
       <td>...</td>
-      <td>0.043817</td>
-      <td>0.021583</td>
-      <td>0.043588</td>
-      <td>0.105278</td>
+      <td>0.044116</td>
+      <td>0.022417</td>
+      <td>0.043528</td>
+      <td>0.105202</td>
       <td>0.000000</td>
-      <td>0.240857</td>
+      <td>0.232615</td>
       <td>0.000000</td>
-      <td>0.091751</td>
-      <td>0.053066</td>
-      <td>0.012283</td>
+      <td>0.087304</td>
+      <td>0.053187</td>
+      <td>0.011980</td>
     </tr>
     <tr>
       <th>Kalimat 2</th>
-      <td>0.157595</td>
+      <td>0.152126</td>
       <td>1.000000</td>
-      <td>0.150519</td>
-      <td>0.055599</td>
-      <td>0.258527</td>
-      <td>0.106300</td>
-      <td>0.076045</td>
-      <td>0.228736</td>
-      <td>0.132148</td>
-      <td>0.202785</td>
+      <td>0.141135</td>
+      <td>0.121555</td>
+      <td>0.053200</td>
+      <td>0.259602</td>
+      <td>0.106121</td>
+      <td>0.077538</td>
+      <td>0.228185</td>
+      <td>0.131023</td>
       <td>...</td>
-      <td>0.204529</td>
-      <td>0.031106</td>
-      <td>0.183737</td>
-      <td>0.290674</td>
-      <td>0.081207</td>
-      <td>0.179098</td>
-      <td>0.128547</td>
-      <td>0.199011</td>
-      <td>0.122089</td>
-      <td>0.088302</td>
+      <td>0.204840</td>
+      <td>0.031735</td>
+      <td>0.182975</td>
+      <td>0.289360</td>
+      <td>0.080413</td>
+      <td>0.177995</td>
+      <td>0.128301</td>
+      <td>0.194602</td>
+      <td>0.120966</td>
+      <td>0.086899</td>
     </tr>
     <tr>
       <th>Kalimat 3</th>
-      <td>0.087814</td>
-      <td>0.150519</td>
+      <td>0.150536</td>
+      <td>0.141135</td>
       <td>1.000000</td>
-      <td>0.076323</td>
-      <td>0.077099</td>
-      <td>0.117125</td>
-      <td>0.044624</td>
-      <td>0.080887</td>
-      <td>0.143901</td>
-      <td>0.135575</td>
+      <td>0.278940</td>
+      <td>0.063450</td>
+      <td>0.079021</td>
+      <td>0.118770</td>
+      <td>0.043427</td>
+      <td>0.080989</td>
+      <td>0.079500</td>
       <td>...</td>
-      <td>0.152153</td>
-      <td>0.106038</td>
-      <td>0.124744</td>
-      <td>0.166256</td>
-      <td>0.024142</td>
-      <td>0.109747</td>
-      <td>0.034178</td>
-      <td>0.202247</td>
-      <td>0.107170</td>
-      <td>0.059198</td>
+      <td>0.147151</td>
+      <td>0.082984</td>
+      <td>0.127258</td>
+      <td>0.209579</td>
+      <td>0.031580</td>
+      <td>0.111717</td>
+      <td>0.020289</td>
+      <td>0.149713</td>
+      <td>0.104380</td>
+      <td>0.049107</td>
     </tr>
     <tr>
       <th>Kalimat 4</th>
-      <td>0.283344</td>
-      <td>0.055599</td>
-      <td>0.076323</td>
+      <td>0.099341</td>
+      <td>0.121555</td>
+      <td>0.278940</td>
       <td>1.000000</td>
-      <td>0.029022</td>
-      <td>0.086661</td>
-      <td>0.019359</td>
-      <td>0.046207</td>
-      <td>0.000000</td>
-      <td>0.058165</td>
+      <td>0.016459</td>
+      <td>0.057979</td>
+      <td>0.076337</td>
+      <td>0.054688</td>
+      <td>0.066537</td>
+      <td>0.209673</td>
       <td>...</td>
-      <td>0.064647</td>
-      <td>0.049210</td>
-      <td>0.040616</td>
-      <td>0.091056</td>
-      <td>0.010270</td>
-      <td>0.104898</td>
-      <td>0.000000</td>
-      <td>0.109345</td>
-      <td>0.091869</td>
-      <td>0.009280</td>
+      <td>0.074255</td>
+      <td>0.015915</td>
+      <td>0.036363</td>
+      <td>0.140255</td>
+      <td>0.042512</td>
+      <td>0.094249</td>
+      <td>0.046765</td>
+      <td>0.103038</td>
+      <td>0.062027</td>
+      <td>0.017526</td>
     </tr>
     <tr>
       <th>Kalimat 5</th>
-      <td>0.042861</td>
-      <td>0.258527</td>
-      <td>0.077099</td>
-      <td>0.029022</td>
+      <td>0.273756</td>
+      <td>0.053200</td>
+      <td>0.063450</td>
+      <td>0.016459</td>
       <td>1.000000</td>
-      <td>0.049257</td>
-      <td>0.095641</td>
-      <td>0.052536</td>
-      <td>0.080422</td>
-      <td>0.138425</td>
+      <td>0.029218</td>
+      <td>0.086666</td>
+      <td>0.019568</td>
+      <td>0.046360</td>
+      <td>0.000000</td>
       <td>...</td>
-      <td>0.168415</td>
-      <td>0.010512</td>
-      <td>0.160864</td>
-      <td>0.213406</td>
-      <td>0.015991</td>
-      <td>0.141213</td>
-      <td>0.012850</td>
-      <td>0.134312</td>
-      <td>0.098514</td>
-      <td>0.044349</td>
+      <td>0.064695</td>
+      <td>0.049381</td>
+      <td>0.040821</td>
+      <td>0.089834</td>
+      <td>0.010326</td>
+      <td>0.101861</td>
+      <td>0.000000</td>
+      <td>0.116178</td>
+      <td>0.091394</td>
+      <td>0.009368</td>
     </tr>
     <tr>
       <th>Kalimat 6</th>
-      <td>0.157901</td>
-      <td>0.106300</td>
-      <td>0.117125</td>
-      <td>0.086661</td>
-      <td>0.049257</td>
+      <td>0.043403</td>
+      <td>0.259602</td>
+      <td>0.079021</td>
+      <td>0.057979</td>
+      <td>0.029218</td>
       <td>1.000000</td>
-      <td>0.030875</td>
-      <td>0.096274</td>
-      <td>0.088135</td>
-      <td>0.151061</td>
+      <td>0.048626</td>
+      <td>0.096921</td>
+      <td>0.052717</td>
+      <td>0.079478</td>
       <td>...</td>
-      <td>0.143773</td>
-      <td>0.077623</td>
-      <td>0.140012</td>
-      <td>0.107323</td>
-      <td>0.016626</td>
-      <td>0.090267</td>
-      <td>0.020208</td>
-      <td>0.145034</td>
-      <td>0.112198</td>
-      <td>0.081196</td>
+      <td>0.167149</td>
+      <td>0.010752</td>
+      <td>0.161431</td>
+      <td>0.214111</td>
+      <td>0.015950</td>
+      <td>0.140967</td>
+      <td>0.012292</td>
+      <td>0.131778</td>
+      <td>0.097601</td>
+      <td>0.044271</td>
     </tr>
     <tr>
       <th>Kalimat 7</th>
-      <td>0.038634</td>
-      <td>0.076045</td>
-      <td>0.044624</td>
-      <td>0.019359</td>
-      <td>0.095641</td>
-      <td>0.030875</td>
+      <td>0.160784</td>
+      <td>0.106121</td>
+      <td>0.118770</td>
+      <td>0.076337</td>
+      <td>0.086666</td>
+      <td>0.048626</td>
       <td>1.000000</td>
-      <td>0.038653</td>
-      <td>0.021008</td>
-      <td>0.032069</td>
+      <td>0.031774</td>
+      <td>0.096837</td>
+      <td>0.086418</td>
       <td>...</td>
-      <td>0.043013</td>
-      <td>0.016912</td>
-      <td>0.088109</td>
-      <td>0.133445</td>
-      <td>0.000000</td>
-      <td>0.110026</td>
-      <td>0.000000</td>
-      <td>0.075540</td>
-      <td>0.016181</td>
-      <td>0.000000</td>
+      <td>0.141753</td>
+      <td>0.079330</td>
+      <td>0.140390</td>
+      <td>0.106468</td>
+      <td>0.016446</td>
+      <td>0.090718</td>
+      <td>0.019392</td>
+      <td>0.142995</td>
+      <td>0.111000</td>
+      <td>0.081406</td>
     </tr>
     <tr>
       <th>Kalimat 8</th>
-      <td>0.088475</td>
-      <td>0.228736</td>
-      <td>0.080887</td>
-      <td>0.046207</td>
-      <td>0.052536</td>
-      <td>0.096274</td>
-      <td>0.038653</td>
+      <td>0.040289</td>
+      <td>0.077538</td>
+      <td>0.043427</td>
+      <td>0.054688</td>
+      <td>0.019568</td>
+      <td>0.096921</td>
+      <td>0.031774</td>
       <td>1.000000</td>
-      <td>0.093639</td>
-      <td>0.112973</td>
+      <td>0.039701</td>
+      <td>0.021570</td>
       <td>...</td>
-      <td>0.111827</td>
-      <td>0.041495</td>
-      <td>0.118742</td>
-      <td>0.199841</td>
-      <td>0.056839</td>
-      <td>0.095704</td>
-      <td>0.015154</td>
-      <td>0.086642</td>
-      <td>0.044868</td>
-      <td>0.025862</td>
+      <td>0.043564</td>
+      <td>0.017285</td>
+      <td>0.089125</td>
+      <td>0.135407</td>
+      <td>0.000000</td>
+      <td>0.111715</td>
+      <td>0.000000</td>
+      <td>0.076081</td>
+      <td>0.016645</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>Kalimat 9</th>
-      <td>0.123951</td>
-      <td>0.132148</td>
-      <td>0.143901</td>
-      <td>0.000000</td>
-      <td>0.080422</td>
-      <td>0.088135</td>
-      <td>0.021008</td>
-      <td>0.093639</td>
+      <td>0.089226</td>
+      <td>0.228185</td>
+      <td>0.080989</td>
+      <td>0.066537</td>
+      <td>0.046360</td>
+      <td>0.052717</td>
+      <td>0.096837</td>
+      <td>0.039701</td>
       <td>1.000000</td>
-      <td>0.087954</td>
+      <td>0.093169</td>
       <td>...</td>
-      <td>0.091660</td>
-      <td>0.000000</td>
-      <td>0.079351</td>
-      <td>0.140611</td>
-      <td>0.012345</td>
-      <td>0.120813</td>
-      <td>0.026400</td>
-      <td>0.111709</td>
-      <td>0.133422</td>
-      <td>0.038943</td>
+      <td>0.111894</td>
+      <td>0.042298</td>
+      <td>0.118866</td>
+      <td>0.199979</td>
+      <td>0.055824</td>
+      <td>0.096565</td>
+      <td>0.015461</td>
+      <td>0.086249</td>
+      <td>0.044098</td>
+      <td>0.025741</td>
     </tr>
     <tr>
       <th>Kalimat 10</th>
-      <td>0.145634</td>
-      <td>0.202785</td>
-      <td>0.135575</td>
-      <td>0.058165</td>
-      <td>0.138425</td>
-      <td>0.151061</td>
-      <td>0.032069</td>
-      <td>0.112973</td>
-      <td>0.087954</td>
+      <td>0.124761</td>
+      <td>0.131023</td>
+      <td>0.079500</td>
+      <td>0.209673</td>
+      <td>0.000000</td>
+      <td>0.079478</td>
+      <td>0.086418</td>
+      <td>0.021570</td>
+      <td>0.093169</td>
       <td>1.000000</td>
       <td>...</td>
-      <td>0.119984</td>
-      <td>0.050190</td>
-      <td>0.135371</td>
-      <td>0.212674</td>
-      <td>0.053739</td>
-      <td>0.132438</td>
-      <td>0.031192</td>
-      <td>0.163325</td>
-      <td>0.065307</td>
-      <td>0.066098</td>
+      <td>0.090069</td>
+      <td>0.000000</td>
+      <td>0.078252</td>
+      <td>0.138655</td>
+      <td>0.011842</td>
+      <td>0.120401</td>
+      <td>0.025301</td>
+      <td>0.108301</td>
+      <td>0.130646</td>
+      <td>0.038197</td>
     </tr>
     <tr>
       <th>Kalimat 11</th>
-      <td>0.000000</td>
-      <td>0.083601</td>
-      <td>0.031618</td>
-      <td>0.000000</td>
-      <td>0.063091</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.051824</td>
+      <td>0.147057</td>
+      <td>0.203154</td>
+      <td>0.115589</td>
+      <td>0.114690</td>
+      <td>0.057470</td>
+      <td>0.138399</td>
+      <td>0.151324</td>
+      <td>0.032828</td>
+      <td>0.113152</td>
+      <td>0.087131</td>
       <td>...</td>
-      <td>0.033982</td>
-      <td>0.000000</td>
-      <td>0.025471</td>
-      <td>0.038331</td>
-      <td>0.000000</td>
-      <td>0.043609</td>
-      <td>0.000000</td>
-      <td>0.023448</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.118986</td>
+      <td>0.050554</td>
+      <td>0.135539</td>
+      <td>0.212871</td>
+      <td>0.054237</td>
+      <td>0.132848</td>
+      <td>0.031321</td>
+      <td>0.165535</td>
+      <td>0.064297</td>
+      <td>0.066120</td>
     </tr>
     <tr>
       <th>Kalimat 12</th>
-      <td>0.101303</td>
-      <td>0.202590</td>
-      <td>0.172036</td>
-      <td>0.155191</td>
-      <td>0.212395</td>
-      <td>0.102534</td>
-      <td>0.051369</td>
-      <td>0.107496</td>
-      <td>0.090430</td>
-      <td>0.221581</td>
+      <td>0.000000</td>
+      <td>0.083465</td>
+      <td>0.027848</td>
+      <td>0.024435</td>
+      <td>0.000000</td>
+      <td>0.061937</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>...</td>
-      <td>0.161263</td>
-      <td>0.051708</td>
-      <td>0.134709</td>
-      <td>0.253512</td>
-      <td>0.045959</td>
-      <td>0.171749</td>
-      <td>0.036753</td>
-      <td>0.247144</td>
-      <td>0.127758</td>
-      <td>0.040537</td>
+      <td>0.031853</td>
+      <td>0.000000</td>
+      <td>0.025822</td>
+      <td>0.037557</td>
+      <td>0.000000</td>
+      <td>0.042328</td>
+      <td>0.000000</td>
+      <td>0.021696</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>Kalimat 13</th>
-      <td>0.042979</td>
-      <td>0.136863</td>
-      <td>0.107286</td>
-      <td>0.058414</td>
-      <td>0.126649</td>
-      <td>0.068444</td>
-      <td>0.058306</td>
-      <td>0.064368</td>
-      <td>0.051896</td>
-      <td>0.098069</td>
+      <td>0.100774</td>
+      <td>0.202368</td>
+      <td>0.176786</td>
+      <td>0.114734</td>
+      <td>0.152648</td>
+      <td>0.211492</td>
+      <td>0.100888</td>
+      <td>0.052463</td>
+      <td>0.107495</td>
+      <td>0.088989</td>
       <td>...</td>
-      <td>0.164406</td>
-      <td>0.039473</td>
-      <td>0.075359</td>
-      <td>0.290714</td>
-      <td>0.093468</td>
-      <td>0.133073</td>
-      <td>0.013832</td>
-      <td>0.161193</td>
-      <td>0.052392</td>
-      <td>0.049191</td>
+      <td>0.158643</td>
+      <td>0.052777</td>
+      <td>0.135106</td>
+      <td>0.253580</td>
+      <td>0.046549</td>
+      <td>0.171654</td>
+      <td>0.036628</td>
+      <td>0.248654</td>
+      <td>0.127205</td>
+      <td>0.041103</td>
     </tr>
     <tr>
       <th>Kalimat 14</th>
-      <td>0.014224</td>
-      <td>0.127995</td>
-      <td>0.046494</td>
-      <td>0.044647</td>
-      <td>0.074593</td>
-      <td>0.096942</td>
-      <td>0.015435</td>
-      <td>0.035607</td>
-      <td>0.070363</td>
-      <td>0.070901</td>
+      <td>0.040943</td>
+      <td>0.136471</td>
+      <td>0.117861</td>
+      <td>0.114108</td>
+      <td>0.056456</td>
+      <td>0.125586</td>
+      <td>0.068620</td>
+      <td>0.058727</td>
+      <td>0.063567</td>
+      <td>0.051065</td>
       <td>...</td>
-      <td>0.094051</td>
-      <td>0.010243</td>
-      <td>0.066772</td>
-      <td>0.105618</td>
-      <td>0.068423</td>
-      <td>0.062374</td>
-      <td>0.019396</td>
-      <td>0.062040</td>
-      <td>0.070222</td>
-      <td>0.055590</td>
+      <td>0.163096</td>
+      <td>0.040152</td>
+      <td>0.074942</td>
+      <td>0.286618</td>
+      <td>0.090147</td>
+      <td>0.131990</td>
+      <td>0.013878</td>
+      <td>0.155565</td>
+      <td>0.052035</td>
+      <td>0.048384</td>
     </tr>
     <tr>
       <th>Kalimat 15</th>
-      <td>0.040294</td>
-      <td>0.172591</td>
-      <td>0.131041</td>
-      <td>0.000000</td>
-      <td>0.092530</td>
-      <td>0.080092</td>
-      <td>0.135250</td>
-      <td>0.087880</td>
-      <td>0.078941</td>
-      <td>0.111738</td>
+      <td>0.013869</td>
+      <td>0.126656</td>
+      <td>0.053053</td>
+      <td>0.034156</td>
+      <td>0.043975</td>
+      <td>0.074386</td>
+      <td>0.096448</td>
+      <td>0.015847</td>
+      <td>0.035637</td>
+      <td>0.069144</td>
       <td>...</td>
-      <td>0.102379</td>
-      <td>0.051769</td>
-      <td>0.140422</td>
-      <td>0.197777</td>
-      <td>0.049540</td>
-      <td>0.084624</td>
-      <td>0.000000</td>
-      <td>0.179980</td>
-      <td>0.067263</td>
-      <td>0.035515</td>
+      <td>0.093640</td>
+      <td>0.010431</td>
+      <td>0.065416</td>
+      <td>0.103373</td>
+      <td>0.068377</td>
+      <td>0.062539</td>
+      <td>0.018588</td>
+      <td>0.059245</td>
+      <td>0.068659</td>
+      <td>0.053381</td>
     </tr>
     <tr>
       <th>Kalimat 16</th>
-      <td>0.043817</td>
-      <td>0.204529</td>
-      <td>0.152153</td>
-      <td>0.064647</td>
-      <td>0.168415</td>
-      <td>0.143773</td>
-      <td>0.043013</td>
-      <td>0.111827</td>
-      <td>0.091660</td>
-      <td>0.119984</td>
+      <td>0.039510</td>
+      <td>0.171167</td>
+      <td>0.120068</td>
+      <td>0.161971</td>
+      <td>0.000000</td>
+      <td>0.090708</td>
+      <td>0.080269</td>
+      <td>0.137059</td>
+      <td>0.087916</td>
+      <td>0.078666</td>
       <td>...</td>
-      <td>1.000000</td>
-      <td>0.112285</td>
-      <td>0.144941</td>
-      <td>0.172786</td>
-      <td>0.077669</td>
-      <td>0.160785</td>
-      <td>0.057112</td>
-      <td>0.116908</td>
-      <td>0.119558</td>
-      <td>0.086607</td>
+      <td>0.099440</td>
+      <td>0.052084</td>
+      <td>0.139951</td>
+      <td>0.195743</td>
+      <td>0.049963</td>
+      <td>0.082912</td>
+      <td>0.000000</td>
+      <td>0.176486</td>
+      <td>0.066787</td>
+      <td>0.033312</td>
     </tr>
     <tr>
       <th>Kalimat 17</th>
-      <td>0.021583</td>
-      <td>0.031106</td>
-      <td>0.106038</td>
-      <td>0.049210</td>
-      <td>0.010512</td>
-      <td>0.077623</td>
-      <td>0.016912</td>
-      <td>0.041495</td>
-      <td>0.000000</td>
-      <td>0.050190</td>
+      <td>0.044116</td>
+      <td>0.204840</td>
+      <td>0.147151</td>
+      <td>0.074255</td>
+      <td>0.064695</td>
+      <td>0.167149</td>
+      <td>0.141753</td>
+      <td>0.043564</td>
+      <td>0.111894</td>
+      <td>0.090069</td>
       <td>...</td>
-      <td>0.112285</td>
       <td>1.000000</td>
-      <td>0.323989</td>
-      <td>0.051403</td>
-      <td>0.027885</td>
-      <td>0.034960</td>
-      <td>0.021044</td>
-      <td>0.069293</td>
-      <td>0.064474</td>
-      <td>0.053692</td>
+      <td>0.113956</td>
+      <td>0.145173</td>
+      <td>0.172338</td>
+      <td>0.077936</td>
+      <td>0.160841</td>
+      <td>0.056666</td>
+      <td>0.113900</td>
+      <td>0.118679</td>
+      <td>0.087960</td>
     </tr>
     <tr>
       <th>Kalimat 18</th>
-      <td>0.043588</td>
-      <td>0.183737</td>
-      <td>0.124744</td>
-      <td>0.040616</td>
-      <td>0.160864</td>
-      <td>0.140012</td>
-      <td>0.088109</td>
-      <td>0.118742</td>
-      <td>0.079351</td>
-      <td>0.135371</td>
+      <td>0.022417</td>
+      <td>0.031735</td>
+      <td>0.082984</td>
+      <td>0.015915</td>
+      <td>0.049381</td>
+      <td>0.010752</td>
+      <td>0.079330</td>
+      <td>0.017285</td>
+      <td>0.042298</td>
+      <td>0.000000</td>
       <td>...</td>
-      <td>0.144941</td>
-      <td>0.323989</td>
+      <td>0.113956</td>
       <td>1.000000</td>
-      <td>0.175661</td>
-      <td>0.017743</td>
-      <td>0.143141</td>
-      <td>0.009077</td>
-      <td>0.126016</td>
-      <td>0.115896</td>
-      <td>0.082638</td>
+      <td>0.329764</td>
+      <td>0.052253</td>
+      <td>0.028327</td>
+      <td>0.035729</td>
+      <td>0.021333</td>
+      <td>0.069775</td>
+      <td>0.065771</td>
+      <td>0.054419</td>
     </tr>
     <tr>
       <th>Kalimat 19</th>
-      <td>0.105278</td>
-      <td>0.290674</td>
-      <td>0.166256</td>
-      <td>0.091056</td>
-      <td>0.213406</td>
-      <td>0.107323</td>
-      <td>0.133445</td>
-      <td>0.199841</td>
-      <td>0.140611</td>
-      <td>0.212674</td>
+      <td>0.043528</td>
+      <td>0.182975</td>
+      <td>0.127258</td>
+      <td>0.036363</td>
+      <td>0.040821</td>
+      <td>0.161431</td>
+      <td>0.140390</td>
+      <td>0.089125</td>
+      <td>0.118866</td>
+      <td>0.078252</td>
       <td>...</td>
-      <td>0.172786</td>
-      <td>0.051403</td>
-      <td>0.175661</td>
+      <td>0.145173</td>
+      <td>0.329764</td>
       <td>1.000000</td>
-      <td>0.139885</td>
-      <td>0.191161</td>
-      <td>0.043725</td>
-      <td>0.239273</td>
-      <td>0.130061</td>
-      <td>0.124011</td>
+      <td>0.174193</td>
+      <td>0.017830</td>
+      <td>0.144158</td>
+      <td>0.008665</td>
+      <td>0.124117</td>
+      <td>0.115421</td>
+      <td>0.080787</td>
     </tr>
     <tr>
       <th>Kalimat 20</th>
-      <td>0.000000</td>
-      <td>0.081207</td>
-      <td>0.024142</td>
-      <td>0.010270</td>
-      <td>0.015991</td>
-      <td>0.016626</td>
-      <td>0.000000</td>
-      <td>0.056839</td>
-      <td>0.012345</td>
-      <td>0.053739</td>
+      <td>0.105202</td>
+      <td>0.289360</td>
+      <td>0.209579</td>
+      <td>0.140255</td>
+      <td>0.089834</td>
+      <td>0.214111</td>
+      <td>0.106468</td>
+      <td>0.135407</td>
+      <td>0.199979</td>
+      <td>0.138655</td>
       <td>...</td>
-      <td>0.077669</td>
-      <td>0.027885</td>
-      <td>0.017743</td>
-      <td>0.139885</td>
+      <td>0.172338</td>
+      <td>0.052253</td>
+      <td>0.174193</td>
       <td>1.000000</td>
-      <td>0.055792</td>
-      <td>0.036074</td>
-      <td>0.041779</td>
-      <td>0.031200</td>
-      <td>0.009865</td>
+      <td>0.137877</td>
+      <td>0.191856</td>
+      <td>0.043165</td>
+      <td>0.233195</td>
+      <td>0.128010</td>
+      <td>0.122211</td>
     </tr>
     <tr>
       <th>Kalimat 21</th>
-      <td>0.240857</td>
-      <td>0.179098</td>
-      <td>0.109747</td>
-      <td>0.104898</td>
-      <td>0.141213</td>
-      <td>0.090267</td>
-      <td>0.110026</td>
-      <td>0.095704</td>
-      <td>0.120813</td>
-      <td>0.132438</td>
+      <td>0.000000</td>
+      <td>0.080413</td>
+      <td>0.031580</td>
+      <td>0.042512</td>
+      <td>0.010326</td>
+      <td>0.015950</td>
+      <td>0.016446</td>
+      <td>0.000000</td>
+      <td>0.055824</td>
+      <td>0.011842</td>
       <td>...</td>
-      <td>0.160785</td>
-      <td>0.034960</td>
-      <td>0.143141</td>
-      <td>0.191161</td>
-      <td>0.055792</td>
+      <td>0.077936</td>
+      <td>0.028327</td>
+      <td>0.017830</td>
+      <td>0.137877</td>
       <td>1.000000</td>
-      <td>0.048404</td>
-      <td>0.152476</td>
-      <td>0.112161</td>
-      <td>0.052301</td>
+      <td>0.056311</td>
+      <td>0.036341</td>
+      <td>0.039791</td>
+      <td>0.030962</td>
+      <td>0.009859</td>
     </tr>
     <tr>
       <th>Kalimat 22</th>
-      <td>0.000000</td>
-      <td>0.128547</td>
-      <td>0.034178</td>
-      <td>0.000000</td>
-      <td>0.012850</td>
-      <td>0.020208</td>
-      <td>0.000000</td>
-      <td>0.015154</td>
-      <td>0.026400</td>
-      <td>0.031192</td>
+      <td>0.232615</td>
+      <td>0.177995</td>
+      <td>0.111717</td>
+      <td>0.094249</td>
+      <td>0.101861</td>
+      <td>0.140967</td>
+      <td>0.090718</td>
+      <td>0.111715</td>
+      <td>0.096565</td>
+      <td>0.120401</td>
       <td>...</td>
-      <td>0.057112</td>
-      <td>0.021044</td>
-      <td>0.009077</td>
-      <td>0.043725</td>
-      <td>0.036074</td>
-      <td>0.048404</td>
+      <td>0.160841</td>
+      <td>0.035729</td>
+      <td>0.144158</td>
+      <td>0.191856</td>
+      <td>0.056311</td>
       <td>1.000000</td>
-      <td>0.038020</td>
-      <td>0.033152</td>
-      <td>0.008375</td>
+      <td>0.047994</td>
+      <td>0.148114</td>
+      <td>0.112139</td>
+      <td>0.053663</td>
     </tr>
     <tr>
       <th>Kalimat 23</th>
-      <td>0.091751</td>
-      <td>0.199011</td>
-      <td>0.202247</td>
-      <td>0.109345</td>
-      <td>0.134312</td>
-      <td>0.145034</td>
-      <td>0.075540</td>
-      <td>0.086642</td>
-      <td>0.111709</td>
-      <td>0.163325</td>
+      <td>0.000000</td>
+      <td>0.128301</td>
+      <td>0.020289</td>
+      <td>0.046765</td>
+      <td>0.000000</td>
+      <td>0.012292</td>
+      <td>0.019392</td>
+      <td>0.000000</td>
+      <td>0.015461</td>
+      <td>0.025301</td>
       <td>...</td>
-      <td>0.116908</td>
-      <td>0.069293</td>
-      <td>0.126016</td>
-      <td>0.239273</td>
-      <td>0.041779</td>
-      <td>0.152476</td>
-      <td>0.038020</td>
+      <td>0.056666</td>
+      <td>0.021333</td>
+      <td>0.008665</td>
+      <td>0.043165</td>
+      <td>0.036341</td>
+      <td>0.047994</td>
       <td>1.000000</td>
-      <td>0.164281</td>
-      <td>0.060825</td>
+      <td>0.036569</td>
+      <td>0.031764</td>
+      <td>0.008028</td>
     </tr>
     <tr>
       <th>Kalimat 24</th>
-      <td>0.053066</td>
-      <td>0.122089</td>
-      <td>0.107170</td>
-      <td>0.091869</td>
-      <td>0.098514</td>
-      <td>0.112198</td>
-      <td>0.016181</td>
-      <td>0.044868</td>
-      <td>0.133422</td>
-      <td>0.065307</td>
+      <td>0.087304</td>
+      <td>0.194602</td>
+      <td>0.149713</td>
+      <td>0.103038</td>
+      <td>0.116178</td>
+      <td>0.131778</td>
+      <td>0.142995</td>
+      <td>0.076081</td>
+      <td>0.086249</td>
+      <td>0.108301</td>
       <td>...</td>
-      <td>0.119558</td>
-      <td>0.064474</td>
-      <td>0.115896</td>
-      <td>0.130061</td>
-      <td>0.031200</td>
-      <td>0.112161</td>
-      <td>0.033152</td>
-      <td>0.164281</td>
+      <td>0.113900</td>
+      <td>0.069775</td>
+      <td>0.124117</td>
+      <td>0.233195</td>
+      <td>0.039791</td>
+      <td>0.148114</td>
+      <td>0.036569</td>
       <td>1.000000</td>
-      <td>0.207213</td>
+      <td>0.160248</td>
+      <td>0.058396</td>
     </tr>
     <tr>
       <th>Kalimat 25</th>
-      <td>0.012283</td>
-      <td>0.088302</td>
-      <td>0.059198</td>
-      <td>0.009280</td>
-      <td>0.044349</td>
-      <td>0.081196</td>
-      <td>0.000000</td>
-      <td>0.025862</td>
-      <td>0.038943</td>
-      <td>0.066098</td>
+      <td>0.053187</td>
+      <td>0.120966</td>
+      <td>0.104380</td>
+      <td>0.062027</td>
+      <td>0.091394</td>
+      <td>0.097601</td>
+      <td>0.111000</td>
+      <td>0.016645</td>
+      <td>0.044098</td>
+      <td>0.130646</td>
       <td>...</td>
-      <td>0.086607</td>
-      <td>0.053692</td>
-      <td>0.082638</td>
-      <td>0.124011</td>
-      <td>0.009865</td>
-      <td>0.052301</td>
-      <td>0.008375</td>
-      <td>0.060825</td>
-      <td>0.207213</td>
+      <td>0.118679</td>
+      <td>0.065771</td>
+      <td>0.115421</td>
+      <td>0.128010</td>
+      <td>0.030962</td>
+      <td>0.112139</td>
+      <td>0.031764</td>
+      <td>0.160248</td>
+      <td>1.000000</td>
+      <td>0.207254</td>
+    </tr>
+    <tr>
+      <th>Kalimat 26</th>
+      <td>0.011980</td>
+      <td>0.086899</td>
+      <td>0.049107</td>
+      <td>0.017526</td>
+      <td>0.009368</td>
+      <td>0.044271</td>
+      <td>0.081406</td>
+      <td>0.000000</td>
+      <td>0.025741</td>
+      <td>0.038197</td>
+      <td>...</td>
+      <td>0.087960</td>
+      <td>0.054419</td>
+      <td>0.080787</td>
+      <td>0.122211</td>
+      <td>0.009859</td>
+      <td>0.053663</td>
+      <td>0.008028</td>
+      <td>0.058396</td>
+      <td>0.207254</td>
       <td>1.000000</td>
     </tr>
   </tbody>
 </table>
-<p>25 rows × 25 columns</p>
+<p>26 rows × 26 columns</p>
 </div>
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-1008c508-af82-4519-96ff-578fec8351eb')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-aaaec2f1-0dda-4787-8e13-e2f7a58946eb')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -2748,12 +2816,12 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 
     <script>
       const buttonEl =
-        document.querySelector('#df-1008c508-af82-4519-96ff-578fec8351eb button.colab-df-convert');
+        document.querySelector('#df-aaaec2f1-0dda-4787-8e13-e2f7a58946eb button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-1008c508-af82-4519-96ff-578fec8351eb');
+        const element = document.querySelector('#df-aaaec2f1-0dda-4787-8e13-e2f7a58946eb');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2778,47 +2846,6 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#membuat dan menampilkan grafik matriks yang menggambarkan cosine similarity antara semua pasangan kalimat dalam teks yang telah di-tokenisasi</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Matriks TF-IDF telah dihitung sebelumnya (tfidf_matrix)</span>
-<span class="c1"># Hitung cosine similarity antara semua pasangan kalimat</span>
-<span class="n">similarity_matrix</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">tfidf_matrix</span><span class="p">)</span>
-
-<span class="c1"># Nama kolom dan indeks untuk DataFrame</span>
-<span class="n">sentence_indices</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Kalimat </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">))]</span>
-
-<span class="c1"># Buat DataFrame dari hasil cosine similarity</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">sentence_indices</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sentence_indices</span><span class="p">)</span>
-
-<span class="c1"># Membuat grafik matriks</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">)</span>
-
-<span class="c1"># Memberi label pada sumbu X dan Y</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan nilai similarity pada matriks</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)):</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/7a0119b18eab8267a5ccb21af201fd74217db04124ceda665300abe15944771e.png" src="_images/7a0119b18eab8267a5ccb21af201fd74217db04124ceda665300abe15944771e.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#membangun sebuah graf yang merepresentasikan hubungan antara kalimat dalam teks berdasarkan kemiripan (similarity) antara kalimat-kalimat tersebut.</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 
@@ -2833,7 +2860,7 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
         <span class="n">similarity</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>  <span class="c1"># Mengambil similarity dari DataFrame</span>
-        <span class="k">if</span> <span class="n">similarity</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">similarity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sentences</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">similarity</span><span class="p">)</span>
 
 <span class="c1"># Hitung closeness centrality untuk setiap simpul</span>
@@ -2841,36 +2868,37 @@ Cosine Similarity antara Kalimat 24 dan Kalimat 25: 0.2072
 
 <span class="c1"># Cetak closeness centrality</span>
 <span class="k">for</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">centrality</span> <span class="ow">in</span> <span class="n">closeness_centrality</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Closeness Centrality of </span><span class="si">{</span><span class="n">centrality</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Closeness Centrality of </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">centrality</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Closeness Centrality of 0.3179
-Closeness Centrality of 1.1570
-Closeness Centrality of 0.6175
-Closeness Centrality of 0.2064
-Closeness Centrality of 0.9361
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.7110
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.9770
-Closeness Centrality of 0.0000
-Closeness Centrality of 1.2736
-Closeness Centrality of 0.7921
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.7412
-Closeness Centrality of 0.1286
-Closeness Centrality of 0.1286
-Closeness Centrality of 1.1416
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.2178
-Closeness Centrality of 0.0000
-Closeness Centrality of 0.8771
-Closeness Centrality of 0.2011
-Closeness Centrality of 0.2011
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Closeness Centrality of Apa tujuan akhir invasi darat Israel ke Gaza?: 27.1361
+Closeness Centrality of Sumber gambar, ReutersKeterangan gambar, Militer Israel telah memanggil sejumlah tentara cadangan untuk bertempur melawan Hamas.1 November 2023Paul KirbyBBC NewsPara pemimpin Israel telah menegaskan bahwa kelompok milisi Palestina, Hamas, akan dimusnahkan dari muka bumi dan Gaza tidak akan pernah kembali seperti semula.“Setiap anggota Hamas adalah orang mati,” kata Perdana Menteri Benjamin Netanyahu setelah kelompok milisi tersebut membunuh lebih dari 1.300 orang dalam serangan yang tak terduga ke Israel pada 7 Oktober.Tujuan Operasi Pedang Besi – operasi serangan balasan Israel atas serangan Hamas – nampaknya jauh lebih ambisius dibandingkan apa pun yang direncanakan militer Israel di Gaza sebelumnya.: 15.3880
+Closeness Centrality of Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanPalestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankSejarah Deklarasi Balfour: 67 kata yang membentuk Negara Israel dan mengubah sejarah Bangsa PalestinaSiapa Abu Ubaida, apa kaitannya dengan Hamas?Pasukan Israel sudah berada ‘di jantung Kota Gaza‘, apakah Gaza akan segera jatuh ke tangan Israel?: 22.5857
+Closeness Centrality of Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?: 25.9161
+Closeness Centrality of Invasi darat ke Jalur Gaza melibatkan pertempuran dari rumah ke rumah di perkotaan, membawa risiko besar bagi penduduk sipil.: 28.5984
+Closeness Centrality of Serangan udara Israel yang dilakukan tak lama setelah serangan Hamas, telah merenggut ribuan nyawa warga Gaza dan lebih dari 400.000 orang terpaksa mengungsi.: 29.0712
+Closeness Centrality of Selain invasi darat, militer Israel memiliki misi tambahan menyelamatkan sedikitnya 150 sandera, yang ditahan di lokasi yang tidak diketahui di seluruh Gaza.Herzi Halevi, kepala staf Pasukan Pertahanan Israel (IDF), berjanji untuk &quot;membongkar&quot; Hamas.: 23.1894
+Closeness Centrality of Namun, bagaimana nasib Gaza setelah 16 tahun dikuasai Hamas?: 26.3964
+Closeness Centrality of Sumber gambar,  Ahmed Zakot/SOPA Images/LightRocketKeterangan gambar, Yahya Sinwar, pemimpin Hamas di Gaza diidentifikasi sebagai sasaran utama oleh Israel“Saya kira Israel tidak bisa membubarkan setiap anggota Hamas, karena ini adalah gagasan Islam ekstremis,” kata analis militer Amir Bar Shalom dari Radio Angkatan Darat Israel.: 23.8265
+Closeness Centrality of “Tetapi [Israel] dapat melemahkannya sebanyak yang [Israel] bisa sehingga Hamas tidak mempunyai kemampuan operasional.”Itu mungkin merupakan tujuan yang lebih realistis.: 23.9203
+Closeness Centrality of Sejauh ini, Israel telah berperang empat kali dengan Hamas, dan setiap upaya untuk menghentikan serangan roketnya selalu gagal.Juru bicara IDF, Letkol Jonathan Conricus, mengatakan bahwa pada akhir perang ini, Hamas seharusnya tidak lagi memiliki kapasitas militer untuk &quot;mengancam atau membunuh warga sipil Israel&quot;.Invasi darat penuh dengan risikoOperasi militer bergantung pada beberapa faktor yang dapat menggagalkannya.Organisasi sayap Hamas, Brigade Izzedine al-Qassam, telah bersiap menghadapi serangan Israel.: 18.3526
+Closeness Centrality of Alat peledak telah dipasang, dan penyergapan direncanakan.: 23.0400
+Closeness Centrality of Mereka dapat menggunakan jaringan terowongan Hamas yang terkenal dan luas untuk menyerang pasukan Israel.Baca juga:Israel segera melancarkan serangan darat ke Gaza, bagaimana pertempuran bakal berlangsung?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Pada 2014, batalion infanteri Israel menderita kerugian besar akibat ranjau anti-tank, penembak jitu dan penyergapan, sementara ratusan warga sipil tewas dalam pertempuran di lingkungan utara Kota Gaza.Itulah salah satu alasan Israel menuntut evakuasi 1,1 juta warga Palestina dari bagian utara Jalur Gaza.Warga Israel telah diperingatkan bahwa perang bisa memakan waktu berbulan-bulan, dan tercatat 360.000 tentara cadangan telah melapor untuk bertugas.Pertanyaannya adalah berapa lama Israel dapat menjalankan operasinya tanpa adanya tekanan internasional untuk mundur?Lembaga yang menangani pengungsi di bawah PBB telah memperingatkan bahwa Gaza dengan cepat menjadi “lubang neraka”.Jumlah korban tewas meningkat dengan cepat; Pasokan air, listrik, dan bahan bakar telah diputus, dan kini separuh penduduk diminta mengungsi dari wilayah lain.“Pemerintah dan militer merasa mendapat dukungan dari komunitas internasional – setidaknya dari para pemimpin Barat.: 16.5306
+Closeness Centrality of Filosofinya adalah &#39;mari kita bergerak, kita punya banyak waktu&#39;,” kata Yossi Melman, salah satu jurnalis keamanan dan intelijen terkemuka Israel.Namun cepat atau lambat dia yakin sekutu Israel akan turun tangan jika mereka melihat gambaran orang-orang kelaparan.Penyelamatan para sanderaLewati Podcast dan lanjutkan membacaInvestigasi: Skandal AdopsiInvestigasi untuk menyibak tabir adopsi ilegal dari Indonesia ke Belanda di masa laluEpisodeAkhir dari PodcastBanyak dari para sandera adalah warga Israel, namun terdapat juga sejumlah besar warga negara asing dan mereka yang memiliki kewarganegaraan ganda, sehingga beberapa negara lain, termasuk Amerika Serikat, Prancis, dan Inggris, memiliki kepentingan dalam operasi ini dan pembebasan warga negara mereka secara aman.: 24.4000
+Closeness Centrality of Presiden Prancis, Emmanuel Macron, telah berjanji kepada keluarga Prancis-Israel yang kerabatnya disandera Hamas untuk membawa pulang orang yang mereka cintai: &quot;Prancis tidak akan pernah meninggalkan anak-anaknya.: 28.6301
+Closeness Centrality of &quot;Sejauh mana nasib para sandera akan mempengaruhi perencana militer masih belum jelas, dan terdapat juga tekanan dalam negeri terhadap para pemimpin Israel.Lebih jauh tentang konflik Israel dan Hamas: Perkembangan terbaru konflik Israel-PalestinaSiapa Hamas dan bagaimana kiprahnya?: 17.0155
+Closeness Centrality of Sejarah konflik berkepanjangan Israel-PalestinaSejarah Jalur Gaza, ‘penjara terbuka paling besar di dunia’Amir Bar Shalom membandingkan situasi ini dengan insiden yang terjadi pada saat Olimpiade Munich tahun 1972, ketika sekelompok orang bersenjata Palestina menangkap atlet Israel dan membunuh 11 orang.Sebuah operasi diluncurkan untuk mencari dan membunuh semua orang yang terlibat dalam serangan tersebut dan dia yakin pemerintah ingin memburu semua orang di balik penculikan tersebut.Menyelamatkan begitu banyak orang yang ditahan di berbagai wilayah di Gaza mungkin tidak dapat dilakukan oleh pasukan komando unit elit Israel, Sayeret Matkal.: 15.5354
+Closeness Centrality of Untuk memutar video ini, aktifkan JavaScript atau coba di mesin pencari lainPlay video, &quot;Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?: 28.6071
+Closeness Centrality of &quot;, Durasi 7,1307:13Keterangan video, Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?Hamas telah mengancam akan menembak sandera sebagai pencegah serangan Israel.Pada 2011, Israel menukar lebih dari 1.000 tahanan untuk pembebasan seorang tentara, Gilad Shalit, yang ditahan oleh Hamas selama lima tahun.: 29.0200
+Closeness Centrality of Namun Israel akan berpikir dua kali sebelum melepaskan tahanan secara besar-besaran, karena salah satu tahanan yang dibebaskan dalam pertukaran itu adalah Yahya Sinwar, yang kemudian menjadi pemimpin politik Hamas di Gaza.Negara tetangga mengawasi dengan cermatHal yang juga dapat mempengaruhi durasi dan hasil serangan darat adalah bagaimana reaksi negara-negara tetangga Israel.Mereka mungkin menghadapi peningkatan tuntutan dari Mesir, yang berbatasan dengan Gaza dan sudah mendorong agar bantuan diizinkan melalui perbatasan Rafah.“Semakin besar penderitaan yang dialami warga Gaza setelah operasi militer Israel, semakin besar pula tekanan yang akan dihadapi Mesir, agar terlihat seolah-olah mereka tidak berpaling dari Palestina,” kata Ofir Winter dari Institut Kajian Keamanan Nasional Israel.Namun hal itu tidak akan terjadi jika Kairo mengizinkan penyeberangan massal warga Gaza ke Mesir atau bertindak secara militer melawan Israel atas nama mereka, dia yakin.Sumber gambar, SAID KHATIB/AFPKeterangan gambar, Serangan udara dan artileri Israel telah membombardir Gaza setelah Hamas melakukan serangan terhadap warga Israel Perbatasan utara Israel dengan Lebanon juga berada dalam pengawasan ketat.Sejauh ini telah terjadi beberapa serangan lintas batas yang melibatkan kelompok militan Islam Hizbullah, namun serangan tersebut belum menjadi sebuah front baru terhadap Israel.Iran, sponsor utama Hizbullah, sudah mengancam akan meluncurkan “front baru” melawan Israel.: 15.7637
+Closeness Centrality of Hal-hal tersebut menjadi fokus peringatan Presiden AS Joe Biden baru-baru ini, ketika dia berkata: &quot;Kepada negara mana pun, organisasi mana pun, siapa pun yang berpikir untuk mengambil keuntungan dari situasi ini, saya punya satu kata: Jangan!: 30.0172
+Closeness Centrality of &quot;Sebuah kapal induk AS telah dikirim ke Mediterania Timur untuk menekankan pesan tersebut.Apa tujuan akhir Israel terhadap Gaza?Jika Hamas melemah secara signifikan, pertanyaannya adalah apa yang bisa dilakukan untuk menggantikannya?Israel menarik tentaranya dan ribuan pemukim keluar dari Jalur Gaza pada tahun 2005 dan tidak memiliki niat untuk kembali menduduki Kawasan itu.Ofir Winter yakin peralihan kekuasaan berpotensi membuka jalan bagi kembalinya Otoritas Palestina (PA) secara bertahap, yang diusir dari Gaza oleh Hamas pada tahun 2007.: 16.2089
+Closeness Centrality of PA, yang bukan kelompok milisi, saat ini menguasai sebagian Tepi Barat.: 36.1527
+Closeness Centrality of Baca juga:Apa hasil analisis terbaru dari bukti-bukti di lokasi ledakan rumah sakit di Gaza?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Kesaksian warga Thailand yang terperangkap perang Israel-Hamas: &#39;Kami melompati tembok dan ditembaki dari belakang&#39;Mesir juga akan menyambut negara tetangganya yang lebih pragmatis, ujarnya.Infrastruktur Gaza yang hancur pada akhirnya harus dibangun kembali seperti setelah perang sebelumnya.Bahkan sebelum kekejaman Hamas di Israel, terdapat pembatasan ketat terhadap “barang-barang penggunaan ganda” yang memasuki Gaza yang dapat memiliki peran militer dan juga sipil.: 18.1975
+Closeness Centrality of Israel ingin menerapkan pembatasan yang lebih ketat.Ada seruan untuk membangun zona penyangga yang luas di sepanjang pagar Gaza untuk memberikan perlindungan yang lebih besar bagi komunitas Israel.: 20.6009
+Closeness Centrality of Mantan kepala dinas keamanan Shin Bet, Yoram Cohen, yakin zona &quot;tembak di tempat&quot; sepanjang 2 km akan diperlukan untuk menggantikan zona yang ada.Apapun hasil perangnya, Israel ingin memastikan serangan serupa tidak akan terjadi lagi.Topik terkaitMesirIsrael-PalestinaPolitikMiliterTimur tengahDunia ArabIsrael Palestina: 32.8168
 </pre></div>
 </div>
 </div>
@@ -2879,6 +2907,7 @@ Closeness Centrality of 0.2011
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#membuat grafik berarah (Directed Graph - DiGraph) yang merepresentasikan hubungan antara kalimat-kalimat dalam teks berdasarkan kemiripan (cosine similarity)</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># Matriks TF-IDF telah dihitung sebelumnya (tfidf_matrix)</span>
 <span class="c1"># Hitung cosine similarity antara semua pasangan kalimat</span>
@@ -2900,40 +2929,275 @@ Closeness Centrality of 0.2011
 
 <span class="c1"># Visualisasi closeness centrality</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Atur layout grafik</span>
-<span class="o">!!</span><span class="nv">node_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>v<span class="w"> </span>*<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span>closeness_centrality.values<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>v<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span>.2<span class="o">]</span><span class="w">  </span>#<span class="w"> </span>Ubah<span class="w"> </span>ukuran<span class="w"> </span>node<span class="w"> </span>berdasarkan<span class="w"> </span>closeness<span class="w"> </span>centrality,<span class="w"> </span>dengan<span class="w"> </span>faktor<span class="w"> </span>pengurangan<span class="w"> </span>ukuran
-<span class="c1"># pilih_node = [node for node, v in closeness_centrality.items() if v &gt; 0.2]</span>
-
-<span class="c1"># subgraph = G.subgraph(pilih_node)</span>
+<span class="n">node_size</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">closeness_centrality</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>  <span class="c1"># Ubah ukuran node berdasarkan closeness centrality, dengan faktor pengurangan ukuran</span>
 
 <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">)</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># plt.show()</span>
 
 <span class="c1"># Cetak closeness centrality dari yang tertinggi hingga terendah</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closeness Centrality (Dari Tertinggi ke Terendah):&quot;</span><span class="p">)</span>
-<span class="o">!!</span><span class="nv">sorted_closeness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sorted<span class="o">([(</span>node,<span class="w"> </span>closeness<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>node,<span class="w"> </span>closeness<span class="w"> </span><span class="k">in</span><span class="w"> </span>closeness_centrality.items<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>closeness<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span>.2<span class="o">]</span>,<span class="w"> </span><span class="nv">key</span><span class="o">=</span>lambda<span class="w"> </span>x:<span class="w"> </span>x<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span><span class="nv">reverse</span><span class="o">=</span>True<span class="o">)</span>
+<span class="c1">#print(&quot;Closeness Centrality (Dari Tertinggi ke Terendah):&quot;)</span>
+<span class="c1">#sorted_closeness = sorted(closeness_centrality.items(), key=lambda x: x[1], reverse=True)</span>
 
-<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">closeness</span> <span class="ow">in</span> <span class="n">sorted_closeness</span><span class="p">:</span>
-    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentences</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>  <span class="c1"># Akses kalimat yang sesuai dengan node</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: Closeness Centrality </span><span class="si">{</span><span class="n">closeness</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kalimat: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
+<span class="c1">#for node, closeness in sorted_closeness:</span>
+ <span class="c1">#   sentence = sentences[node]  # Akses kalimat yang sesuai dengan node</span>
+  <span class="c1">#  print(f&quot;Node {node}: Closeness Centrality {closeness:.4f}&quot;)</span>
+   <span class="c1"># print(f&quot;Kalimat: {sentence}&quot;)</span>
+    <span class="c1">#print()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-8-fd406c40529e&gt;</span> in <span class="ni">&lt;cell line: 29&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="c1"># subgraph = G.subgraph(pilih_node)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> 
-<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: Text(0.16484579120470552, 0.7197537027973745, &#39;0&#39;),
+ 1: Text(0.11575647501827134, 0.23237688351913843, &#39;1&#39;),
+ 2: Text(0.27041936833518515, -0.4354877555799966, &#39;2&#39;),
+ 3: Text(-0.3473620923501861, 0.28547274496709535, &#39;3&#39;),
+ 4: Text(0.804073229186313, 0.1055934836805191, &#39;4&#39;),
+ 5: Text(0.48847286122493716, 0.2251028434853672, &#39;5&#39;),
+ 6: Text(0.5120917628839582, -0.49621543370391086, &#39;6&#39;),
+ 7: Text(0.5303198935757033, 0.5956334714909887, &#39;7&#39;),
+ 8: Text(-0.13279100571967511, -0.524491346882807, &#39;8&#39;),
+ 9: Text(-0.35350416990809297, -0.3922501500357362, &#39;9&#39;),
+ 10: Text(0.2722961352809131, 0.4207007318535781, &#39;10&#39;),
+ 11: Text(-0.3724084977947675, 1.0, &#39;11&#39;),
+ 12: Text(0.05912311099048678, -0.044254704286213864, &#39;12&#39;),
+ 13: Text(-0.5489325577441175, -0.23189570379904648, &#39;13&#39;),
+ 14: Text(-0.5752197688264528, 0.24609619803778554, &#39;14&#39;),
+ 15: Text(-0.7110759745931168, 0.015388059147863713, &#39;15&#39;),
+ 16: Text(-0.0669892434545435, 0.449967533276068, &#39;16&#39;),
+ 17: Text(0.6565052352324466, -0.23906616287430316, &#39;17&#39;),
+ 18: Text(0.41840407616072206, -0.02235587152166066, &#39;18&#39;),
+ 19: Text(-0.16071351351933633, 0.07351020084188213, &#39;19&#39;),
+ 20: Text(-0.08758553541660061, -0.8281276474692701, &#39;20&#39;),
+ 21: Text(-0.3367127488854858, 0.5244550566299954, &#39;21&#39;),
+ 22: Text(-0.5372430262055197, -0.6893930384130436, &#39;22&#39;),
+ 23: Text(0.18026145587379594, -0.23868932815110536, &#39;23&#39;),
+ 24: Text(-0.3748097821288087, -0.07934716876088559, &#39;24&#39;),
+ 25: Text(0.13277852157928144, -0.6724765982496822, &#39;25&#39;)}
+</pre></div>
+</div>
+<img alt="_images/2761fafbd0fb62805f66b9b85ad7e72e399eaa0e9a217871253b7e0d94fe0015.png" src="_images/2761fafbd0fb62805f66b9b85ad7e72e399eaa0e9a217871253b7e0d94fe0015.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="ne">NameError</span>: name &#39;node_size&#39; is not defined
+<span class="c1"># Diasumsikan similarity_matrix sudah didefinisikan sebelumnya</span>
+<span class="c1"># Contoh similarity_matrix</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">similarity</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Bulatkan nilai ke 2 angka dibelakang koma</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">similarity</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi grafik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Menentukan layout grafik</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>  <span class="c1"># Menggambar grafik dengan label node</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>  <span class="c1"># Mendapatkan atribut edge (bobot)</span>
+<span class="c1"># Mengubah nilai bobot menjadi string dengan 2 angka di belakang koma</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">weight</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">edge_labels</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>  <span class="c1"># Menampilkan label bobot pada edge</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Graph dengan Kesamaan Kosinus (Bulatan 2 Desimal)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/057d3e73384b68d81eaac7ce66b385e280e1c5c910a183885bcf2649c48ff2d4.png" src="_images/057d3e73384b68d81eaac7ce66b385e280e1c5c910a183885bcf2649c48ff2d4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Diasumsikan similarity_matrix sudah didefinisikan sebelumnya</span>
+<span class="c1"># Contoh similarity_matrix</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.06</span>  <span class="c1"># Threshold untuk menyambungkan node</span>
+
+<span class="c1"># Tambahkan semua node ke grafik</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">)))</span>
+
+<span class="c1"># Tambahkan edge antara node yang nilainya melebihi threshold</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">similarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="n">similarity</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Bulatkan nilai ke 2 angka dibelakang koma</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">similarity</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi grafik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Menentukan layout grafik</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>  <span class="c1"># Menggambar grafik dengan label node</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>  <span class="c1"># Mendapatkan atribut edge (bobot)</span>
+<span class="c1"># Mengubah nilai bobot menjadi string dengan 2 angka di belakang koma</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">weight</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">edge_labels</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>  <span class="c1"># Menampilkan label bobot pada edge</span>
+
+<span class="c1"># Tambahkan label pada node yang tidak terhubung</span>
+<span class="n">isolated_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">isolates</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">isolated_nodes</span><span class="p">:</span>
+    <span class="c1"># isolated_nodes_labels = {node: f&#39;Node {node} (Not connected)&#39; for node in isolated_nodes}</span>
+    <span class="n">pos_extra</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">isolated_nodes</span><span class="p">}</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Visualisasi Graph dengan Kesamaan Kosinus (Threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0a3536be0355afbacfc77effef647fadc1d9a963bba51c94f10d3edb5e170366.png" src="_images/0a3536be0355afbacfc77effef647fadc1d9a963bba51c94f10d3edb5e170366.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung closeness centrality dari graph</span>
+<span class="n">closeness</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan closeness centrality</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closeness Centrality:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">closeness_value</span> <span class="ow">in</span> <span class="n">closeness</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">closeness_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan 3 kalimat dengan PageRank tertinggi</span>
+<span class="n">sorted_pagerank</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">closeness</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=============================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 3 sentences based on closeness centrality:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">sorted_pagerank</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=============================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 3 node based on closeness centrality:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">sorted_pagerank</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2"> dengan PageRank </span><span class="si">{</span><span class="n">rank</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Closeness Centrality:
+Node 0: 0.6578947368421053
+Node 1: 0.9259259259259259
+Node 2: 0.8064516129032258
+Node 3: 0.7142857142857143
+Node 4: 0.5952380952380952
+Node 5: 0.7352941176470589
+Node 6: 0.8333333333333334
+Node 7: 0.5813953488372093
+Node 8: 0.7142857142857143
+Node 9: 0.7575757575757576
+Node 10: 0.8064516129032258
+Node 11: 0.5208333333333334
+Node 12: 0.8333333333333334
+Node 13: 0.7352941176470589
+Node 14: 0.6756756756756757
+Node 15: 0.7575757575757576
+Node 16: 0.8620689655172413
+Node 17: 0.5434782608695652
+Node 18: 0.8064516129032258
+Node 19: 0.8928571428571429
+Node 20: 0.5555555555555556
+Node 21: 0.8333333333333334
+Node 22: 0.49019607843137253
+Node 23: 0.8333333333333334
+Node 24: 0.78125
+Node 25: 0.5813953488372093
+=============================
+Top 3 sentences based on closeness centrality:
+a
+ 
+n
+=============================
+Top 3 node based on closeness centrality:
+Node 1 dengan PageRank 0.9259
+Node 19 dengan PageRank 0.8929
+Node 16 dengan PageRank 0.8621
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hitung PageRank</span>
+<span class="n">pagerank</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan Closeness Centrality</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PageRank:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">pagerank</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan 3 kalimat dengan PageRank tertinggi</span>
+<span class="n">sorted_pagerank</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pagerank</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=============================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 3 sentences based on PageRank:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">sorted_pagerank</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=============================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 3 node based on PageRank:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">sorted_pagerank</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2"> dengan PageRank </span><span class="si">{</span><span class="n">rank</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1">#sorted_pagerank = sorted(pagerank.items(), key=lambda x: x[1], reverse=True)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PageRank:
+Node 0: 0.035266735487009274
+Node 1: 0.0740351266659516
+Node 2: 0.04776704638694228
+Node 3: 0.036221262417755376
+Node 4: 0.02314523976344751
+Node 5: 0.0431176306606629
+Node 6: 0.042986955509830005
+Node 7: 0.018170090160343065
+Node 8: 0.03354792475919927
+Node 9: 0.0363643301300688
+Node 10: 0.047941463959741006
+Node 11: 0.010186337406598215
+Node 12: 0.061338536307687375
+Node 13: 0.04299212607988153
+Node 14: 0.024977057561236804
+Node 15: 0.04268128521183246
+Node 16: 0.05166594788110044
+Node 17: 0.018275378856023424
+Node 18: 0.051317581449919304
+Node 19: 0.07337983030411209
+Node 20: 0.01366157738454769
+Node 21: 0.05040046316176729
+Node 22: 0.008041832303686831
+Node 23: 0.05390933677316859
+Node 24: 0.0402576609889259
+Node 25: 0.018351242428561017
+=============================
+Top 3 sentences based on PageRank:
+a
+ 
+a
+=============================
+Top 3 node based on PageRank:
+Node 1 dengan PageRank 0.0740
+Node 19 dengan PageRank 0.0734
+Node 12 dengan PageRank 0.0613
 </pre></div>
 </div>
 </div>
@@ -2968,7 +3232,7 @@ Closeness Centrality of 0.2011
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="playstore.html"
@@ -2978,6 +3242,15 @@ Closeness Centrality of 0.2011
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Crawling Playstore</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="category.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Crawling Tiga Kategori Berita</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -3002,6 +3275,7 @@ By 20_148 Fadilatul Jannah
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2022.
@@ -3028,8 +3302,8 @@ By 20_148 Fadilatul Jannah
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

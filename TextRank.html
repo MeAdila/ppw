@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>ekstaksi kata kunci menggunakan textrank &#8212; Pencarian &amp; Penambangan Web</title>
+    <title>bsio &#8212; Pencarian &amp; Penambangan Web</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'TextRank';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Ringkasan Data" href="summary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -137,6 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="intro.html">
@@ -166,12 +168,15 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">TASK</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="PTA.html">Crawling PTA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Data Text</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LDA.html">Implementasi LDA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="playstore.html">Crawling Playstore</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph.html">Crawling Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph.html">Crawling Satu Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="category.html">Crawling Tiga Kategori Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Ringkasan Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">bsio</a></li>
 </ul>
 
     </div>
@@ -356,6 +361,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -366,6 +372,7 @@ document.write(`
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -373,9 +380,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -386,21 +391,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>ekstaksi kata kunci menggunakan textrank</h1>
+    <h1>bsio</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">ekstaksi kata kunci menggunakan textrank</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#co-occurrence-matrix">co-occurrence matrix</a></li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -410,1315 +405,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ekstaksi-kata-kunci-menggunakan-textrank">
-<h1>ekstaksi kata kunci menggunakan textrank<a class="headerlink" href="#ekstaksi-kata-kunci-menggunakan-textrank" title="Permalink to this heading">#</a></h1>
-<p><a class="reference external" href="https://stackoverflow.com/questions/57456069/how-to-convert-a-co-occurrence-matrix-to-networkx-graph">https://stackoverflow.com/questions/57456069/how-to-convert-a-co-occurrence-matrix-to-networkx-graph</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#melakukan web scraping pada halaman berita yang berasal dari URL</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
-
-<span class="c1"># Unduh konten halaman web berita</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.bbc.com/indonesia/articles/cxrvr59632eo&quot;</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
-
-<span class="c1"># Parsing halaman web menggunakan BeautifulSoup</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
-
-<span class="c1"># Ekstraksi teks dari elemen-elemen yang berisi berita</span>
-<span class="n">article</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;bbc-1cvxiy9&quot;</span><span class="p">)</span>  <span class="c1"># Sesuaikan dengan struktur HTML halaman web berita</span>
-
-<span class="c1"># Periksa apakah elemen article ada sebelum mencoba mengambil teksnya</span>
-<span class="k">if</span> <span class="n">article</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">article_text</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
-
-    <span class="c1"># Tokenisasi teks menjadi kalimat menggunakan nltk</span>
-    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>  <span class="c1"># Pastikan Anda sudah mengunduh tokenisasi kalimat nltk</span>
-    <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">article_text</span><span class="p">)</span>
-
-    <span class="c1"># Cetak kalimat-kalimat</span>
-    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elemen berita tidak ditemukan&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to /root/nltk_data...
-[nltk_data]   Unzipping tokenizers/punkt.zip.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Apa tujuan akhir invasi darat Israel ke Gaza?
-Sumber gambar, ReutersKeterangan gambar, Militer Israel telah memanggil sejumlah tentara cadangan untuk bertempur melawan Hamas.1 November 2023Paul KirbyBBC NewsPara pemimpin Israel telah menegaskan bahwa kelompok milisi Palestina, Hamas, akan dimusnahkan dari muka bumi dan Gaza tidak akan pernah kembali seperti semula.“Setiap anggota Hamas adalah orang mati,” kata Perdana Menteri Benjamin Netanyahu setelah kelompok milisi tersebut membunuh lebih dari 1.300 orang dalam serangan yang tak terduga ke Israel pada 7 Oktober.Tujuan Operasi Pedang Besi – operasi serangan balasan Israel atas serangan Hamas – nampaknya jauh lebih ambisius dibandingkan apa pun yang direncanakan militer Israel di Gaza sebelumnya.
-Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanTentara Israel serbu RS Al-Shifa, Menkes Palestina minta bukti keberadaan markas HamasNasib sejumlah rumah sakit di Gaza yang lumpuh akibat perang Israel-Hamas Palestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankKomunitas Palestina terbesar di luar dunia Arab dan Israel berada di Cile, mengapa?Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?
-Invasi darat ke Jalur Gaza melibatkan pertempuran dari rumah ke rumah di perkotaan, membawa risiko besar bagi penduduk sipil.
-Serangan udara Israel yang dilakukan tak lama setelah serangan Hamas, telah merenggut ribuan nyawa warga Gaza dan lebih dari 400.000 orang terpaksa mengungsi.
-Selain invasi darat, militer Israel memiliki misi tambahan menyelamatkan sedikitnya 150 sandera, yang ditahan di lokasi yang tidak diketahui di seluruh Gaza.Herzi Halevi, kepala staf Pasukan Pertahanan Israel (IDF), berjanji untuk &quot;membongkar&quot; Hamas.
-Namun, bagaimana nasib Gaza setelah 16 tahun dikuasai Hamas?
-Sumber gambar,  Ahmed Zakot/SOPA Images/LightRocketKeterangan gambar, Yahya Sinwar, pemimpin Hamas di Gaza diidentifikasi sebagai sasaran utama oleh Israel“Saya kira Israel tidak bisa membubarkan setiap anggota Hamas, karena ini adalah gagasan Islam ekstremis,” kata analis militer Amir Bar Shalom dari Radio Angkatan Darat Israel.
-“Tetapi [Israel] dapat melemahkannya sebanyak yang [Israel] bisa sehingga Hamas tidak mempunyai kemampuan operasional.”Itu mungkin merupakan tujuan yang lebih realistis.
-Sejauh ini, Israel telah berperang empat kali dengan Hamas, dan setiap upaya untuk menghentikan serangan roketnya selalu gagal.Juru bicara IDF, Letkol Jonathan Conricus, mengatakan bahwa pada akhir perang ini, Hamas seharusnya tidak lagi memiliki kapasitas militer untuk &quot;mengancam atau membunuh warga sipil Israel&quot;.Invasi darat penuh dengan risikoOperasi militer bergantung pada beberapa faktor yang dapat menggagalkannya.Organisasi sayap Hamas, Brigade Izzedine al-Qassam, telah bersiap menghadapi serangan Israel.
-Alat peledak telah dipasang, dan penyergapan direncanakan.
-Mereka dapat menggunakan jaringan terowongan Hamas yang terkenal dan luas untuk menyerang pasukan Israel.Baca juga:Israel segera melancarkan serangan darat ke Gaza, bagaimana pertempuran bakal berlangsung?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Pada 2014, batalion infanteri Israel menderita kerugian besar akibat ranjau anti-tank, penembak jitu dan penyergapan, sementara ratusan warga sipil tewas dalam pertempuran di lingkungan utara Kota Gaza.Itulah salah satu alasan Israel menuntut evakuasi 1,1 juta warga Palestina dari bagian utara Jalur Gaza.Warga Israel telah diperingatkan bahwa perang bisa memakan waktu berbulan-bulan, dan tercatat 360.000 tentara cadangan telah melapor untuk bertugas.Pertanyaannya adalah berapa lama Israel dapat menjalankan operasinya tanpa adanya tekanan internasional untuk mundur?Lembaga yang menangani pengungsi di bawah PBB telah memperingatkan bahwa Gaza dengan cepat menjadi “lubang neraka”.Jumlah korban tewas meningkat dengan cepat; Pasokan air, listrik, dan bahan bakar telah diputus, dan kini separuh penduduk diminta mengungsi dari wilayah lain.“Pemerintah dan militer merasa mendapat dukungan dari komunitas internasional – setidaknya dari para pemimpin Barat.
-Filosofinya adalah &#39;mari kita bergerak, kita punya banyak waktu&#39;,” kata Yossi Melman, salah satu jurnalis keamanan dan intelijen terkemuka Israel.Namun cepat atau lambat dia yakin sekutu Israel akan turun tangan jika mereka melihat gambaran orang-orang kelaparan.Penyelamatan para sanderaLewati Podcast dan lanjutkan membacaInvestigasi: Skandal AdopsiInvestigasi untuk menyibak tabir adopsi ilegal dari Indonesia ke Belanda di masa laluEpisodeAkhir dari PodcastBanyak dari para sandera adalah warga Israel, namun terdapat juga sejumlah besar warga negara asing dan mereka yang memiliki kewarganegaraan ganda, sehingga beberapa negara lain, termasuk Amerika Serikat, Prancis, dan Inggris, memiliki kepentingan dalam operasi ini dan pembebasan warga negara mereka secara aman.
-Presiden Prancis, Emmanuel Macron, telah berjanji kepada keluarga Prancis-Israel yang kerabatnya disandera Hamas untuk membawa pulang orang yang mereka cintai: &quot;Prancis tidak akan pernah meninggalkan anak-anaknya.
-&quot;Sejauh mana nasib para sandera akan mempengaruhi perencana militer masih belum jelas, dan terdapat juga tekanan dalam negeri terhadap para pemimpin Israel.Lebih jauh tentang konflik Israel dan Hamas: Perkembangan terbaru konflik Israel-PalestinaSiapa Hamas dan bagaimana kiprahnya?
-Sejarah konflik berkepanjangan Israel-PalestinaSejarah Jalur Gaza, ‘penjara terbuka paling besar di dunia’Amir Bar Shalom membandingkan situasi ini dengan insiden yang terjadi pada saat Olimpiade Munich tahun 1972, ketika sekelompok orang bersenjata Palestina menangkap atlet Israel dan membunuh 11 orang.Sebuah operasi diluncurkan untuk mencari dan membunuh semua orang yang terlibat dalam serangan tersebut dan dia yakin pemerintah ingin memburu semua orang di balik penculikan tersebut.Menyelamatkan begitu banyak orang yang ditahan di berbagai wilayah di Gaza mungkin tidak dapat dilakukan oleh pasukan komando unit elit Israel, Sayeret Matkal.
-Untuk memutar video ini, aktifkan JavaScript atau coba di mesin pencari lainPlay video, &quot;Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?
-&quot;, Durasi 7,1307:13Keterangan video, Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?Hamas telah mengancam akan menembak sandera sebagai pencegah serangan Israel.Pada 2011, Israel menukar lebih dari 1.000 tahanan untuk pembebasan seorang tentara, Gilad Shalit, yang ditahan oleh Hamas selama lima tahun.
-Namun Israel akan berpikir dua kali sebelum melepaskan tahanan secara besar-besaran, karena salah satu tahanan yang dibebaskan dalam pertukaran itu adalah Yahya Sinwar, yang kemudian menjadi pemimpin politik Hamas di Gaza.Negara tetangga mengawasi dengan cermatHal yang juga dapat mempengaruhi durasi dan hasil serangan darat adalah bagaimana reaksi negara-negara tetangga Israel.Mereka mungkin menghadapi peningkatan tuntutan dari Mesir, yang berbatasan dengan Gaza dan sudah mendorong agar bantuan diizinkan melalui perbatasan Rafah.“Semakin besar penderitaan yang dialami warga Gaza setelah operasi militer Israel, semakin besar pula tekanan yang akan dihadapi Mesir, agar terlihat seolah-olah mereka tidak berpaling dari Palestina,” kata Ofir Winter dari Institut Kajian Keamanan Nasional Israel.Namun hal itu tidak akan terjadi jika Kairo mengizinkan penyeberangan massal warga Gaza ke Mesir atau bertindak secara militer melawan Israel atas nama mereka, dia yakin.Sumber gambar, SAID KHATIB/AFPKeterangan gambar, Serangan udara dan artileri Israel telah membombardir Gaza setelah Hamas melakukan serangan terhadap warga Israel Perbatasan utara Israel dengan Lebanon juga berada dalam pengawasan ketat.Sejauh ini telah terjadi beberapa serangan lintas batas yang melibatkan kelompok militan Islam Hizbullah, namun serangan tersebut belum menjadi sebuah front baru terhadap Israel.Iran, sponsor utama Hizbullah, sudah mengancam akan meluncurkan “front baru” melawan Israel.
-Hal-hal tersebut menjadi fokus peringatan Presiden AS Joe Biden baru-baru ini, ketika dia berkata: &quot;Kepada negara mana pun, organisasi mana pun, siapa pun yang berpikir untuk mengambil keuntungan dari situasi ini, saya punya satu kata: Jangan!
-&quot;Sebuah kapal induk AS telah dikirim ke Mediterania Timur untuk menekankan pesan tersebut.Apa tujuan akhir Israel terhadap Gaza?Jika Hamas melemah secara signifikan, pertanyaannya adalah apa yang bisa dilakukan untuk menggantikannya?Israel menarik tentaranya dan ribuan pemukim keluar dari Jalur Gaza pada tahun 2005 dan tidak memiliki niat untuk kembali menduduki Kawasan itu.Ofir Winter yakin peralihan kekuasaan berpotensi membuka jalan bagi kembalinya Otoritas Palestina (PA) secara bertahap, yang diusir dari Gaza oleh Hamas pada tahun 2007.
-PA, yang bukan kelompok milisi, saat ini menguasai sebagian Tepi Barat.
-Baca juga:Apa hasil analisis terbaru dari bukti-bukti di lokasi ledakan rumah sakit di Gaza?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Kesaksian warga Thailand yang terperangkap perang Israel-Hamas: &#39;Kami melompati tembok dan ditembaki dari belakang&#39;Mesir juga akan menyambut negara tetangganya yang lebih pragmatis, ujarnya.Infrastruktur Gaza yang hancur pada akhirnya harus dibangun kembali seperti setelah perang sebelumnya.Bahkan sebelum kekejaman Hamas di Israel, terdapat pembatasan ketat terhadap “barang-barang penggunaan ganda” yang memasuki Gaza yang dapat memiliki peran militer dan juga sipil.
-Israel ingin menerapkan pembatasan yang lebih ketat.Ada seruan untuk membangun zona penyangga yang luas di sepanjang pagar Gaza untuk memberikan perlindungan yang lebih besar bagi komunitas Israel.
-Mantan kepala dinas keamanan Shin Bet, Yoram Cohen, yakin zona &quot;tembak di tempat&quot; sepanjang 2 km akan diperlukan untuk menggantikan zona yang ada.Apapun hasil perangnya, Israel ingin memastikan serangan serupa tidak akan terjadi lagi.Topik terkaitMesirIsrael-PalestinaPolitikMiliterTimur tengahDunia ArabIsrael Palestina
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#menghitung dan mencetak nilai TF-IDF (Term Frequency-Inverse Document Frequency)</span>
-<span class="c1">#untuk setiap kata dalam setiap kalimat dari teks yang telah di-tokenisasi sebelumnya.</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-
-<span class="c1"># Inisialisasi penghitung TF-IDF</span>
-<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
-
-<span class="c1"># Hitung TF-IDF</span>
-<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-
-<span class="c1"># Daftar kata kunci</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
-
-<span class="c1"># Konversi matriks TF-IDF menjadi bentuk yang lebih mudah dibaca</span>
-<span class="n">tfidf_values</span> <span class="o">=</span> <span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-
-<span class="c1"># Cetak TF-IDF untuk setiap kata dalam setiap kalimat</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sentences</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kalimat </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_names</span><span class="p">):</span>
-        <span class="n">tfidf_value</span> <span class="o">=</span> <span class="n">tfidf_values</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">tfidf_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">tfidf_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kalimat 1: Apa tujuan akhir invasi darat Israel ke Gaza?
-akhir: 0.4128
-apa: 0.4128
-darat: 0.3395
-gaza: 0.2220
-invasi: 0.4128
-israel: 0.1967
-ke: 0.3395
-tujuan: 0.4128
-
-Kalimat 2: Sumber gambar, ReutersKeterangan gambar, Militer Israel telah memanggil sejumlah tentara cadangan untuk bertempur melawan Hamas.1 November 2023Paul KirbyBBC NewsPara pemimpin Israel telah menegaskan bahwa kelompok milisi Palestina, Hamas, akan dimusnahkan dari muka bumi dan Gaza tidak akan pernah kembali seperti semula.“Setiap anggota Hamas adalah orang mati,” kata Perdana Menteri Benjamin Netanyahu setelah kelompok milisi tersebut membunuh lebih dari 1.300 orang dalam serangan yang tak terduga ke Israel pada 7 Oktober.Tujuan Operasi Pedang Besi – operasi serangan balasan Israel atas serangan Hamas – nampaknya jauh lebih ambisius dibandingkan apa pun yang direncanakan militer Israel di Gaza sebelumnya.
-2023paul: 0.1170
-300: 0.1170
-adalah: 0.0759
-akan: 0.1353
-ambisius: 0.1170
-anggota: 0.1037
-apa: 0.0870
-atas: 0.1037
-bahwa: 0.0943
-balasan: 0.1170
-benjamin: 0.1170
-bertempur: 0.1170
-besi: 0.1170
-bumi: 0.1170
-cadangan: 0.1037
-dalam: 0.0759
-dan: 0.0556
-dari: 0.1112
-di: 0.0509
-dibandingkan: 0.1170
-dimusnahkan: 0.1170
-direncanakan: 0.1037
-gambar: 0.1886
-gaza: 0.0936
-hamas: 0.1951
-israel: 0.2072
-jauh: 0.1037
-kata: 0.0810
-ke: 0.0715
-kelompok: 0.1886
-kembali: 0.0943
-kirbybbc: 0.1170
-lebih: 0.1430
-mati: 0.1170
-melawan: 0.1037
-memanggil: 0.1170
-membunuh: 0.0943
-menegaskan: 0.1170
-menteri: 0.1170
-milisi: 0.2074
-militer: 0.1284
-muka: 0.1170
-nampaknya: 0.1170
-netanyahu: 0.0943
-newspara: 0.1170
-november: 0.1170
-oktober: 0.1170
-operasi: 0.1619
-orang: 0.1619
-pada: 0.0715
-palestina: 0.0715
-pedang: 0.1170
-pemimpin: 0.0810
-perdana: 0.1170
-pernah: 0.1037
-pun: 0.1037
-reutersketerangan: 0.1170
-sebelumnya: 0.1037
-sejumlah: 0.0943
-semula: 0.1170
-seperti: 0.1037
-serangan: 0.2030
-setelah: 0.0810
-setiap: 0.0943
-sumber: 0.0943
-tak: 0.1037
-telah: 0.1284
-tentara: 0.0870
-terduga: 0.1170
-tersebut: 0.0810
-tidak: 0.0611
-tujuan: 0.0870
-untuk: 0.0531
-yang: 0.0862
-
-Kalimat 3: Lewatkan Artikel-artikel yang direkomendasikan dan terus membacaArtikel-artikel yang direkomendasikanTentara Israel serbu RS Al-Shifa, Menkes Palestina minta bukti keberadaan markas HamasNasib sejumlah rumah sakit di Gaza yang lumpuh akibat perang Israel-Hamas Palestina: Tentara Israel ‘serbu’ RS Al-Shifa di Gaza dengan tankKomunitas Palestina terbesar di luar dunia Arab dan Israel berada di Cile, mengapa?Akhir dari Artikel-artikel yang direkomendasikanAkan tetapi, apakah itu operasi militer yang realistis, dan bagaimana para komandan militer Israel merealisasikan ambisi ini?
-akhir: 0.0784
-akibat: 0.0935
-al: 0.1870
-ambisi: 0.1055
-apakah: 0.1055
-arab: 0.1055
-artikel: 0.5274
-bagaimana: 0.0730
-berada: 0.0935
-bukti: 0.0935
-cile: 0.1055
-dan: 0.1503
-dari: 0.0501
-dengan: 0.0730
-di: 0.1835
-direkomendasikan: 0.1055
-direkomendasikanakan: 0.1055
-direkomendasikantentara: 0.1055
-dunia: 0.0935
-gaza: 0.0843
-hamas: 0.0440
-hamasnasib: 0.1055
-ini: 0.0525
-israel: 0.1868
-itu: 0.0784
-keberadaan: 0.1055
-komandan: 0.1055
-lewatkan: 0.1055
-luar: 0.1055
-lumpuh: 0.1055
-markas: 0.1055
-membacaartikel: 0.1055
-mengapa: 0.0850
-menkes: 0.1055
-merealisasikan: 0.1055
-militer: 0.1157
-minta: 0.1055
-operasi: 0.0730
-palestina: 0.1934
-para: 0.0784
-perang: 0.0784
-realistis: 0.0935
-rs: 0.2110
-rumah: 0.0850
-sakit: 0.0935
-sejumlah: 0.0850
-serbu: 0.2110
-shifa: 0.2110
-tankkomunitas: 0.1055
-tentara: 0.0784
-terbesar: 0.1055
-terus: 0.0850
-tetapi: 0.0935
-yang: 0.1944
-
-Kalimat 4: Invasi darat ke Jalur Gaza melibatkan pertempuran dari rumah ke rumah di perkotaan, membawa risiko besar bagi penduduk sipil.
-bagi: 0.2242
-besar: 0.1805
-darat: 0.1701
-dari: 0.1322
-di: 0.1210
-gaza: 0.1113
-invasi: 0.2068
-jalur: 0.2068
-ke: 0.3402
-melibatkan: 0.2467
-membawa: 0.2467
-penduduk: 0.2467
-perkotaan: 0.2784
-pertempuran: 0.2467
-risiko: 0.2784
-rumah: 0.4485
-sipil: 0.2068
-
-Kalimat 5: Serangan udara Israel yang dilakukan tak lama setelah serangan Hamas, telah merenggut ribuan nyawa warga Gaza dan lebih dari 400.000 orang terpaksa mengungsi.
-000: 0.2180
-400: 0.2706
-dan: 0.1285
-dari: 0.1285
-dilakukan: 0.2180
-gaza: 0.1081
-hamas: 0.1127
-israel: 0.0958
-lama: 0.2398
-lebih: 0.1654
-mengungsi: 0.2398
-merenggut: 0.2706
-nyawa: 0.2706
-orang: 0.1872
-ribuan: 0.2398
-serangan: 0.3128
-setelah: 0.1872
-tak: 0.2398
-telah: 0.1484
-terpaksa: 0.2706
-udara: 0.2398
-warga: 0.1755
-yang: 0.0997
-
-Kalimat 6: Selain invasi darat, militer Israel memiliki misi tambahan menyelamatkan sedikitnya 150 sandera, yang ditahan di lokasi yang tidak diketahui di seluruh Gaza.Herzi Halevi, kepala staf Pasukan Pertahanan Israel (IDF), berjanji untuk &quot;membongkar&quot; Hamas.
-150: 0.2127
-berjanji: 0.1885
-darat: 0.1300
-di: 0.1850
-diketahui: 0.2127
-ditahan: 0.1714
-gaza: 0.0850
-halevi: 0.2127
-hamas: 0.0886
-herzi: 0.2127
-idf: 0.1885
-invasi: 0.1581
-israel: 0.1507
-kepala: 0.1885
-lokasi: 0.1885
-membongkar: 0.2127
-memiliki: 0.1472
-menyelamatkan: 0.1885
-militer: 0.1167
-misi: 0.2127
-pasukan: 0.1714
-pertahanan: 0.2127
-sandera: 0.1581
-sedikitnya: 0.2127
-selain: 0.2127
-seluruh: 0.2127
-staf: 0.2127
-tambahan: 0.2127
-tidak: 0.1110
-untuk: 0.0966
-yang: 0.1568
-
-Kalimat 7: Namun, bagaimana nasib Gaza setelah 16 tahun dikuasai Hamas?
-16: 0.4353
-bagaimana: 0.3012
-dikuasai: 0.4353
-gaza: 0.1740
-hamas: 0.1814
-namun: 0.3507
-nasib: 0.3858
-setelah: 0.3012
-tahun: 0.3234
-
-Kalimat 8: Sumber gambar,  Ahmed Zakot/SOPA Images/LightRocketKeterangan gambar, Yahya Sinwar, pemimpin Hamas di Gaza diidentifikasi sebagai sasaran utama oleh Israel“Saya kira Israel tidak bisa membubarkan setiap anggota Hamas, karena ini adalah gagasan Islam ekstremis,” kata analis militer Amir Bar Shalom dari Radio Angkatan Darat Israel.
-adalah: 0.1136
-ahmed: 0.1751
-amir: 0.1552
-analis: 0.1751
-anggota: 0.1552
-angkatan: 0.1751
-bar: 0.1552
-bisa: 0.1301
-darat: 0.1070
-dari: 0.0832
-di: 0.0761
-diidentifikasi: 0.1751
-ekstremis: 0.1751
-gagasan: 0.1751
-gambar: 0.2821
-gaza: 0.0700
-hamas: 0.1459
-images: 0.1751
-ini: 0.0871
-islam: 0.1552
-israel: 0.1860
-karena: 0.1552
-kata: 0.1212
-kira: 0.1751
-lightrocketketerangan: 0.1751
-membubarkan: 0.1751
-militer: 0.0961
-oleh: 0.1301
-pemimpin: 0.1212
-radio: 0.1751
-sasaran: 0.1751
-saya: 0.1552
-sebagai: 0.1552
-setiap: 0.1411
-shalom: 0.1552
-sinwar: 0.1552
-sopa: 0.1751
-sumber: 0.1411
-tidak: 0.0914
-utama: 0.1552
-yahya: 0.1552
-zakot: 0.1751
-
-Kalimat 9: “Tetapi [Israel] dapat melemahkannya sebanyak yang [Israel] bisa sehingga Hamas tidak mempunyai kemampuan operasional.”Itu mungkin merupakan tujuan yang lebih realistis.
-bisa: 0.2065
-dapat: 0.1803
-hamas: 0.1158
-israel: 0.1968
-itu: 0.2065
-kemampuan: 0.2779
-lebih: 0.1698
-melemahkannya: 0.2779
-mempunyai: 0.2779
-merupakan: 0.2779
-mungkin: 0.2239
-operasional: 0.2779
-realistis: 0.2463
-sebanyak: 0.2779
-sehingga: 0.2463
-tetapi: 0.2463
-tidak: 0.1450
-tujuan: 0.2065
-yang: 0.2048
-
-Kalimat 10: Sejauh ini, Israel telah berperang empat kali dengan Hamas, dan setiap upaya untuk menghentikan serangan roketnya selalu gagal.Juru bicara IDF, Letkol Jonathan Conricus, mengatakan bahwa pada akhir perang ini, Hamas seharusnya tidak lagi memiliki kapasitas militer untuk &quot;mengancam atau membunuh warga sipil Israel&quot;.Invasi darat penuh dengan risikoOperasi militer bergantung pada beberapa faktor yang dapat menggagalkannya.Organisasi sayap Hamas, Brigade Izzedine al-Qassam, telah bersiap menghadapi serangan Israel.
-akhir: 0.1051
-al: 0.1253
-atau: 0.1051
-bahwa: 0.1139
-beberapa: 0.1139
-bergantung: 0.1414
-berperang: 0.1139
-bersiap: 0.1414
-bicara: 0.1414
-brigade: 0.1414
-conricus: 0.1414
-dan: 0.0672
-dapat: 0.0917
-darat: 0.0864
-dengan: 0.1957
-empat: 0.1414
-faktor: 0.1414
-gagal: 0.1414
-hamas: 0.1768
-idf: 0.1253
-ini: 0.1407
-invasi: 0.1051
-israel: 0.1502
-izzedine: 0.1414
-jonathan: 0.1414
-juru: 0.1414
-kali: 0.1253
-kapasitas: 0.1414
-lagi: 0.1253
-letkol: 0.1414
-membunuh: 0.1139
-memiliki: 0.0978
-mengancam: 0.1139
-mengatakan: 0.1414
-menggagalkannya: 0.1414
-menghadapi: 0.1253
-menghentikan: 0.1414
-militer: 0.1551
-organisasi: 0.1253
-pada: 0.1729
-penuh: 0.1414
-perang: 0.1051
-qassam: 0.1414
-risikooperasi: 0.1414
-roketnya: 0.1414
-sayap: 0.1414
-seharusnya: 0.1414
-sejauh: 0.1139
-selalu: 0.1414
-serangan: 0.1635
-setiap: 0.1139
-sipil: 0.1051
-telah: 0.1551
-tidak: 0.0738
-untuk: 0.1285
-upaya: 0.1414
-warga: 0.0917
-yang: 0.0521
-
-Kalimat 11: Alat peledak telah dipasang, dan penyergapan direncanakan.
-alat: 0.4429
-dan: 0.2104
-dipasang: 0.4429
-direncanakan: 0.3925
-peledak: 0.4429
-penyergapan: 0.3925
-telah: 0.2430
-
-Kalimat 12: Mereka dapat menggunakan jaringan terowongan Hamas yang terkenal dan luas untuk menyerang pasukan Israel.Baca juga:Israel segera melancarkan serangan darat ke Gaza, bagaimana pertempuran bakal berlangsung?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Pada 2014, batalion infanteri Israel menderita kerugian besar akibat ranjau anti-tank, penembak jitu dan penyergapan, sementara ratusan warga sipil tewas dalam pertempuran di lingkungan utara Kota Gaza.Itulah salah satu alasan Israel menuntut evakuasi 1,1 juta warga Palestina dari bagian utara Jalur Gaza.Warga Israel telah diperingatkan bahwa perang bisa memakan waktu berbulan-bulan, dan tercatat 360.000 tentara cadangan telah melapor untuk bertugas.Pertanyaannya adalah berapa lama Israel dapat menjalankan operasinya tanpa adanya tekanan internasional untuk mundur?Lembaga yang menangani pengungsi di bawah PBB telah memperingatkan bahwa Gaza dengan cepat menjadi “lubang neraka”.Jumlah korban tewas meningkat dengan cepat; Pasokan air, listrik, dan bahan bakar telah diputus, dan kini separuh penduduk diminta mengungsi dari wilayah lain.“Pemerintah dan militer merasa mendapat dukungan dari komunitas internasional – setidaknya dari para pemimpin Barat.
-000: 0.0649
-2014: 0.0806
-360: 0.0806
-adalah: 0.0522
-adanya: 0.0806
-air: 0.0806
-akibat: 0.0714
-alasan: 0.0806
-anti: 0.0806
-baca: 0.0714
-bagaimana: 0.0557
-bagian: 0.0806
-bahan: 0.0806
-bahwa: 0.1298
-bakal: 0.0806
-bakar: 0.0806
-barat: 0.0714
-batalion: 0.0806
-bawah: 0.0806
-berapa: 0.0806
-berbulan: 0.0806
-berlangsung: 0.0806
-berperang: 0.0649
-bertugas: 0.0806
-besar: 0.0522
-bisa: 0.0598
-bulan: 0.0806
-cadangan: 0.0714
-cepat: 0.1428
-dalam: 0.0522
-dan: 0.2295
-dapat: 0.1045
-darat: 0.0492
-dari: 0.1530
-dengan: 0.1115
-di: 0.0700
-diminta: 0.0806
-diperingatkan: 0.0806
-diputus: 0.0806
-dukungan: 0.0806
-evakuasi: 0.0806
-gaza: 0.1288
-gencatan: 0.0714
-hamas: 0.0671
-infanteri: 0.0806
-ini: 0.0401
-internasional: 0.1611
-israel: 0.1997
-itulah: 0.0806
-jalur: 0.0598
-jaringan: 0.0806
-jitu: 0.0806
-juga: 0.0557
-jumlah: 0.0806
-juta: 0.0806
-ke: 0.0492
-kerugian: 0.0806
-kini: 0.0806
-komunitas: 0.0714
-korban: 0.0806
-kota: 0.0806
-lain: 0.0714
-lama: 0.0714
-lembaga: 0.0806
-lingkungan: 0.0806
-listrik: 0.0806
-luas: 0.0714
-lubang: 0.0806
-melancarkan: 0.0806
-melapor: 0.0806
-memakan: 0.0806
-memperingatkan: 0.0806
-menangani: 0.0806
-mendapat: 0.0806
-menderita: 0.0806
-menggunakan: 0.0806
-mengungsi: 0.0714
-meningkat: 0.0806
-menjadi: 0.0649
-menjalankan: 0.0806
-menuntut: 0.0806
-menyerang: 0.0806
-merasa: 0.0806
-mereka: 0.0598
-militer: 0.0442
-mundur: 0.0806
-neraka: 0.0806
-netanyahu: 0.0649
-operasinya: 0.0806
-pada: 0.0492
-palestina: 0.0492
-para: 0.0598
-pasokan: 0.0806
-pasukan: 0.0649
-pbb: 0.0806
-pemerintah: 0.0714
-pemimpin: 0.0557
-penduduk: 0.0714
-penembak: 0.0806
-pengungsi: 0.0806
-penyergapan: 0.0714
-perang: 0.1197
-pertanyaannya: 0.0714
-pertempuran: 0.1428
-ranjau: 0.0806
-ratusan: 0.0806
-salah: 0.0649
-satu: 0.0598
-segera: 0.0806
-sementara: 0.0806
-senjata: 0.0714
-separuh: 0.0806
-serangan: 0.0466
-setidaknya: 0.0806
-sipil: 0.0598
-tank: 0.0806
-tanpa: 0.0806
-tekanan: 0.0649
-telah: 0.1767
-tentara: 0.0598
-tercatat: 0.0806
-terkenal: 0.0806
-terowongan: 0.0806
-tewas: 0.1611
-tolak: 0.0714
-untuk: 0.1098
-utara: 0.1428
-waktu: 0.0714
-waktunya: 0.0714
-warga: 0.1567
-wilayah: 0.0714
-yang: 0.0594
-
-Kalimat 13: Filosofinya adalah &#39;mari kita bergerak, kita punya banyak waktu&#39;,” kata Yossi Melman, salah satu jurnalis keamanan dan intelijen terkemuka Israel.Namun cepat atau lambat dia yakin sekutu Israel akan turun tangan jika mereka melihat gambaran orang-orang kelaparan.Penyelamatan para sanderaLewati Podcast dan lanjutkan membacaInvestigasi: Skandal AdopsiInvestigasi untuk menyibak tabir adopsi ilegal dari Indonesia ke Belanda di masa laluEpisodeAkhir dari PodcastBanyak dari para sandera adalah warga Israel, namun terdapat juga sejumlah besar warga negara asing dan mereka yang memiliki kewarganegaraan ganda, sehingga beberapa negara lain, termasuk Amerika Serikat, Prancis, dan Inggris, memiliki kepentingan dalam operasi ini dan pembebasan warga negara mereka secara aman.
-adalah: 0.1339
-adopsi: 0.1032
-adopsiinvestigasi: 0.1032
-akan: 0.0597
-aman: 0.1032
-amerika: 0.1032
-asing: 0.1032
-atau: 0.0767
-banyak: 0.0915
-beberapa: 0.0831
-belanda: 0.1032
-bergerak: 0.1032
-besar: 0.0669
-cepat: 0.0915
-dalam: 0.0669
-dan: 0.2451
-dari: 0.1470
-di: 0.0449
-dia: 0.0767
-filosofinya: 0.1032
-gambaran: 0.1032
-ganda: 0.0915
-ilegal: 0.1032
-indonesia: 0.1032
-inggris: 0.1032
-ini: 0.0513
-intelijen: 0.1032
-israel: 0.1096
-jika: 0.0831
-juga: 0.0714
-jurnalis: 0.1032
-kata: 0.0714
-ke: 0.0631
-keamanan: 0.0831
-kelaparan: 0.1032
-kepentingan: 0.1032
-kewarganegaraan: 0.1032
-kita: 0.2064
-lain: 0.0915
-laluepisodeakhir: 0.1032
-lambat: 0.1032
-lanjutkan: 0.1032
-mari: 0.1032
-masa: 0.1032
-melihat: 0.1032
-melman: 0.1032
-membacainvestigasi: 0.1032
-memiliki: 0.1428
-menyibak: 0.1032
-mereka: 0.2300
-namun: 0.1663
-negara: 0.2300
-operasi: 0.0714
-orang: 0.1428
-para: 0.1533
-pembebasan: 0.0915
-penyelamatan: 0.1032
-podcast: 0.1032
-podcastbanyak: 0.1032
-prancis: 0.0915
-punya: 0.0915
-salah: 0.0831
-sandera: 0.0767
-sanderalewati: 0.1032
-satu: 0.0767
-secara: 0.0831
-sehingga: 0.0915
-sejumlah: 0.0831
-sekutu: 0.1032
-serikat: 0.1032
-skandal: 0.1032
-tabir: 0.1032
-tangan: 0.1032
-terdapat: 0.0831
-terkemuka: 0.1032
-termasuk: 0.1032
-turun: 0.1032
-untuk: 0.0469
-waktu: 0.0915
-warga: 0.2008
-yakin: 0.0714
-yang: 0.0380
-yossi: 0.1032
-
-Kalimat 14: Presiden Prancis, Emmanuel Macron, telah berjanji kepada keluarga Prancis-Israel yang kerabatnya disandera Hamas untuk membawa pulang orang yang mereka cintai: &quot;Prancis tidak akan pernah meninggalkan anak-anaknya.
-akan: 0.1180
-anak: 0.2042
-anaknya: 0.2042
-berjanji: 0.1810
-cintai: 0.2042
-disandera: 0.2042
-emmanuel: 0.2042
-hamas: 0.0851
-israel: 0.0723
-keluarga: 0.2042
-kepada: 0.1810
-kerabatnya: 0.2042
-macron: 0.2042
-membawa: 0.1810
-meninggalkan: 0.2042
-mereka: 0.1517
-orang: 0.1413
-pernah: 0.1810
-prancis: 0.5429
-presiden: 0.1810
-pulang: 0.2042
-telah: 0.1120
-tidak: 0.1066
-untuk: 0.0927
-yang: 0.1505
-
-Kalimat 15: &quot;Sejauh mana nasib para sandera akan mempengaruhi perencana militer masih belum jelas, dan terdapat juga tekanan dalam negeri terhadap para pemimpin Israel.Lebih jauh tentang konflik Israel dan Hamas: Perkembangan terbaru konflik Israel-PalestinaSiapa Hamas dan bagaimana kiprahnya?
-akan: 0.1115
-bagaimana: 0.1334
-belum: 0.1709
-dalam: 0.1251
-dan: 0.2747
-hamas: 0.1607
-israel: 0.2048
-jauh: 0.1709
-jelas: 0.1928
-juga: 0.1334
-kiprahnya: 0.1928
-konflik: 0.2865
-lebih: 0.1178
-mana: 0.1709
-masih: 0.1928
-mempengaruhi: 0.1709
-militer: 0.1058
-nasib: 0.1709
-negeri: 0.1928
-palestinasiapa: 0.1928
-para: 0.2865
-pemimpin: 0.1334
-perencana: 0.1928
-perkembangan: 0.1928
-sandera: 0.1433
-sejauh: 0.1553
-tekanan: 0.1553
-tentang: 0.1928
-terbaru: 0.1709
-terdapat: 0.1553
-terhadap: 0.1433
-
-Kalimat 16: Sejarah konflik berkepanjangan Israel-PalestinaSejarah Jalur Gaza, ‘penjara terbuka paling besar di dunia’Amir Bar Shalom membandingkan situasi ini dengan insiden yang terjadi pada saat Olimpiade Munich tahun 1972, ketika sekelompok orang bersenjata Palestina menangkap atlet Israel dan membunuh 11 orang.Sebuah operasi diluncurkan untuk mencari dan membunuh semua orang yang terlibat dalam serangan tersebut dan dia yakin pemerintah ingin memburu semua orang di balik penculikan tersebut.Menyelamatkan begitu banyak orang yang ditahan di berbagai wilayah di Gaza mungkin tidak dapat dilakukan oleh pasukan komando unit elit Israel, Sayeret Matkal.
-11: 0.1134
-1972: 0.1134
-amir: 0.1005
-atlet: 0.1134
-balik: 0.1134
-banyak: 0.1005
-bar: 0.1005
-begitu: 0.1134
-berbagai: 0.1134
-berkepanjangan: 0.1134
-bersenjata: 0.1134
-besar: 0.0735
-dalam: 0.0735
-dan: 0.1615
-dapat: 0.0735
-dengan: 0.0784
-di: 0.1972
-dia: 0.0842
-dilakukan: 0.0913
-diluncurkan: 0.1134
-ditahan: 0.0913
-dunia: 0.1005
-elit: 0.1134
-gaza: 0.0906
-ingin: 0.0913
-ini: 0.0564
-insiden: 0.1134
-israel: 0.1204
-jalur: 0.0842
-ketika: 0.1005
-komando: 0.1134
-konflik: 0.0842
-matkal: 0.1134
-membandingkan: 0.1134
-membunuh: 0.1827
-memburu: 0.1134
-menangkap: 0.1134
-mencari: 0.1134
-menyelamatkan: 0.1005
-mungkin: 0.0913
-munich: 0.1134
-oleh: 0.0842
-olimpiade: 0.1134
-operasi: 0.0784
-orang: 0.3922
-pada: 0.0693
-palestina: 0.0693
-palestinasejarah: 0.1134
-paling: 0.1134
-pasukan: 0.0913
-pemerintah: 0.1005
-penculikan: 0.1134
-penjara: 0.1134
-saat: 0.1005
-sayeret: 0.1134
-sebuah: 0.0913
-sejarah: 0.1134
-sekelompok: 0.1134
-semua: 0.2267
-serangan: 0.0655
-shalom: 0.1005
-situasi: 0.1005
-tahun: 0.0842
-terbuka: 0.1134
-terjadi: 0.0784
-terlibat: 0.1134
-tersebut: 0.1569
-tidak: 0.0592
-unit: 0.1134
-untuk: 0.0515
-wilayah: 0.1005
-yakin: 0.0784
-yang: 0.1253
-
-Kalimat 17: Untuk memutar video ini, aktifkan JavaScript atau coba di mesin pencari lainPlay video, &quot;Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?
-aktifkan: 0.2432
-atau: 0.1807
-coba: 0.2432
-di: 0.3172
-gaza: 0.0972
-ini: 0.1210
-javascript: 0.2432
-kehidupan: 0.2155
-konflik: 0.1807
-lainplay: 0.2432
-memutar: 0.2432
-mengapa: 0.1959
-mesin: 0.2432
-pencari: 0.2432
-sana: 0.2155
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>terjadi: 0.1682
-terus: 0.1959
-untuk: 0.1104
-video: 0.4311
-
-Kalimat 18: &quot;, Durasi 7,1307:13Keterangan video, Kehidupan di Gaza : Mengapa konflik terus terjadi di sana?Hamas telah mengancam akan menembak sandera sebagai pencegah serangan Israel.Pada 2011, Israel menukar lebih dari 1.000 tahanan untuk pembebasan seorang tentara, Gilad Shalit, yang ditahan oleh Hamas selama lima tahun.
-000: 0.1540
-1307: 0.1911
-13keterangan: 0.1911
-2011: 0.1911
-akan: 0.1105
-dari: 0.0908
-di: 0.1662
-ditahan: 0.1540
-durasi: 0.1694
-gaza: 0.0764
-gilad: 0.1911
-hamas: 0.1593
-israel: 0.1354
-kehidupan: 0.1694
-konflik: 0.1420
-lebih: 0.1168
-lima: 0.1911
-menembak: 0.1911
-mengancam: 0.1540
-mengapa: 0.1540
-menukar: 0.1911
-oleh: 0.1420
-pada: 0.1168
-pembebasan: 0.1694
-pencegah: 0.1911
-sana: 0.1694
-sandera: 0.1420
-sebagai: 0.1694
-selama: 0.1911
-seorang: 0.1911
-serangan: 0.1105
-shalit: 0.1911
-tahanan: 0.1694
-tahun: 0.1420
-telah: 0.1048
-tentara: 0.1420
-terjadi: 0.1322
-terus: 0.1540
-untuk: 0.0868
-video: 0.1694
-yang: 0.0704
-
-Kalimat 19: Namun Israel akan berpikir dua kali sebelum melepaskan tahanan secara besar-besaran, karena salah satu tahanan yang dibebaskan dalam pertukaran itu adalah Yahya Sinwar, yang kemudian menjadi pemimpin politik Hamas di Gaza.Negara tetangga mengawasi dengan cermatHal yang juga dapat mempengaruhi durasi dan hasil serangan darat adalah bagaimana reaksi negara-negara tetangga Israel.Mereka mungkin menghadapi peningkatan tuntutan dari Mesir, yang berbatasan dengan Gaza dan sudah mendorong agar bantuan diizinkan melalui perbatasan Rafah.“Semakin besar penderitaan yang dialami warga Gaza setelah operasi militer Israel, semakin besar pula tekanan yang akan dihadapi Mesir, agar terlihat seolah-olah mereka tidak berpaling dari Palestina,” kata Ofir Winter dari Institut Kajian Keamanan Nasional Israel.Namun hal itu tidak akan terjadi jika Kairo mengizinkan penyeberangan massal warga Gaza ke Mesir atau bertindak secara militer melawan Israel atas nama mereka, dia yakin.Sumber gambar, SAID KHATIB/AFPKeterangan gambar, Serangan udara dan artileri Israel telah membombardir Gaza setelah Hamas melakukan serangan terhadap warga Israel Perbatasan utara Israel dengan Lebanon juga berada dalam pengawasan ketat.Sejauh ini telah terjadi beberapa serangan lintas batas yang melibatkan kelompok militan Islam Hizbullah, namun serangan tersebut belum menjadi sebuah front baru terhadap Israel.Iran, sponsor utama Hizbullah, sudah mengancam akan meluncurkan “front baru” melawan Israel.
-adalah: 0.0878
-afpketerangan: 0.0677
-agar: 0.1354
-akan: 0.1565
-artileri: 0.0677
-atas: 0.0600
-atau: 0.0503
-bagaimana: 0.0468
-bantuan: 0.0677
-baru: 0.1200
-batas: 0.0677
-beberapa: 0.0545
-belum: 0.0600
-berada: 0.0600
-berbatasan: 0.0677
-berpaling: 0.0677
-berpikir: 0.0600
-bertindak: 0.0677
-besar: 0.1317
-besaran: 0.0677
-cermathal: 0.0677
-dalam: 0.0878
-dan: 0.0964
-dapat: 0.0439
-darat: 0.0414
-dari: 0.0964
-dengan: 0.1405
-di: 0.0294
-dia: 0.0503
-dialami: 0.0677
-dibebaskan: 0.0677
-dihadapi: 0.0677
-diizinkan: 0.0677
-dua: 0.0677
-durasi: 0.0600
-front: 0.1354
-gambar: 0.1091
-gaza: 0.1353
-hal: 0.0600
-hamas: 0.0564
-hasil: 0.0545
-hizbullah: 0.1354
-ini: 0.0337
-institut: 0.0677
-iran: 0.0677
-islam: 0.0600
-israel: 0.2397
-itu: 0.1006
-jika: 0.0545
-juga: 0.0937
-kairo: 0.0677
-kajian: 0.0677
-kali: 0.0600
-karena: 0.0600
-kata: 0.0468
-ke: 0.0414
-keamanan: 0.0545
-kelompok: 0.0545
-kemudian: 0.0677
-ketat: 0.0545
-khatib: 0.0677
-lebanon: 0.0677
-lintas: 0.0677
-massal: 0.0677
-melakukan: 0.0677
-melalui: 0.0677
-melawan: 0.1200
-melepaskan: 0.0677
-melibatkan: 0.0600
-meluncurkan: 0.0677
-membombardir: 0.0677
-mempengaruhi: 0.0600
-mendorong: 0.0677
-mengancam: 0.0545
-mengawasi: 0.0677
-menghadapi: 0.0600
-mengizinkan: 0.0677
-menjadi: 0.1091
-mereka: 0.1509
-mesir: 0.1800
-militan: 0.0677
-militer: 0.0743
-mungkin: 0.0545
-nama: 0.0677
-namun: 0.1636
-nasional: 0.0677
-negara: 0.1509
-ofir: 0.0600
-olah: 0.0677
-operasi: 0.0468
-palestina: 0.0414
-pemimpin: 0.0468
-penderitaan: 0.0677
-pengawasan: 0.0677
-peningkatan: 0.0677
-penyeberangan: 0.0677
-perbatasan: 0.1354
-pertukaran: 0.0677
-politik: 0.0677
-pula: 0.0677
-rafah: 0.0677
-reaksi: 0.0677
-said: 0.0677
-salah: 0.0545
-satu: 0.0503
-sebelum: 0.0600
-sebuah: 0.0545
-secara: 0.1091
-sejauh: 0.0545
-semakin: 0.1354
-seolah: 0.0677
-serangan: 0.1957
-setelah: 0.0937
-sinwar: 0.0600
-sponsor: 0.0677
-sudah: 0.1354
-sumber: 0.0545
-tahanan: 0.1200
-tekanan: 0.0545
-telah: 0.0743
-terhadap: 0.1006
-terjadi: 0.0937
-terlihat: 0.0677
-tersebut: 0.0468
-tetangga: 0.1354
-tidak: 0.0706
-tuntutan: 0.0677
-udara: 0.0600
-utama: 0.0600
-utara: 0.0600
-warga: 0.1317
-winter: 0.0600
-yahya: 0.0600
-yakin: 0.0468
-yang: 0.1746
-
-Kalimat 20: Hal-hal tersebut menjadi fokus peringatan Presiden AS Joe Biden baru-baru ini, ketika dia berkata: &quot;Kepada negara mana pun, organisasi mana pun, siapa pun yang berpikir untuk mengambil keuntungan dari situasi ini, saya punya satu kata: Jangan!
-as: 0.1450
-baru: 0.2899
-berkata: 0.1636
-berpikir: 0.1450
-biden: 0.1636
-dari: 0.0777
-dia: 0.1215
-fokus: 0.1636
-hal: 0.2899
-ini: 0.1627
-jangan: 0.1636
-joe: 0.1636
-kata: 0.1132
-kepada: 0.1450
-ketika: 0.1450
-keuntungan: 0.1636
-mana: 0.2899
-mengambil: 0.1636
-menjadi: 0.1318
-negara: 0.1215
-organisasi: 0.1450
-peringatan: 0.1636
-presiden: 0.1450
-pun: 0.4349
-punya: 0.1450
-satu: 0.1215
-saya: 0.1450
-siapa: 0.1636
-situasi: 0.1450
-tersebut: 0.1132
-untuk: 0.0743
-yang: 0.0603
-
-Kalimat 21: &quot;Sebuah kapal induk AS telah dikirim ke Mediterania Timur untuk menekankan pesan tersebut.Apa tujuan akhir Israel terhadap Gaza?Jika Hamas melemah secara signifikan, pertanyaannya adalah apa yang bisa dilakukan untuk menggantikannya?Israel menarik tentaranya dan ribuan pemukim keluar dari Jalur Gaza pada tahun 2005 dan tidak memiliki niat untuk kembali menduduki Kawasan itu.Ofir Winter yakin peralihan kekuasaan berpotensi membuka jalan bagi kembalinya Otoritas Palestina (PA) secara bertahap, yang diusir dari Gaza oleh Hamas pada tahun 2007.
-2005: 0.1309
-2007: 0.1309
-adalah: 0.0849
-akhir: 0.0973
-apa: 0.1945
-as: 0.1160
-bagi: 0.1055
-berpotensi: 0.1309
-bertahap: 0.1309
-bisa: 0.0973
-dan: 0.1244
-dari: 0.1244
-dikirim: 0.1309
-dilakukan: 0.1055
-diusir: 0.1309
-gaza: 0.1570
-hamas: 0.1091
-induk: 0.1309
-israel: 0.0927
-itu: 0.0973
-jalan: 0.1309
-jalur: 0.0973
-jika: 0.1055
-kapal: 0.1309
-kawasan: 0.1309
-ke: 0.0800
-kekuasaan: 0.1309
-keluar: 0.1309
-kembali: 0.1055
-kembalinya: 0.1309
-mediterania: 0.1309
-melemah: 0.1309
-membuka: 0.1309
-memiliki: 0.0906
-menarik: 0.1309
-menduduki: 0.1309
-menekankan: 0.1309
-menggantikannya: 0.1309
-niat: 0.1309
-ofir: 0.1160
-oleh: 0.0973
-otoritas: 0.1309
-pa: 0.1160
-pada: 0.1600
-palestina: 0.0800
-pemukim: 0.1309
-peralihan: 0.1309
-pertanyaannya: 0.1160
-pesan: 0.1309
-ribuan: 0.1160
-sebuah: 0.1055
-secara: 0.2109
-signifikan: 0.1309
-tahun: 0.1945
-telah: 0.0718
-tentaranya: 0.1309
-terhadap: 0.0973
-tersebut: 0.0906
-tidak: 0.0683
-timur: 0.1309
-tujuan: 0.0973
-untuk: 0.1784
-winter: 0.1160
-yakin: 0.0906
-yang: 0.0965
-
-Kalimat 22: PA, yang bukan kelompok milisi, saat ini menguasai sebagian Tepi Barat.
-barat: 0.3100
-bukan: 0.3498
-ini: 0.1740
-kelompok: 0.2818
-menguasai: 0.3498
-milisi: 0.3100
-pa: 0.3100
-saat: 0.3100
-sebagian: 0.3498
-tepi: 0.3498
-yang: 0.1289
-
-Kalimat 23: Baca juga:Apa hasil analisis terbaru dari bukti-bukti di lokasi ledakan rumah sakit di Gaza?Perang Israel-Hamas: Netanyahu tolak gencatan senjata: &#39;Ini waktunya berperang&#39;Kesaksian warga Thailand yang terperangkap perang Israel-Hamas: &#39;Kami melompati tembok dan ditembaki dari belakang&#39;Mesir juga akan menyambut negara tetangganya yang lebih pragmatis, ujarnya.Infrastruktur Gaza yang hancur pada akhirnya harus dibangun kembali seperti setelah perang sebelumnya.Bahkan sebelum kekejaman Hamas di Israel, terdapat pembatasan ketat terhadap “barang-barang penggunaan ganda” yang memasuki Gaza yang dapat memiliki peran militer dan juga sipil.
-akan: 0.0678
-akhirnya: 0.1173
-analisis: 0.1173
-apa: 0.0872
-baca: 0.1040
-bahkan: 0.1173
-barang: 0.2347
-belakang: 0.1173
-berperang: 0.0945
-bukti: 0.2080
-dan: 0.1115
-dapat: 0.0761
-dari: 0.1115
-di: 0.1531
-dibangun: 0.1173
-ditembaki: 0.1173
-ganda: 0.1040
-gaza: 0.1407
-gencatan: 0.1040
-hamas: 0.1467
-hancur: 0.1173
-harus: 0.1173
-hasil: 0.0945
-infrastruktur: 0.1173
-ini: 0.0584
-israel: 0.1247
-juga: 0.2435
-kami: 0.1173
-kekejaman: 0.1173
-kembali: 0.0945
-kesaksian: 0.1173
-ketat: 0.0945
-lebih: 0.0717
-ledakan: 0.1173
-lokasi: 0.1040
-melompati: 0.1173
-memasuki: 0.1173
-memiliki: 0.0812
-menyambut: 0.1173
-mesir: 0.1040
-militer: 0.0644
-negara: 0.0872
-netanyahu: 0.0945
-pada: 0.0717
-pembatasan: 0.1040
-penggunaan: 0.1173
-peran: 0.1173
-perang: 0.2616
-pragmatis: 0.1173
-rumah: 0.0945
-sakit: 0.1040
-sebelum: 0.1040
-sebelumnya: 0.1040
-senjata: 0.1040
-seperti: 0.1040
-setelah: 0.0812
-sipil: 0.0872
-tembok: 0.1173
-terbaru: 0.1040
-terdapat: 0.0945
-terhadap: 0.0872
-terperangkap: 0.1173
-tetangganya: 0.1173
-thailand: 0.1173
-tolak: 0.1040
-ujarnya: 0.1173
-waktunya: 0.1040
-warga: 0.0761
-yang: 0.2162
-
-Kalimat 24: Israel ingin menerapkan pembatasan yang lebih ketat.Ada seruan untuk membangun zona penyangga yang luas di sepanjang pagar Gaza untuk memberikan perlindungan yang lebih besar bagi komunitas Israel.
-ada: 0.2062
-bagi: 0.1874
-besar: 0.1509
-di: 0.1012
-gaza: 0.0930
-ingin: 0.1874
-israel: 0.1648
-ketat: 0.1874
-komunitas: 0.2062
-lebih: 0.2844
-luas: 0.2062
-membangun: 0.2327
-memberikan: 0.2327
-menerapkan: 0.2327
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pagar: 0.2327
-pembatasan: 0.2062
-penyangga: 0.2327
-perlindungan: 0.2327
-sepanjang: 0.2062
-seruan: 0.2327
-untuk: 0.2113
-yang: 0.2572
-zona: 0.2062
-
-Kalimat 25: Mantan kepala dinas keamanan Shin Bet, Yoram Cohen, yakin zona &quot;tembak di tempat&quot; sepanjang 2 km akan diperlukan untuk menggantikan zona yang ada.Apapun hasil perangnya, Israel ingin memastikan serangan serupa tidak akan terjadi lagi.Topik terkaitMesirIsrael-PalestinaPolitikMiliterTimur tengahDunia ArabIsrael Palestina
-ada: 0.1563
-akan: 0.2039
-apapun: 0.1763
-arabisrael: 0.1763
-bet: 0.1763
-cohen: 0.1763
-di: 0.0767
-dinas: 0.1763
-diperlukan: 0.1763
-hasil: 0.1420
-ingin: 0.1420
-israel: 0.0624
-keamanan: 0.1420
-kepala: 0.1563
-km: 0.1763
-lagi: 0.1563
-mantan: 0.1763
-memastikan: 0.1763
-menggantikan: 0.1763
-palestina: 0.1078
-palestinapolitikmilitertimur: 0.1763
-perangnya: 0.1763
-sepanjang: 0.1563
-serangan: 0.1019
-serupa: 0.1763
-shin: 0.1763
-tembak: 0.1763
-tempat: 0.1763
-tengahdunia: 0.1763
-terjadi: 0.1220
-terkaitmesirisrael: 0.1763
-tidak: 0.0920
-topik: 0.1763
-untuk: 0.0801
-yakin: 0.1220
-yang: 0.0650
-yoram: 0.1763
-zona: 0.3126
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bag</span> <span class="o">=</span> <span class="n">bagOfWords</span><span class="p">(</span><span class="n">sentences</span><span class="p">);</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">Counts</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-3-dd4fb5e50ad8&gt;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">bag</span> <span class="o">=</span> <span class="n">bagOfWords</span><span class="p">(</span><span class="n">sentences</span><span class="p">);</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">Counts</span><span class="p">;</span>
-
-<span class="ne">NameError</span>: name &#39;bagOfWords&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="co-occurrence-matrix">
-<h1>co-occurrence matrix<a class="headerlink" href="#co-occurrence-matrix" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p>graph, centrality</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="bsio">
+<h1>bsio<a class="headerlink" href="#bsio" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1749,30 +437,23 @@ zona: 0.3126
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="summary.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ringkasan Data</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">ekstaksi kata kunci menggunakan textrank</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#co-occurrence-matrix">co-occurrence matrix</a></li>
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
@@ -1790,6 +471,7 @@ By 20_148 Fadilatul Jannah
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2022.
@@ -1816,8 +498,8 @@ By 20_148 Fadilatul Jannah
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

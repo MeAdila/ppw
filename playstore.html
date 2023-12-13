@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'playstore';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Crawling Berita" href="graph.html" />
+    <link rel="next" title="Crawling Satu Berita" href="graph.html" />
     <link rel="prev" title="Implementasi LDA" href="LDA.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -139,6 +139,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="intro.html">
@@ -173,7 +174,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Data Text</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LDA.html">Implementasi LDA</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling Playstore</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph.html">Crawling Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph.html">Crawling Satu Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="category.html">Crawling Tiga Kategori Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Ringkasan Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TextRank.html">bsio</a></li>
 </ul>
 
     </div>
@@ -358,6 +362,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -367,6 +372,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -463,7 +469,7 @@ Successfully installed google-play-scraper-1.2.4
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-078b09c6-ce8c-4e9c-961d-04349ca361e0" class="colab-df-container">
+  <div id="df-4a4b3819-95e5-4513-bdfc-a06de14544bc" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -498,73 +504,73 @@ Successfully installed google-play-scraper-1.2.4
   <tbody>
     <tr>
       <th>0</th>
-      <td>bcc079ef-2ad2-4275-aa14-6f0b08ffdfc9</td>
-      <td>Muhammad Maulana Darmawan</td>
+      <td>f49a8115-ad2b-43cb-a60f-5718c20db5fb</td>
+      <td>Siti Sofiah</td>
       <td>https://play-lh.googleusercontent.com/a-/ALV-U...</td>
-      <td>Setelah update, spotify jadi lebih sering stop...</td>
+      <td>Kenapa ya setelah hapus data, aplikasinya jadi...</td>
       <td>3</td>
-      <td>99</td>
-      <td>8.8.88.397</td>
-      <td>2023-11-19 02:00:12</td>
+      <td>147</td>
+      <td>8.8.92.700</td>
+      <td>2023-12-11 02:37:58</td>
       <td>None</td>
       <td>None</td>
-      <td>8.8.88.397</td>
+      <td>8.8.92.700</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>96f9eb92-5e59-4fc6-af21-ac2bb6368174</td>
-      <td>Zannuba Alian Nur</td>
+      <td>8723e496-f050-4d9a-b19b-83d3bd295239</td>
+      <td>Farah Humaira</td>
       <td>https://play-lh.googleusercontent.com/a-/ALV-U...</td>
-      <td>Ini knp lagunya bnyk yg ga bisa tampilin lirik...</td>
+      <td>Emang fitur yang diberikan untuk pengguna grat...</td>
       <td>1</td>
-      <td>1993</td>
-      <td>8.8.82.634</td>
-      <td>2023-11-09 03:30:15</td>
+      <td>216</td>
+      <td>8.8.92.700</td>
+      <td>2023-12-10 08:41:12</td>
       <td>None</td>
       <td>None</td>
-      <td>8.8.82.634</td>
+      <td>8.8.92.700</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2cd5b501-6b60-45d7-8db2-9e0ff5419f4b</td>
-      <td>rere mh</td>
+      <td>ae065c39-7775-48e5-bd91-881e52e94339</td>
+      <td>Wahyu Hanifa</td>
       <td>https://play-lh.googleusercontent.com/a/ACg8oc...</td>
-      <td>Beberapa lagu ada yang belum, lalu banyak ikla...</td>
+      <td>mohon diperbaiki bug untuk lirik' yang tidak b...</td>
       <td>3</td>
-      <td>79</td>
-      <td>8.8.82.634</td>
-      <td>2023-11-19 08:14:16</td>
+      <td>267</td>
+      <td>8.8.92.700</td>
+      <td>2023-12-09 10:14:38</td>
       <td>None</td>
       <td>None</td>
-      <td>8.8.82.634</td>
+      <td>8.8.92.700</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4da7d07f-dd73-4486-9669-b0c05fd8533f</td>
-      <td>Fauzi25 Official</td>
+      <td>2008431e-b788-4dcd-80a2-bc8f79cda664</td>
+      <td>Nofita Dewi</td>
       <td>https://play-lh.googleusercontent.com/a-/ALV-U...</td>
-      <td>Iklan sangat pas di saat musik terhenti atau d...</td>
-      <td>5</td>
-      <td>576</td>
-      <td>8.8.82.634</td>
-      <td>2023-11-10 08:03:35</td>
+      <td>Kaya aplikasi untuk mendengarkan lagu biasa ta...</td>
+      <td>3</td>
+      <td>313</td>
+      <td>8.8.92.700</td>
+      <td>2023-12-08 03:35:41</td>
       <td>None</td>
       <td>None</td>
-      <td>8.8.82.634</td>
+      <td>8.8.92.700</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>bc902a93-14f7-4d19-99d7-e4bb62e43c32</td>
-      <td>Nazwatul Unayah</td>
+      <td>1152c51b-0e7a-46e2-8d37-0e20a15ac7b8</td>
+      <td>Donny Setiawan</td>
       <td>https://play-lh.googleusercontent.com/a-/ALV-U...</td>
-      <td>Spotify kenapa ya akhir2 ini semakin di update...</td>
-      <td>1</td>
+      <td>Aplikasinya sangat bagus tapi hanya untuk peng...</td>
       <td>2</td>
-      <td>8.8.82.634</td>
-      <td>2023-11-19 14:16:11</td>
+      <td>31</td>
+      <td>8.8.92.700</td>
+      <td>2023-12-07 11:58:27</td>
       <td>None</td>
       <td>None</td>
-      <td>8.8.82.634</td>
+      <td>8.8.92.700</td>
     </tr>
   </tbody>
 </table>
@@ -572,7 +578,7 @@ Successfully installed google-play-scraper-1.2.4
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-078b09c6-ce8c-4e9c-961d-04349ca361e0')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-4a4b3819-95e5-4513-bdfc-a06de14544bc')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -624,12 +630,12 @@ Successfully installed google-play-scraper-1.2.4
 
     <script>
       const buttonEl =
-        document.querySelector('#df-078b09c6-ce8c-4e9c-961d-04349ca361e0 button.colab-df-convert');
+        document.querySelector('#df-4a4b3819-95e5-4513-bdfc-a06de14544bc button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-078b09c6-ce8c-4e9c-961d-04349ca361e0');
+        const element = document.querySelector('#df-4a4b3819-95e5-4513-bdfc-a06de14544bc');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -672,7 +678,7 @@ Successfully installed google-play-scraper-1.2.4
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-cc9de6e9-acfd-4275-9a65-33813457e642" class="colab-df-container">
+  <div id="df-a3d782e5-9d10-470c-b196-6bcfb5c2740f" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -700,38 +706,38 @@ Successfully installed google-play-scraper-1.2.4
   <tbody>
     <tr>
       <th>0</th>
-      <td>Muhammad Maulana Darmawan</td>
+      <td>Siti Sofiah</td>
       <td>3</td>
-      <td>2023-11-19 02:00:12</td>
-      <td>Setelah update, spotify jadi lebih sering stop...</td>
+      <td>2023-12-11 02:37:58</td>
+      <td>Kenapa ya setelah hapus data, aplikasinya jadi...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Zannuba Alian Nur</td>
+      <td>Farah Humaira</td>
       <td>1</td>
-      <td>2023-11-09 03:30:15</td>
-      <td>Ini knp lagunya bnyk yg ga bisa tampilin lirik...</td>
+      <td>2023-12-10 08:41:12</td>
+      <td>Emang fitur yang diberikan untuk pengguna grat...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>rere mh</td>
+      <td>Wahyu Hanifa</td>
       <td>3</td>
-      <td>2023-11-19 08:14:16</td>
-      <td>Beberapa lagu ada yang belum, lalu banyak ikla...</td>
+      <td>2023-12-09 10:14:38</td>
+      <td>mohon diperbaiki bug untuk lirik' yang tidak b...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Fauzi25 Official</td>
-      <td>5</td>
-      <td>2023-11-10 08:03:35</td>
-      <td>Iklan sangat pas di saat musik terhenti atau d...</td>
+      <td>Nofita Dewi</td>
+      <td>3</td>
+      <td>2023-12-08 03:35:41</td>
+      <td>Kaya aplikasi untuk mendengarkan lagu biasa ta...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Nazwatul Unayah</td>
-      <td>1</td>
-      <td>2023-11-19 14:16:11</td>
-      <td>Spotify kenapa ya akhir2 ini semakin di update...</td>
+      <td>Donny Setiawan</td>
+      <td>2</td>
+      <td>2023-12-07 11:58:27</td>
+      <td>Aplikasinya sangat bagus tapi hanya untuk peng...</td>
     </tr>
   </tbody>
 </table>
@@ -739,7 +745,7 @@ Successfully installed google-play-scraper-1.2.4
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-cc9de6e9-acfd-4275-9a65-33813457e642')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a3d782e5-9d10-470c-b196-6bcfb5c2740f')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -791,12 +797,12 @@ Successfully installed google-play-scraper-1.2.4
 
     <script>
       const buttonEl =
-        document.querySelector('#df-cc9de6e9-acfd-4275-9a65-33813457e642 button.colab-df-convert');
+        document.querySelector('#df-a3d782e5-9d10-470c-b196-6bcfb5c2740f button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-cc9de6e9-acfd-4275-9a65-33813457e642');
+        const element = document.querySelector('#df-a3d782e5-9d10-470c-b196-6bcfb5c2740f');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -831,7 +837,7 @@ Successfully installed google-play-scraper-1.2.4
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-569c413c-2fb4-4243-83b7-77ad3a22e683" class="colab-df-container">
+  <div id="df-4fe61ce9-662a-493c-8e65-22cd6ea1a813" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -858,39 +864,39 @@ Successfully installed google-play-scraper-1.2.4
   </thead>
   <tbody>
     <tr>
-      <th>4</th>
-      <td>Nazwatul Unayah</td>
+      <th>30</th>
+      <td>Adii Makayasaa</td>
       <td>1</td>
-      <td>2023-11-19 14:16:11</td>
-      <td>Spotify kenapa ya akhir2 ini semakin di update...</td>
+      <td>2023-12-11 11:53:21</td>
+      <td>Aplikasi nya sudah bagus banget dan lagu yg ti...</td>
     </tr>
     <tr>
-      <th>35</th>
-      <td>Muhammad Zaki Aldifano</td>
-      <td>5</td>
-      <td>2023-11-19 12:46:53</td>
-      <td>Untuk aplikasi saya suka tetapi harus ada peni...</td>
+      <th>31</th>
+      <td>Elsa Agustin</td>
+      <td>2</td>
+      <td>2023-12-11 11:07:32</td>
+      <td>ini Spotify sekarang kenapa ya lagu² nya pada ...</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>rere mh</td>
-      <td>3</td>
-      <td>2023-11-19 08:14:16</td>
-      <td>Beberapa lagu ada yang belum, lalu banyak ikla...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>S. Fira Agustia</td>
-      <td>1</td>
-      <td>2023-11-19 07:37:11</td>
-      <td>Malesin banget, setiap satu kali putar lagu pa...</td>
+      <th>11</th>
+      <td>Khanza Lavina Rasmy</td>
+      <td>2</td>
+      <td>2023-12-11 08:02:04</td>
+      <td>Kenapa ya sblm di update apk ini lancar² aja t...</td>
     </tr>
     <tr>
       <th>0</th>
-      <td>Muhammad Maulana Darmawan</td>
+      <td>Siti Sofiah</td>
       <td>3</td>
-      <td>2023-11-19 02:00:12</td>
-      <td>Setelah update, spotify jadi lebih sering stop...</td>
+      <td>2023-12-11 02:37:58</td>
+      <td>Kenapa ya setelah hapus data, aplikasinya jadi...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Farah Humaira</td>
+      <td>1</td>
+      <td>2023-12-10 08:41:12</td>
+      <td>Emang fitur yang diberikan untuk pengguna grat...</td>
     </tr>
   </tbody>
 </table>
@@ -898,7 +904,7 @@ Successfully installed google-play-scraper-1.2.4
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-569c413c-2fb4-4243-83b7-77ad3a22e683')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-4fe61ce9-662a-493c-8e65-22cd6ea1a813')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -950,12 +956,12 @@ Successfully installed google-play-scraper-1.2.4
 
     <script>
       const buttonEl =
-        document.querySelector('#df-569c413c-2fb4-4243-83b7-77ad3a22e683 button.colab-df-convert');
+        document.querySelector('#df-4fe61ce9-662a-493c-8e65-22cd6ea1a813 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-569c413c-2fb4-4243-83b7-77ad3a22e683');
+        const element = document.querySelector('#df-4fe61ce9-662a-493c-8e65-22cd6ea1a813');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -993,7 +999,7 @@ Successfully installed google-play-scraper-1.2.4
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-00ac1d60-bdcd-4a5b-b38c-e0f3f3840529" class="colab-df-container">
+  <div id="df-8ec4d39f-22e9-4e59-b41a-89ba16ddba79" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1020,39 +1026,39 @@ Successfully installed google-play-scraper-1.2.4
   </thead>
   <tbody>
     <tr>
-      <th>4</th>
-      <td>Nazwatul Unayah</td>
+      <th>30</th>
+      <td>Adii Makayasaa</td>
       <td>1</td>
-      <td>2023-11-19 14:16:11</td>
-      <td>Spotify kenapa ya akhir2 ini semakin di update...</td>
+      <td>2023-12-11 11:53:21</td>
+      <td>Aplikasi nya sudah bagus banget dan lagu yg ti...</td>
     </tr>
     <tr>
-      <th>35</th>
-      <td>Muhammad Zaki Aldifano</td>
-      <td>5</td>
-      <td>2023-11-19 12:46:53</td>
-      <td>Untuk aplikasi saya suka tetapi harus ada peni...</td>
+      <th>31</th>
+      <td>Elsa Agustin</td>
+      <td>2</td>
+      <td>2023-12-11 11:07:32</td>
+      <td>ini Spotify sekarang kenapa ya lagu² nya pada ...</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>rere mh</td>
-      <td>3</td>
-      <td>2023-11-19 08:14:16</td>
-      <td>Beberapa lagu ada yang belum, lalu banyak ikla...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>S. Fira Agustia</td>
-      <td>1</td>
-      <td>2023-11-19 07:37:11</td>
-      <td>Malesin banget, setiap satu kali putar lagu pa...</td>
+      <th>11</th>
+      <td>Khanza Lavina Rasmy</td>
+      <td>2</td>
+      <td>2023-12-11 08:02:04</td>
+      <td>Kenapa ya sblm di update apk ini lancar² aja t...</td>
     </tr>
     <tr>
       <th>0</th>
-      <td>Muhammad Maulana Darmawan</td>
+      <td>Siti Sofiah</td>
       <td>3</td>
-      <td>2023-11-19 02:00:12</td>
-      <td>Setelah update, spotify jadi lebih sering stop...</td>
+      <td>2023-12-11 02:37:58</td>
+      <td>Kenapa ya setelah hapus data, aplikasinya jadi...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Farah Humaira</td>
+      <td>1</td>
+      <td>2023-12-10 08:41:12</td>
+      <td>Emang fitur yang diberikan untuk pengguna grat...</td>
     </tr>
   </tbody>
 </table>
@@ -1060,7 +1066,7 @@ Successfully installed google-play-scraper-1.2.4
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-00ac1d60-bdcd-4a5b-b38c-e0f3f3840529')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-8ec4d39f-22e9-4e59-b41a-89ba16ddba79')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -1112,12 +1118,12 @@ Successfully installed google-play-scraper-1.2.4
 
     <script>
       const buttonEl =
-        document.querySelector('#df-00ac1d60-bdcd-4a5b-b38c-e0f3f3840529 button.colab-df-convert');
+        document.querySelector('#df-8ec4d39f-22e9-4e59-b41a-89ba16ddba79 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-00ac1d60-bdcd-4a5b-b38c-e0f3f3840529');
+        const element = document.querySelector('#df-8ec4d39f-22e9-4e59-b41a-89ba16ddba79');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1177,7 +1183,7 @@ Successfully installed google-play-scraper-1.2.4
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="LDA.html"
@@ -1193,7 +1199,7 @@ Successfully installed google-play-scraper-1.2.4
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Crawling Berita</p>
+        <p class="prev-next-title">Crawling Satu Berita</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1220,6 +1226,7 @@ By 20_148 Fadilatul Jannah
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2022.
@@ -1246,8 +1253,8 @@ By 20_148 Fadilatul Jannah
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
